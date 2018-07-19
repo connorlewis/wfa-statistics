@@ -1,0 +1,133 @@
+---
+title: "WFA Statistics"
+output:
+  flexdashboard::flex_dashboard:
+    theme: cosmo
+    vertical_layout: scroll
+runtime: shiny
+---
+
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center')
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(flexdashboard, tidyverse)
+```
+
+
+
+<!-- vertical_layout: fill -->
+<!-- logo: www/tractor_resized.png -->
+<!-- favicon: www/tractor_resized.png -->
+<!-- social: menu -->
+<!-- css: styles.css -->
+
+
+About {data-navmenu="Home"}
+=====================================
+
+League Overview {data-navmenu="Home"}
+=====================================
+
+Top Performers {data-navmenu="Home"}
+=====================================
+
+
+<!-- OFFENSE -->
+
+League {data-navmenu="Offense"}
+=====================================
+
+By Division {data-navmenu="Offense"}
+=====================================
+
+By Team {data-navmenu="Offense"}
+=====================================
+
+By Position {data-navmenu="Offense"}
+=====================================
+
+By Player {data-navmenu="Offense"}
+=====================================
+
+
+<!--  DEFENSE -->
+
+League {data-navmenu="Defense"}
+=====================================
+
+By Division {data-navmenu="Defense"}
+=====================================
+
+By Team {data-navmenu="Defense"}
+=====================================
+
+By Position {data-navmenu="Defense"}
+=====================================
+
+By Player {data-navmenu="Defense"}
+=====================================
+
+Column {.tabset}
+-------------------------------------
+
+### Season 
+
+```{r}
+print("offensive stats")
+```
+
+
+### Comparison
+
+```{r}
+plot(mtcars$mpg, mtcars$wt)
+```
+
+
+
+
+League {data-navmenu="Special Teams"}
+=====================================
+
+By Division {data-navmenu="Special Teams"}
+=====================================
+
+By Team {data-navmenu="Special Teams"}
+=====================================
+
+Column {.tabset}
+-------------------------------------
+
+### Kick-off/return
+
+```{r}
+print("offensive stats")
+```
+
+
+### Punt
+
+```{r}
+plot(mtcars$mpg, mtcars$wt)
+```
+
+### Kicking
+
+```{r}
+plot(mtcars$mpg, mtcars$wt)
+```
+
+
+
+
+Prediction {data-navmenu="Analytics"}
+=====================================
+
+Team Rankings {data-navmenu="Analytics"}
+=====================================
+
+Player Rankings {data-navmenu="Analytics"}
+=====================================
+
+
+
