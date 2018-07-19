@@ -35,6 +35,8 @@ stats_page_results <- read_html(stats_url)
 
 ```{r get each data table}
 
+# work in progress....
+
 table_data <- stats_page_results %>%  
   html_nodes(".table.tbody.tr.td") 
 
