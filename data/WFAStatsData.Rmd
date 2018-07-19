@@ -11,39 +11,76 @@ library(tidyverse)
 library(jsonlite)
 library(xml2)
 library(rvest)
+library(purrr)
 ```
 
-```{r url setup}
+
+```{r get each data table}
+
+# url setup
+
 league <- "wfa"
 season <- c("2017","2018")
 tier <- "1"
 tiers <- c("WFA+I","WFA+II","WFA+III")
 weeks <- c("1","2","3","4","5","6","7","8","9","10")
+teams <- ("Dixie+Blues","Fury","Inferno","Fusion","Nighthawks","Comets",
+          "Dark+Angels","Phantomz","Sharks","Rebellion","EV_Reign","Trauma",
+          "Dragons","Rage","Vixen","MH_Blaze")
 
-# validate this page seems to give totals up to now, so better to pull weekly data and sum ourselves? - http://www.hostedstatistics.com/football/stats.asp?league=wfa&season=2018&tier=WFA+II
 
-# eventually loop on all possibilities, i.e. 2017, all tiers and all weeks
-stats_url <- paste0("http://www.hostedstatistics.com/football/stats.asp?league=wfa&season=",season[2],"&tiers=1&tier=",tiers[2],"&selected_week=",weeks[10])
+#stats_url <- "http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=2018&tier=WFA+II&selected_team=Inferno&selected_week=10"
+
+# for testing
+#i = 3
+
+table_data <- NULL
+headers <- NULL
+
+for(i in 1:length(weeks)) {
+#for(i in 1:2) {
+  print(i)
+  # eventually loop on all possibilities, i.e. 2017, all tiers and all weeks
+  stats_url <- paste0("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=",season[2],"&tier=",tiers[2],"&selected_team=",teams[1],"&selected_week=",weeks[i])
+  
+  # read page data
+  stats_page_results <- read_html(stats_url)
+  
+  # compile page results
+  table_data_temp <- stats_page_results %>% 
+    html_nodes("table") %>% 
+    html_table(fill=TRUE,header=TRUE) %>%
+    keep(~(length(grep("Name",names(.))) == 1)) %>% 
+    map(~mutate(.x,week = i,team = teams[1])) %>% 
+    map(~mutate_all(.x,as.character))
+  
+  if(is.null(table_data)) {
+    table_data <- table_data_temp
+  } else {
+    if(length(table_data_temp) > 0) {
+      # would be nice if we could keep col type but would have to manually set
+      # for each df.... hmm.
+      table_data <- map2(table_data,table_data_temp, bind_rows)
+    }
+  }
+  
+  if(is.null(headers)) {
+    headers <- stats_page_results %>% 
+      html_nodes(".indStatHead") %>%
+      html_text() %>% 
+      as.tibble()
+  }
+
+}
 
 ```
 
-```{r read page data}
+```{r}
+# get score historical
 
-stats_page_results <- read_html(stats_url)
+
+# http://www.hostedstatistics.com/football/schedule.asp?league=wfa&year=2013
+
 
 ```
-
-```{r get each data table}
-
-# work in progress....
-
-table_data <- stats_page_results %>%  
-  html_nodes(".table.tbody.tr.td") 
-
-week_scores <- stats_page_results %>%
-  html_nodes(xpath="//html//body//table[3]//tr//td[2]//table[3]//tr//td") %>% 
-  toString()
-#/html/body/table[3]/tbody/tr/td[2]/table[3]/tbody/tr/td/table[2]/tbody
-```
-
 
