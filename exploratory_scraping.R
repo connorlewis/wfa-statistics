@@ -11,7 +11,9 @@ tabgrab <- check %>%
    html_table(fill = TRUE, header = TRUE) %>%
    keep(~(c("Name", "Rnk") %in% names(.)))
 
-tabgrab <- check %>% 
+
+# Heather this can be used to name them. 
+tab.names <- check %>% 
   html_nodes(".indStatHead") %>%
   html_text()
 
