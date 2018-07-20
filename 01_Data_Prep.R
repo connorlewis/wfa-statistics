@@ -9,29 +9,22 @@
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, rvest)
 
-check <- read_html("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=2018&tier=WFA+I&selected_team=Titans&selected_week=1")
+example_page <- read_html("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=2018&tier=WFA+I&selected_team=Titans&selected_week=1")
 
 # use this to name the tables: 
-tab.names <- check %>% 
+tab.names <-  example_page %>% 
   html_nodes(".indStatHead") %>%
   html_text()
 
-d2.dta <- readRDS("div_2_stats.rds")
+# Read in the division 2 statistics
+d2.dta.list <- readRDS("div_2_stats.rds")
 
-names(d2.dta) <- tabgrab.names
+# name the tables using tab
+names(d2.dta.list) <- tab.names
 
+# combine data
+full.dta <- d2.dta %>% 
+  reduce(full_join, by = c("Name", "No.", "team", "week")) %>%
+  select(-contains("Rnk"))
 
-rush.dta <- d2.dta$Rushing
-names(rush.dta)
-
-ggplot(rush.dta %>% filter(Name %in% c("Grace Cooper", "Jeanette Nelson"))
-       , aes(x = as.numeric(week), y = as.numeric(Yards)/as.numeric(Carries), color = Name)) +
-  geom_line(size = 2) +
-  geom_point() +
-  labs(x = "Week", y = "Yards per Carry"
-       , title = "2018 Regular Season Yards per Carry")
-
-
-
-
-
+View(full.dta)
