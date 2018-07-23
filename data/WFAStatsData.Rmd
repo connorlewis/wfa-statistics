@@ -24,9 +24,20 @@ season <- c("2017","2018")
 tier <- "1"
 tiers <- c("WFA+I","WFA+II","WFA+III")
 weeks <- c("1","2","3","4","5","6","7","8","9","10")
-teams <- ("Dixie+Blues","Fury","Inferno","Fusion","Nighthawks","Comets",
+teams_div_1 <- c("Shockwaves","Majestics","War+Angels","Warriors","Surge","Titans",
+          "Elite","Impact","Force","Renegades","Divas","Passion",
+          "Fusion","AT_Phoenix")
+teams_div_2 <- c("Dixie+Blues","Fury","Inferno","Fusion","Nighthawks","Comets",
           "Dark+Angels","Phantomz","Sharks","Rebellion","EV_Reign","Trauma",
           "Dragons","Rage","Vixen","MH_Blaze")
+teams_div_3 <- c("CA_Phoenix","Fire","Trojans","MD_Blaze","Waverunners","Tigers",
+          "Mizfits","Anarchy","Smash","Hurricanez","Royalty","Lightning",
+          "TO_Reign","Black+Widows","Sizzle","Hawks","Dynamite","Riveters","Assault","Mayhem",
+          "Nightmare","Vanguards","Tidal+Waves","Ravens","Crusaders","Las+Cruces","Thunderkatz",
+          "Lady+Renegades","Blitz","Wolf-Pack","Dukes","Wildkatz","Freeze","Destroyers","Power",
+          "Zydeco","Wildcats","Outlaws","Knockout")
+
+teams <- c(teams_div1,teams_div_2,teams_div_3)
 
 
 #stats_url <- "http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=2018&tier=WFA+II&selected_team=Inferno&selected_week=10"
@@ -37,41 +48,63 @@ teams <- ("Dixie+Blues","Fury","Inferno","Fusion","Nighthawks","Comets",
 table_data <- NULL
 headers <- NULL
 
-for(i in 1:length(weeks)) {
-#for(i in 1:2) {
-  print(i)
-  # eventually loop on all possibilities, i.e. 2017, all tiers and all weeks
-  stats_url <- paste0("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=",season[2],"&tier=",tiers[2],"&selected_team=",teams[1],"&selected_week=",weeks[i])
-  
-  # read page data
-  stats_page_results <- read_html(stats_url)
-  
-  # compile page results
-  table_data_temp <- stats_page_results %>% 
-    html_nodes("table") %>% 
-    html_table(fill=TRUE,header=TRUE) %>%
-    keep(~(length(grep("Name",names(.))) == 1)) %>% 
-    map(~mutate(.x,week = i,team = teams[1])) %>% 
-    map(~mutate_all(.x,as.character))
-  
-  if(is.null(table_data)) {
-    table_data <- table_data_temp
-  } else {
-    if(length(table_data_temp) > 0) {
-      # would be nice if we could keep col type but would have to manually set
-      # for each df.... hmm.
-      table_data <- map2(table_data,table_data_temp, bind_rows)
-    }
-  }
-  
-  if(is.null(headers)) {
-    headers <- stats_page_results %>% 
-      html_nodes(".indStatHead") %>%
-      html_text() %>% 
-      as.tibble()
-  }
 
+for(l in 1:length(season)) {
+
+  for(j in 1:length(teams)) {
+  
+    for(i in 1:length(weeks)) {
+    #for(i in 1:2) {
+      print(i)
+      # eventually loop on all possibilities, i.e. 2017, all tiers and all weeks
+      # "&tier=",tiers[2], -- not needed
+      stats_url <- paste0("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=",season[2],"&selected_team=",teams[j],"&selected_week=",weeks[i])
+    
+      # read page data
+      stats_page_results <- read_html(stats_url)
+      
+      # compile page results
+      table_data_temp <- stats_page_results %>% 
+        html_nodes("table") %>% 
+        html_table(fill=TRUE,header=TRUE) %>%
+        keep(~(length(grep("Name",names(.))) == 1)) %>% 
+        map(~mutate(.x,week = i,team = teams[j])) %>% 
+        map(~mutate_all(.x,as.character))
+      
+      if(is.null(table_data)) {
+        table_data <- table_data_temp
+      } else {
+        if(length(table_data_temp) > 0) {
+          # would be nice if we could keep col type but would have to manually set
+          # for each df.... hmm.
+          table_data <- map2(table_data,table_data_temp, bind_rows)
+        }
+      }
+      
+      if(is.null(headers)) {
+        headers <- stats_page_results %>% 
+          html_nodes(".indStatHead") %>%
+          html_text() %>% 
+          as.tibble()
+      }
+    
+    }
+    
+  }
+  
 }
+
+# saveRDS(table_data,"div_2_stats.rds")
+
+#data <- readRDS("/Users/heatherlendway/Documents/Code/wfa-statistics/div_2_stats.rds")
+
+# TO DO Do something to add the headers in
+for(k in 1:length(headers)) {
+  table_data <- table_data %>% 
+    map(~mutate(.x,week = i,team = teams[j]))
+}
+
+
 
 ```
 
