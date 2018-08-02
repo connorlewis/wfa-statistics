@@ -64,18 +64,17 @@ selectInput("player", "Player", choices = c('', unique(pass.sum.dta$Player))
 
 # Player rankings on side: 
 selectInput("comp.plyr", "Comparison Player(s)"
-            , choices = c("All", unique(pass.sum.dta$Player))
-            , selected = "All", multiple = TRUE
+            , choices =  unique(pass.sum.dta$Player)
+            , selected = NULL, multiple = TRUE
             , selectize = TRUE)
 
 
 
-# Player rankings on side: 
+# All weeks for the players selected
 temp.dta <- reactive({
     dta <- pass.sum.dta %>% 
                 filter((Player == input$player)
-                                        | (Player %in% input$comp.plyr)
-                                        | (input$comp.plyr == "All")) %>%
+                                        | (Player %in% input$comp.plyr)) %>%
                 mutate(plyr.of.interest = 
                          case_when(
                             Player == input$player ~ input$player
@@ -86,6 +85,7 @@ temp.dta <- reactive({
     dta
   })
 
+# Only the last week played of data for the players selected
 temp.last.dta <- reactive({
   temp.dta() %>%
       group_by(Player) %>%
@@ -93,6 +93,7 @@ temp.last.dta <- reactive({
       ungroup
 })
 
+# A table of the rating of the QB, by passer rating (last weeks data)
 renderTable(temp.last.dta() %>%
               group_by(Player) %>%
               select(`QB Rating` = Rating) %>%
@@ -147,24 +148,50 @@ renderValueBox({
 Row
 -----------------------------------------------------------------------
 
-### Plots
-
-```{r pasing.output}
-
+```{r}
 renderPlot({
- temp.last.dta() %>%
-    ggplot(aes(x =  Att.cum, y = Yds.cum
-               , color = factor(plyr.of.interest)
+
+   temp.last.dta() %>%
+    ggplot(aes(x = Att.cum, y = Yds.cum
+              
                , label = Player)) +
-    geom_point(size = 3) +
+    geom_point(size = 3 , aes(color = factor(plyr.of.interest))) +
     geom_text(nudge_x = 5) +
     labs(x = "Total Attempts", y = "Total Yards"
-         , color = "Player") +
+         , title = "Total Yards vs. Attempts\n (Season-To-Date") +
     coord_cartesian(xlim = c(0, pass.att.max)
                     , ylim = c(0, pass.yrd.max)) +
-    scale_color_discrete(guide = FALSE)
+    scale_color_discrete(guide = FALSE) +
+     geom_smooth(data = pass.sum.dta %>%
+                group_by(Player) %>%
+                top_n(1, week)
+                , mapping = aes(x = Att.cum, y = Yds.cum)
+                , method = "lm", se = FALSE, color = "red")
 })
+```
 
+
+
+```{r td.int.plot}
+renderPlot({
+
+   temp.dta() %>%
+    ggplot(aes(x = game, y = TD.Int.cum
+               , label = Player)) +
+    geom_point(size = 3 
+               , aes(color = factor(Player))) +
+    geom_line(aes(color = factor(Player))) +
+    # geom_text(nudge_x = 5) +
+    labs(x = "Game Number"
+         , y = "TD Rate/Interception Rate Ratio"
+         , title = "Ratio of TD & Interceptions\n Per Attempt") +
+    coord_cartesian(xlim = c(0, 8)
+                    , ylim = c(0, 15)) +
+    scale_color_discrete(guide = FALSE) +
+     geom_smooth(data = pass.sum.dta 
+                , mapping = aes(x = game, y = TD.Int.cum)
+                , method = "loess", se = FALSE, color = "red")
+})
 ```
 
 
