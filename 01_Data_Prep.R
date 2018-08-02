@@ -34,7 +34,22 @@ sp.tbl.names <- c("Blocked Kicks & Punts", "Kickoff Returns"
 
 
 
-# Bind the listed datasets for offense, defense, and special teams, separately. 
+# Creating dataframes -----------------------------------------------------
+
+# Create offensive data sets for each of the main categories: Passing, Rushing, Receiving. 
+pass.dta <- dta.list[["Passing"]] %>%
+  data.frame %>%
+  select(-contains("Rnk"))
+
+rush.dta <- dta.list[["Rushing"]] %>%
+  data.frame %>%
+  select(-contains("Rnk"))
+
+rec.dta <- dta.list[["Receiving"]] %>%
+  data.frame %>%
+  select(-contains("Rnk"))
+
+# Create data sets for all of the offensive, defensive, and special teams, sepearatly. 
 off.dta <- dta.list[off.tbl.names] %>% 
   reduce(full_join, by = c("Name", "No.", "team", "week", "season")) %>%
   select(-contains("Rnk"))
@@ -48,5 +63,35 @@ sp.dta <- dta.list[sp.tbl.names] %>%
   reduce(full_join, by = c("Name", "No.", "team", "week", "season")) %>%
   select(-contains("Rnk"))
 
+# Need to add Division level to teams for each season
+# Need the week by week games: Oppenetns, scores, etc. 
+# Positions for each player.. QB, RB, LB, etc. 
 
+
+# Passing Data Prep -------------------------------------------------------
+# Create the necessary stats of interest:
+# 1. 
+pass.sum.dta <- pass.dta %>% 
+  unique %>%
+  unite("Player", No., Name, sep = " ", remove = FALSE) %>%
+  group_by(Player, team, season) %>%
+  mutate(game = 1:length(Player)
+         , Yds.cum = cumsum(Yards)
+         , Att.cum = cumsum(Att) 
+         , TD.cum = cumsum(TD) 
+         , TD.rate.cum = TD.cum/cumsum(Att)
+         , Int.rate.cum = cumsum(Int)/cumsum(Att) 
+         , Yds.Att.cum = Yds.cum/Att.cum
+         , TD.Int.cum = case_when(
+                          Int.rate.cum == 0 ~ TD.rate.cum
+                          , TRUE              ~ TD.rate.cum/Int.rate.cum)
+  ) %>%
+  filter(Att.cum > 10 & season == 2018) %>%
+  ungroup %>%
+  arrange(Name)
+  
+# important values to save: 
+pass.yrd.max <- max(pass.sum.dta$Yds.cum)
+pass.td.max <- max(pass.sum.dta$TD.cum)
+pass.att.max <- max(pass.sum.dta$Att.cum)
 
