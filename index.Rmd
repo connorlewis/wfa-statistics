@@ -4,6 +4,7 @@ output:
   flexdashboard::flex_dashboard:
     theme: cosmo
     vertical_layout: scroll
+    orientation: rows
 runtime: shiny
 ---
 
@@ -11,8 +12,16 @@ runtime: shiny
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center')
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(flexdashboard, tidyverse)
+
+source("01_Data_Prep.R")
+#pass.sum.dta <- read_csv("PassingDataTemp.csv")
+
 ```
 
+
+
+<!-- Sidebar {.sidebar} -->
+<!-- ===================================== -->
 
 
 <!-- vertical_layout: fill -->
@@ -25,6 +34,8 @@ pacman::p_load(flexdashboard, tidyverse)
 About {data-navmenu="Home"}
 =====================================
 
+We are currently only looking at the 2018 season. 
+
 League Overview {data-navmenu="Home"}
 =====================================
 
@@ -34,19 +45,133 @@ Top Performers {data-navmenu="Home"}
 
 <!-- OFFENSE -->
 
-League {data-navmenu="Offense"}
+Overall {data-navmenu="Offense"}
 =====================================
 
-By Division {data-navmenu="Offense"}
+Passing {data-navmenu="Offense"}
 =====================================
 
-By Team {data-navmenu="Offense"}
+
+Inputs {.sidebar data-width=300}
+-----------------------------------------------------------------------
+
+QB Comparisons
+
+```{r passing.input}
+# What players (QBs) will be compared/analyzed
+selectInput("player", "Player", choices = c('', unique(pass.sum.dta$Player))
+              , selected = NULL, multiple = FALSE, selectize = TRUE)
+
+# Player rankings on side: 
+selectInput("comp.plyr", "Comparison Player(s)"
+            , choices = c("All", unique(pass.sum.dta$Player))
+            , selected = "All", multiple = TRUE
+            , selectize = TRUE)
+
+
+
+# Player rankings on side: 
+temp.dta <- reactive({
+    dta <- pass.sum.dta %>% 
+                filter((Player == input$player)
+                                        | (Player %in% input$comp.plyr)
+                                        | (input$comp.plyr == "All")) %>%
+                mutate(plyr.of.interest = 
+                         case_when(
+                            Player == input$player ~ input$player
+                            , TRUE                 ~ "Other")
+                ) %>%
+      ungroup
+    
+    dta
+  })
+
+temp.last.dta <- reactive({
+  temp.dta() %>%
+      group_by(Player) %>%
+      top_n(1, week) %>%
+      ungroup
+})
+
+renderTable(temp.last.dta() %>%
+              group_by(Player) %>%
+              select(`QB Rating` = Rating) %>%
+              arrange(desc(as.numeric(`QB Rating`))))
+
+```
+
+
+Row
+-----------------------------------------------------------------------
+
+### Total Passing Yards {.value-box}
+
+<!-- data-width=200 -->
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  value <- temp.last.dta() %>% 
+             filter(Player == input$player) %>%
+             select(Yds.cum)
+  valueBox(value
+           , icon = "fa-tag")
+})
+
+```
+
+
+### Total Touchdowns {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  valueBox(temp.last.dta() %>% 
+             filter(Player == input$player) %>%
+             select(TD.cum)
+           , icon = "fa-tag")
+})
+```
+
+### Player Ranking {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  valueBox("TBD"
+           , icon = "fa-tag")
+})
+```
+
+
+Row
+-----------------------------------------------------------------------
+
+### Plots
+
+```{r pasing.output}
+
+renderPlot({
+ temp.last.dta() %>%
+    ggplot(aes(x =  Att.cum, y = Yds.cum
+               , color = factor(plyr.of.interest)
+               , label = Player)) +
+    geom_point(size = 3) +
+    geom_text(nudge_x = 5) +
+    labs(x = "Total Attempts", y = "Total Yards"
+         , color = "Player") +
+    coord_cartesian(xlim = c(0, pass.att.max)
+                    , ylim = c(0, pass.yrd.max)) +
+    scale_color_discrete(guide = FALSE)
+})
+
+```
+
+
+Rushing {data-navmenu="Offense"}
 =====================================
 
-By Position {data-navmenu="Offense"}
-=====================================
-
-By Player {data-navmenu="Offense"}
+Receiving {data-navmenu="Offense"}
 =====================================
 
 
@@ -128,6 +253,4 @@ Team Rankings {data-navmenu="Analytics"}
 
 Player Rankings {data-navmenu="Analytics"}
 =====================================
-
-
 
