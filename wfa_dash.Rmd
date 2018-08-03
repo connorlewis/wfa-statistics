@@ -14,9 +14,6 @@ library(knitr)
 library(shiny)
 library(tidyverse)
 library(rsconnect)
-library(plotly)
-
-options(shiny.sanitize.errors = FALSE)
 
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', fig.dim = c(4, 6) )
 
@@ -24,10 +21,14 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align 
 # set the theme for all ggplots: 
 theme_set(theme_minimal() +
             theme(plot.title = element_text(hjust = 0.5)
-                  , axis.text = element_text(size = 10)))
+                  , axis.text = element_text(size = 10)
+                  , axis.title=element_text(size=14,face="bold")))
 
-source("01_Data_Prep.R")
+source("data_prep.R")
 #pass.sum.dta <- read_csv("PassingDataTemp.csv")
+#rsconnect::setAccountInfo(name='connorjo',
+#			  token='966F109BEA1433280CB80AACEF59B28F',
+#			  secret='7l/D0vouhjiFkeEZwmyB0anPqXFAXJogfqqifjN7')
 #rsconnect::deployApp('wfa_dash.Rmd')
 ```
 
@@ -64,29 +65,33 @@ Quarterbacks {data-navmenu="Offense" data-orientation=rows}
 =====================================
 
 
-Inputs {.sidebar data-width=300}
+Inputs {.sidebar data-width=250}
 -----------------------------------------------------------------------
 
-QB Comparisons
 
 ```{r passing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("player", "Player", choices = c('', unique(pass.sum.dta$Player))
+selectInput("player", "QB (>50 attempts)", choices = c('', unique(pass.sum.dta$Player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
+checkboxInput("comp", "Compare to another QB", value = FALSE)
+
 # Player rankings on side: 
-selectInput("comp.plyr", "Comparison Player(s)"
-            , choices =  unique(pass.sum.dta$Player)
-            , selected = NULL, multiple = TRUE
-            , selectize = TRUE)
+
+
+conditionalPanel(
+      condition = "input.comp",
+      selectInput("comp.plyr", ""
+            , choices =  c('', unique(pass.sum.dta$Player))
+            , selected = NULL, multiple = FALSE
+            , selectize = TRUE))
 
 
 
 # All weeks for the players selected
 temp.dta <- reactive({
     dta <- pass.sum.dta %>% 
-                filter((Player == input$player)
-                                        | (Player %in% input$comp.plyr)) %>%
+                filter(Player %in% c(input$player, input$comp.plyr)) %>%
                 mutate(plyr.of.interest = 
                          case_when(
                             Player == input$player ~ input$player
@@ -106,29 +111,49 @@ temp.last.dta <- reactive({
 })
 
 # A table of the rating of the QB, by passer rating (last weeks data)
-renderTable(temp.last.dta() %>%
-              group_by(Player) %>%
-              select(`QB Rating` = Rating) %>%
-              arrange(desc(as.numeric(`QB Rating`))))
+temp.comp.dta <- reactive({
+  temp.df <- temp.last.dta() %>%
+                select(plyr.lbl, Games = game, Attempts = Att.cum
+                  , `Comp (%)` = comp.rate, TD = TD.cum
+                  , `Avg Yds` = avg.cum) %>% 
+      t
+            
+      plyr.names <- temp.df[1, ]
+      
+      temp.df <- temp.df %>%
+        data.frame()
+      
+      names(temp.df) <- plyr.names
+      
+      temp.df %>%
+        rownames_to_column("Stat") %>%
+        filter(Stat != "plyr.lbl") 
+})
+
+renderTable(
+  if(input$player != '' | input$comp.plyr != '') {temp.comp.dta()}
+)
+
 
 ```
 
 
 Row {data-height=100}
 -----------------------------------------------------------------------
-
-### Select QB
-
+### Team {.value-box}
 ```{r}
-selectInput("player1", "", choices = c('', unique(pass.sum.dta$Player))
-              , selected = NULL, multiple = FALSE, selectize = TRUE)
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  value <- temp.last.dta() %>% 
+             filter(Player == input$player) %>%
+             select(team)
+  valueBox(value
+           , icon = "fa-football-ball")
+})
 
 ```
 
-
 ### Total Passing Yards {.value-box}
-
-<!-- data-width=200 -->
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
@@ -172,23 +197,33 @@ Row {data-height=350}
 ### Total passing yards vs. passing attempts
 
 
-```{r}
+```{r passyrds.plot}
 renderPlot({
 
   temp.last.dta() %>%
     ggplot(aes(x = Att.cum, y = Yds.cum
-               , label = Player)) +
-    geom_point(size = 3 , aes(color = factor(plyr.of.interest))) +
-    geom_text(nudge_x = 5) +
-    labs(x = "Total Attempts", y = "Total Yards") +
-    coord_cartesian(xlim = c(0, pass.att.max)
-                    , ylim = c(0, pass.yrd.max)) +
-    scale_color_discrete(guide = FALSE) +
-     geom_smooth(data = pass.sum.dta %>%
+               , label = plyr.lbl)) +
+    
+    # plots all of the players in grey with a red line for the lm
+    geom_point(data = pass.sum.dta %>%
+                group_by(Player) %>%
+                filter(Player != input$player) %>%
+                top_n(1, week)
+                , mapping = aes(x = Att.cum, y = Yds.cum)
+                , color = "grey") +
+    geom_smooth(data = pass.sum.dta %>%
                 group_by(Player) %>%
                 top_n(1, week)
                 , mapping = aes(x = Att.cum, y = Yds.cum)
-                , method = "lm", se = FALSE, color = "red")
+                , method = "lm", se = FALSE, color = "red") +
+    
+    # plot the selected players
+    geom_point(size = 3, color = "blue") +
+    geom_text(vjust = "left", hjust = "bottom", angle = 45, color = "blue") +
+    labs(x = "Total Attempts", y = "Total Yards") +
+    coord_cartesian(xlim = c(50, pass.att.max)
+                    , ylim = c(pass.yrd.min, pass.yrd.max)) +
+    scale_color_discrete(guide = FALSE) 
 })
 ```
 
@@ -200,19 +235,29 @@ renderPlot({
 
    temp.dta() %>%
     ggplot(aes(x = game, y = TD.Int.cum
-               , label = Player)) +
-    geom_point(size = 3 
-               , aes(color = factor(Player))) +
-    geom_line(aes(color = factor(Player))) +
+               , group = Player)) +
+    
+       geom_line(data = pass.sum.dta 
+            , mapping = aes(x = game, y = TD.Int.cum
+                            , group = factor(Player))
+            , color = "grey") +
+       geom_smooth(data = pass.sum.dta 
+                , mapping = aes(x = game, y = TD.Int.cum)
+                , method = "loess", se = FALSE, color = "red") +
+   
+    geom_point(size = 3, color = "blue") +
+    geom_line(color = "blue") +
     # geom_text(nudge_x = 5) +
     labs(x = "Game Number"
-         , y = "TD Rate/Interception Rate Ratio") +
+         , y = "Ratio") +
     coord_cartesian(xlim = c(0, 8)
                     , ylim = c(0, 15)) +
     scale_color_discrete(guide = FALSE) +
-     geom_smooth(data = pass.sum.dta 
-                , mapping = aes(x = game, y = TD.Int.cum)
-                , method = "loess", se = FALSE, color = "red")
+    geom_text(data = temp.last.dta(),
+              mapping = aes(x = game, y = TD.Int.cum, label = plyr.lbl)
+              , vjust = "left", hjust = "bottom"
+              , angle = 20, color = "blue" )
+
 })
 ```
 
