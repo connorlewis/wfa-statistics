@@ -7,18 +7,28 @@ output:
 runtime: shiny
 ---
 
+
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE}
+library(flexdashboard)
+library(knitr)
+library(shiny)
+library(tidyverse)
+library(rsconnect)
+library(plotly)
+
+options(shiny.sanitize.errors = FALSE)
+
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', fig.dim = c(4, 6) )
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load(flexdashboard, tidyverse)
+
 
 # set the theme for all ggplots: 
 theme_set(theme_minimal() +
-            theme(plot.title = element_text(hjust = 0.5)))
+            theme(plot.title = element_text(hjust = 0.5)
+                  , axis.text = element_text(size = 10)))
 
 source("01_Data_Prep.R")
 #pass.sum.dta <- read_csv("PassingDataTemp.csv")
-
+#rsconnect::deployApp('wfa_dash.Rmd')
 ```
 
 
@@ -27,7 +37,6 @@ source("01_Data_Prep.R")
 <!-- ===================================== -->
 
 
-<!-- vertical_layout: fill -->
 <!-- logo: www/tractor_resized.png -->
 <!-- favicon: www/tractor_resized.png -->
 <!-- social: menu -->
@@ -51,7 +60,7 @@ Top Performers {data-navmenu="Home"}
 Overall {data-navmenu="Offense"}
 =====================================
 
-Passing {data-navmenu="Offense" data-orientation=rows}
+Quarterbacks {data-navmenu="Offense" data-orientation=rows}
 =====================================
 
 
@@ -108,6 +117,15 @@ renderTable(temp.last.dta() %>%
 Row {data-height=100}
 -----------------------------------------------------------------------
 
+### Select QB
+
+```{r}
+selectInput("player1", "", choices = c('', unique(pass.sum.dta$Player))
+              , selected = NULL, multiple = FALSE, selectize = TRUE)
+
+```
+
+
 ### Total Passing Yards {.value-box}
 
 <!-- data-width=200 -->
@@ -119,7 +137,7 @@ renderValueBox({
              filter(Player == input$player) %>%
              select(Yds.cum)
   valueBox(value
-           , icon = "fa-tag")
+           , icon = "fa-football-ball")
 })
 
 ```
@@ -133,7 +151,7 @@ renderValueBox({
   valueBox(temp.last.dta() %>% 
              filter(Player == input$player) %>%
              select(TD.cum)
-           , icon = "fa-tag")
+           , icon = "fa-football-ball")
 })
 ```
 
@@ -143,7 +161,7 @@ renderValueBox({
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
   valueBox("TBD"
-           , icon = "fa-tag")
+           , icon = "fa-trophy")
 })
 ```
 
@@ -157,9 +175,8 @@ Row {data-height=350}
 ```{r}
 renderPlot({
 
-   temp.last.dta() %>%
+  temp.last.dta() %>%
     ggplot(aes(x = Att.cum, y = Yds.cum
-              
                , label = Player)) +
     geom_point(size = 3 , aes(color = factor(plyr.of.interest))) +
     geom_text(nudge_x = 5) +
@@ -200,10 +217,10 @@ renderPlot({
 ```
 
 
-Rushing {data-navmenu="Offense"}
+Running Backs {data-navmenu="Offense"}
 =====================================
 
-Receiving {data-navmenu="Offense"}
+Wide Receivers {data-navmenu="Offense"}
 =====================================
 
 

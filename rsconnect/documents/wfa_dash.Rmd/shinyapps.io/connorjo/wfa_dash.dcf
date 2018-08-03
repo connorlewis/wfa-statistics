@@ -1,0 +1,12 @@
+name: wfa_dash
+title:
+username:
+account: connorjo
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 394517
+bundleId: 1517283
+url: https://connorjo.shinyapps.io/wfa_dash/
+when: 1533321580.17133
+asMultiple: FALSE
+asStatic: FALSE

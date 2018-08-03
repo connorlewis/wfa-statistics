@@ -6,8 +6,10 @@
 
 # git push in terminal: git push -u origin master 
 
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, rvest)
+#if (!require("pacman")) install.packages("pacman")
+#pacman::p_load(tidyverse, rvest)
+library(tidyverse)
+library(rvest)
 
 example_page <- read_html("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=2018&tier=WFA+I&selected_team=Titans&selected_week=1")
 
