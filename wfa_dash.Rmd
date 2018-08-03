@@ -4,14 +4,17 @@ output:
   flexdashboard::flex_dashboard:
     theme: cosmo
     vertical_layout: scroll
-    orientation: rows
 runtime: shiny
 ---
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center')
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', fig.dim = c(4, 6) )
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(flexdashboard, tidyverse)
+
+# set the theme for all ggplots: 
+theme_set(theme_minimal() +
+            theme(plot.title = element_text(hjust = 0.5)))
 
 source("01_Data_Prep.R")
 #pass.sum.dta <- read_csv("PassingDataTemp.csv")
@@ -48,7 +51,7 @@ Top Performers {data-navmenu="Home"}
 Overall {data-navmenu="Offense"}
 =====================================
 
-Passing {data-navmenu="Offense"}
+Passing {data-navmenu="Offense" data-orientation=rows}
 =====================================
 
 
@@ -102,7 +105,7 @@ renderTable(temp.last.dta() %>%
 ```
 
 
-Row
+Row {data-height=100}
 -----------------------------------------------------------------------
 
 ### Total Passing Yards {.value-box}
@@ -145,8 +148,11 @@ renderValueBox({
 ```
 
 
-Row
+Row {data-height=350}
 -----------------------------------------------------------------------
+
+### Total passing yards vs. passing attempts
+
 
 ```{r}
 renderPlot({
@@ -157,8 +163,7 @@ renderPlot({
                , label = Player)) +
     geom_point(size = 3 , aes(color = factor(plyr.of.interest))) +
     geom_text(nudge_x = 5) +
-    labs(x = "Total Attempts", y = "Total Yards"
-         , title = "Total Yards vs. Attempts\n (Season-To-Date") +
+    labs(x = "Total Attempts", y = "Total Yards") +
     coord_cartesian(xlim = c(0, pass.att.max)
                     , ylim = c(0, pass.yrd.max)) +
     scale_color_discrete(guide = FALSE) +
@@ -171,6 +176,7 @@ renderPlot({
 ```
 
 
+### Touchdown Rate/Interception Rate
 
 ```{r td.int.plot}
 renderPlot({
@@ -183,8 +189,7 @@ renderPlot({
     geom_line(aes(color = factor(Player))) +
     # geom_text(nudge_x = 5) +
     labs(x = "Game Number"
-         , y = "TD Rate/Interception Rate Ratio"
-         , title = "Ratio of TD & Interceptions\n Per Attempt") +
+         , y = "TD Rate/Interception Rate Ratio") +
     coord_cartesian(xlim = c(0, 8)
                     , ylim = c(0, 15)) +
     scale_color_discrete(guide = FALSE) +

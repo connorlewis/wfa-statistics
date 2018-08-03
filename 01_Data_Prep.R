@@ -79,11 +79,12 @@ pass.sum.dta <- pass.dta %>%
          , Yds.cum = cumsum(Yards)
          , Att.cum = cumsum(Att) 
          , TD.cum = cumsum(TD) 
-         , TD.rate.cum = TD.cum/cumsum(Att)
-         , Int.rate.cum = cumsum(Int)/cumsum(Att) 
+         , TD.rate.cum = TD.cum/Att.cum
+         , Int.rate.cum = cumsum(Int)/Att.cum
          , Yds.Att.cum = Yds.cum/Att.cum
          , TD.Int.cum = case_when(
                           Int.rate.cum == 0 ~ TD.rate.cum
+                          , TD.rate.cum == 0 ~ 0
                           , TRUE              ~ TD.rate.cum/Int.rate.cum)
   ) %>%
   filter(Att.cum > 10 & season == 2018) %>%
