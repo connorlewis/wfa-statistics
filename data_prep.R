@@ -20,7 +20,7 @@ tbl.names <-  example_page %>%
   trimws() 
 
 # Read in the statistics for all division 
-dta.list <- readRDS("Data/div_all_stats.rds")
+dta.list <- readRDS("data/div_all_stats.rds")
 
 # name the tables using tab
 names(dta.list) <- tbl.names
@@ -75,26 +75,38 @@ sp.dta <- dta.list[sp.tbl.names] %>%
 # 1. 
 pass.sum.dta <- pass.dta %>% 
   unique %>%
+  # first creat just the first initial and last name 
+  # of player for plotting labeling: 
+  separate(Name, c("First", "Last"), sep = " ", remove = FALSE) %>%
+  mutate(First = substr(First, 1,1) 
+         , Last = substr(Last, 1,1)) %>%
+  unite("plyr.temp", First, Last, sep = "", remove = TRUE) %>%
+  unite("plyr.lbl", plyr.temp, No., sep = " ", remove = FALSE) %>%
   unite("Player", No., Name, sep = " ", remove = FALSE) %>%
   group_by(Player, team, season) %>%
   mutate(game = 1:length(Player)
          , Yds.cum = cumsum(Yards)
          , Att.cum = cumsum(Att) 
          , TD.cum = cumsum(TD) 
+         , comp.cum = cumsum(Comp)
          , TD.rate.cum = TD.cum/Att.cum
+         , comp.rate = round(comp.cum/Att.cum*100)
          , Int.rate.cum = cumsum(Int)/Att.cum
          , Yds.Att.cum = Yds.cum/Att.cum
+         , avg.cum = round(Yds.cum/comp.cum, 1)
          , TD.Int.cum = case_when(
                           Int.rate.cum == 0 ~ TD.rate.cum
                           , TD.rate.cum == 0 ~ 0
                           , TRUE              ~ TD.rate.cum/Int.rate.cum)
   ) %>%
-  filter(Att.cum > 10 & season == 2018) %>%
+  filter(last(Att.cum) > 50 & season == 2018) %>%
   ungroup %>%
   arrange(Name)
   
 # important values to save: 
 pass.yrd.max <- max(pass.sum.dta$Yds.cum)
+pass.yrd.min <- min(pass.sum.dta$Yds.cum)
 pass.td.max <- max(pass.sum.dta$TD.cum)
 pass.att.max <- max(pass.sum.dta$Att.cum)
+
 
