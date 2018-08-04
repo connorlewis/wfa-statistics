@@ -49,14 +49,15 @@ var.by.game.plot <- function(react.dta, dta, y.var, y.axis.lbl, y.lims){
     labs(x = "Game"
          , y = y.axis.lbl
          , caption = "Grey lines represent all non-selected players.") +
-    coord_cartesian(xlim = c(1, 8)
+    coord_cartesian(xlim = c(1, 9)
                     , ylim = y.lims) +
+    scale_x_continuous(breaks = seq(1,8,1)) +
     scale_color_discrete(guide = FALSE) +
     geom_text(data = (react.dta %>%
                 group_by(Player) %>%
                 top_n(1, as.numeric(game))),
-              mapping = aes(x = game - 0.5, y = !!quo_var
+              mapping = aes(x = game + 0.6, y = !!quo_var
                             , label = plyr.lbl, color = Player)
-              , size = 5)
+              , size = 4.5)
   
 }

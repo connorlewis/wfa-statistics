@@ -121,7 +121,7 @@ temp.last.dta <- reactive({
 # A table of the rating of the QB, by passer rating (last weeks data)
 temp.comp.dta <- reactive({
   temp.df <- temp.last.dta() %>%
-                select(plyr.lbl, Games = game, Rating = qb.rate.cum
+                select(plyr.lbl, Team = team, Games = game, Rating = qb.rate.cum
                        , Attempts = Att.cum
                        , `Comp (%)` = comp.cum.rate, TD = TD.cum
                        , `Avg Yds` = avg.cum) %>% 
@@ -308,7 +308,7 @@ temp.rb.last.dta <- reactive({
 # A table of the rating of the QB, by passer rating (last weeks data)
 temp.rb.comp.dta <- reactive({
   temp.df <- temp.rb.last.dta() %>%
-                select(plyr.lbl, Games = game, Carries = car.cum
+                select(plyr.lbl, Team = team, Games = game, Carries = car.cum
                   , TD = TD.cum, `Avg Yds` = avg.cum, `Yds per Game` = yds.cum.game) %>% 
       t
             
@@ -403,7 +403,7 @@ renderPlot({
 ```{r rush.yrds.car}
 renderPlot({
   var.by.game.plot(temp.rb.dta(), rush.sum.dta
-                 , yds.car, "Yards", c(0,30))
+                 , yds.car, "Yards", c(0, 40))
 })
 ```
 
@@ -456,7 +456,7 @@ temp.wr.last.dta <- reactive({
 # A table of the rating of the QB, by passer rating (last weeks data)
 temp.wr.comp.dta <- reactive({
   temp.df <- temp.wr.last.dta() %>%
-                select(plyr.lbl, Games = game, Receptions = rec.cum
+                select(plyr.lbl, Team = team, Games = game, Receptions = rec.cum
                   , TD = TD.cum, `Avg Yds` = avg.cum, `Yds per Game` = yds.cum.game) %>% 
       t
             
@@ -570,7 +570,7 @@ Row {.tabset data-height=600}
 datatable(pass.sum.dta %>% 
   group_by(Player) %>%
           top_n(1, as.numeric(game)) %>%
-          select(Player, Games = game, Rating = qb.rate.cum, Attempts = Att.cum
+          select(Player, Team = team, Games = game, Rating = qb.rate.cum, Attempts = Att.cum
                  , Comp = comp.cum, Yds = Yds.cum, Avg = avg.cum
                  , TD = TD.cum) %>%
           arrange(desc(as.numeric(Rating)))
@@ -585,7 +585,7 @@ datatable(pass.sum.dta %>%
 datatable(rush.sum.dta %>% 
   group_by(Player) %>%
           top_n(1, as.numeric(game)) %>%
-          select(Player, Games = game, Carries = car.cum
+          select(Player, Team = team, Games = game, Carries = car.cum
                  , Yds = yds.cum, Avg = avg.cum
                  , TD = TD.cum, `Yds per Game` = yds.cum.game) %>%
           arrange(desc(as.numeric(Yds)))
@@ -600,7 +600,7 @@ datatable(rush.sum.dta %>%
 datatable(rec.sum.dta %>% 
   group_by(Player) %>%
           top_n(1, as.numeric(game)) %>%
-          select(Player, Games = game, Recs = rec.cum
+          select(Player, Team = team, Games = game, Recs = rec.cum
                  , Yds = yds.cum, Avg = avg.cum
                  , TD = TD.cum, `Yds per Game` = yds.cum.game) %>%
           arrange(desc(as.numeric(Yds)))
