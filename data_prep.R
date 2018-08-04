@@ -1,16 +1,16 @@
 # This file preps the scraped data: 
 # Prepping will entail:
-# 1. Combining all offensive statistics into one table
+# 1. Prepping Passing, Rushing, and Receiving data frames
 # 2. Combining all defensive satistics into one table
 # 3. Make special teams tables
 
 # git push in terminal: git push -u origin master 
 
-#if (!require("pacman")) install.packages("pacman")
-#pacman::p_load(tidyverse, rvest)
 library(tidyverse)
 library(rvest)
 
+# load in the supporting functions script:
+source("functions.R")
 example_page <- read_html("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=2018&tier=WFA+I&selected_team=Titans&selected_week=1")
 
 # use this to name the tables: 
@@ -36,7 +36,7 @@ sp.tbl.names <- c("Blocked Kicks & Punts", "Kickoff Returns"
 
 
 
-# Creating dataframes -----------------------------------------------------
+# Creating dataframes from the list of df -----------------------------
 
 # Create offensive data sets for each of the main categories: Passing, Rushing, Receiving. 
 pass.dta <- dta.list[["Passing"]] %>%
@@ -74,15 +74,7 @@ sp.dta <- dta.list[sp.tbl.names] %>%
 # Create the necessary stats of interest:
 # 1. 
 pass.sum.dta <- pass.dta %>% 
-  unique %>%
-  # first creat just the first initial and last name 
-  # of player for plotting labeling: 
-  separate(Name, c("First", "Last"), sep = " ", remove = FALSE) %>%
-  mutate(First = substr(First, 1,1) 
-         , Last = substr(Last, 1,1)) %>%
-  unite("plyr.temp", First, Last, sep = "", remove = TRUE) %>%
-  unite("plyr.lbl", plyr.temp, No., sep = " ", remove = FALSE) %>%
-  unite("Player", No., Name, sep = " ", remove = FALSE) %>%
+  create.name.vars %>%
   group_by(Player, team, season) %>%
   mutate(game = 1:length(Player)
          , Yds.cum = cumsum(Yards)
@@ -110,3 +102,37 @@ pass.td.max <- max(pass.sum.dta$TD.cum)
 pass.att.max <- max(pass.sum.dta$Att.cum)
 
 
+
+# Rushing Data Prep -------------------------------------------------------
+# 1. 
+rush.sum.dta <- rush.dta %>% 
+  create.name.vars() %>%
+  group_by(Player, team, season) %>%
+  mutate(game = 1:length(Player)
+         , yds.cum = cumsum(as.numeric(Yards))
+         , car.cum = cumsum(as.numeric(Carries))
+         , TD.cum = cumsum(as.numeric(TD))
+         , TD.rate.cum = TD.cum/car.cum
+         , avg.cum = round(yds.cum/car.cum, 1)
+         , yds.cum.game = round(yds.cum/game, 1)
+         , yds.game = round(as.numeric(Yards)/as.numeric(Carries), 1)) %>%
+  filter(last(car.cum) > 50 & season == 2018) %>%
+  ungroup %>%
+  arrange(Name)
+
+
+# Receiving data prep -------------------------------------------------------
+rec.sum.dta <- rec.dta %>% 
+  create.name.vars() %>%
+  group_by(Player, team, season) %>%
+  mutate(game = 1:length(Player)
+         , yds.cum = cumsum(as.numeric(Yards))
+         , rec.cum = cumsum(as.numeric(Rec))
+         , TD.cum = cumsum(as.numeric(TD))
+         , TD.rate.cum = TD.cum/rec.cum
+         , avg.cum = round(yds.cum/rec.cum, 1)
+         , yds.cum.game = round(yds.cum/game, 1)
+         , yds.game = round(as.numeric(Yards)/as.numeric(Rec), 1)) %>%
+  filter(last(rec.cum) > 10 & season == 2018) %>%
+  ungroup %>%
+  arrange(Name)
