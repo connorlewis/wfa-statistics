@@ -50,10 +50,13 @@ About {data-navmenu="Home"}
 
 We are currently only looking at the 2018 season (end of season). 
 
-_Pages that are somewhat complete:_
+_Pages that contain some content_
 
-* Offense -> Quarterbacks
-
+* Offense:
+    +  Quarterbacks
+    +  Runningbacks
+    +  Widereceivers
+    
 League Overview {data-navmenu="Home"}
 =====================================
 
@@ -438,15 +441,15 @@ Row {data-height=350}
 renderPlot({
    temp.rb.dta() %>%
     ggplot(aes(x = game, y = as.numeric(Yards)
-               , group = Player)) +
+               , group = Player, color = Player)) +
     
        geom_line(data = rush.sum.dta 
             , mapping = aes(x = game, y = as.numeric(Yards)
                             , group = factor(Player))
             , color = "grey") +
     
-    geom_point(size = 3, color = "blue") +
-    geom_line(color = "blue") +
+    geom_point(size = 3) +
+    geom_line() +
     # geom_text(nudge_x = 5) +
     labs(x = "Game"
          , y = "Yards"
@@ -456,8 +459,7 @@ renderPlot({
     scale_color_discrete(guide = FALSE) +
     geom_text(data = temp.rb.last.dta(),
               mapping = aes(x = game - 0.8, y = as.numeric(Yards)
-                            , label = plyr.lbl)
-              , color = "blue" ) 
+                            , label = plyr.lbl, color = Player)) 
 
 })
 ```
@@ -467,15 +469,15 @@ renderPlot({
 renderPlot({
    temp.rb.dta() %>%
     ggplot(aes(x = game, y = yds.game
-               , group = Player)) +
+               , group = Player, color = Player)) +
     
        geom_line(data = rush.sum.dta 
             , mapping = aes(x = game, y = yds.game
                             , group = factor(Player))
             , color = "grey") +
     
-    geom_point(size = 3, color = "blue") +
-    geom_line(color = "blue") +
+    geom_point(size = 3) +
+    geom_line() +
     # geom_text(nudge_x = 5) +
     labs(x = "Game"
          , y = "Yards per Carry"
@@ -485,8 +487,7 @@ renderPlot({
     scale_color_discrete(guide = FALSE) +
     geom_text(data = temp.rb.last.dta(),
               mapping = aes(x = game - 0.8, y = yds.game
-                            , label = plyr.lbl)
-              , color = "blue" ) 
+                            , label = plyr.lbl, color = Player)) 
 
 })
 ```
