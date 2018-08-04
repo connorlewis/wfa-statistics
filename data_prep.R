@@ -82,7 +82,7 @@ pass.sum.dta <- pass.dta %>%
          , TD.cum = cumsum(TD) 
          , comp.cum = cumsum(Comp)
          , TD.rate.cum = TD.cum/Att.cum
-         , comp.rate = round(comp.cum/Att.cum*100)
+         , comp.cum.rate = round(comp.cum/Att.cum*100)
          , Int.rate.cum = cumsum(Int)/Att.cum
          , Yds.Att.cum = Yds.cum/Att.cum
          , avg.cum = round(Yds.cum/comp.cum, 1)
@@ -90,7 +90,29 @@ pass.sum.dta <- pass.dta %>%
                           Int.rate.cum == 0 ~ TD.rate.cum
                           , TD.rate.cum == 0 ~ 0
                           , TRUE              ~ TD.rate.cum/Int.rate.cum)
-  ) %>%
+  
+         , qb.part1 = case_when(
+              (comp.cum/Att.cum*100-30)*0.05 < 0     ~ 0
+              , (comp.cum/Att.cum*100-30)*0.05 > 2.375 ~2.375
+              , TRUE ~ (comp.cum/Att.cum*100-30)*0.05
+         )
+         , qb.part2 = case_when(
+           (Yds.Att.cum-3)*.25 < 0 ~ 0
+           , (Yds.Att.cum-3)*.25 > 2.375 ~ 2.375
+           , TRUE ~ (Yds.Att.cum-3)*.25
+         )
+         , qb.part3 = case_when(
+           (TD.rate.cum*100*.2) < 0 ~ 0
+           , (TD.rate.cum*100*.2) > 2.375 ~ 2.375
+           , TRUE ~ (TD.rate.cum*100*.2)
+         )
+         , qb.part4 = case_when(
+           2.375-(Int.rate.cum*100*.25) < 0 ~ 0
+           , 2.375-(Int.rate.cum*100*.25) > 2.375 ~ 2.375
+           , TRUE ~ 2.375-(Int.rate.cum*100*.25)
+         )
+         , qb.rate.cum = round((qb.part1 + qb.part2 
+                             + qb.part3 + qb.part4)/6*100, 1)) %>%
   filter(last(Att.cum) > 50 & season == 2018) %>%
   ungroup %>%
   arrange(Name)
