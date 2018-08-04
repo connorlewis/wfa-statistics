@@ -13,6 +13,7 @@ library(flexdashboard)
 library(knitr)
 library(shiny)
 library(tidyverse)
+library(DT)
 library(rsconnect)
 
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', fig.dim = c(4, 6) )
@@ -47,7 +48,11 @@ source("data_prep.R")
 About {data-navmenu="Home"}
 =====================================
 
-We are currently only looking at the 2018 season. 
+We are currently only looking at the 2018 season (end of season). 
+
+_Pages that are somewhat complete:_
+
+* Offense -> Quarterbacks
 
 League Overview {data-navmenu="Home"}
 =====================================
@@ -60,6 +65,11 @@ Top Performers {data-navmenu="Home"}
 
 Overall {data-navmenu="Offense"}
 =====================================
+
+
+Inputs {.sidebar data-width=250}
+----------------------------------------------------------------------
+
 
 Quarterbacks {data-navmenu="Offense" data-orientation=rows}
 =====================================
@@ -92,12 +102,7 @@ conditionalPanel(
 temp.dta <- reactive({
     dta <- pass.sum.dta %>% 
                 filter(Player %in% c(input$player, input$comp.plyr)) %>%
-                mutate(plyr.of.interest = 
-                         case_when(
-                            Player == input$player ~ input$player
-                            , TRUE                 ~ "Other")
-                ) %>%
-      ungroup
+                ungroup
     
     dta
   })
@@ -106,7 +111,7 @@ temp.dta <- reactive({
 temp.last.dta <- reactive({
   temp.dta() %>%
       group_by(Player) %>%
-      top_n(1, week) %>%
+      top_n(1, as.numeric(game)) %>%
       ungroup
 })
 
@@ -140,6 +145,7 @@ renderTable(
 
 Row {data-height=100}
 -----------------------------------------------------------------------
+
 ### Team {.value-box}
 ```{r}
 # A box showing the total cumulative yards for the selected player
@@ -219,8 +225,9 @@ renderPlot({
     
     # plot the selected players
     geom_point(size = 3, color = "blue") +
-    geom_text(vjust = "left", hjust = "bottom", angle = 45, color = "blue") +
-    labs(x = "Total Attempts", y = "Total Yards") +
+    geom_text(nudge_y = 100, color = "blue") +
+    labs(x = "Total Attempts", y = "Total Yards"
+         , caption = "Grey dots represent all non-selected QBs") +
     coord_cartesian(xlim = c(50, pass.att.max)
                     , ylim = c(pass.yrd.min, pass.yrd.max)) +
     scale_color_discrete(guide = FALSE) 
@@ -248,26 +255,366 @@ renderPlot({
     geom_point(size = 3, color = "blue") +
     geom_line(color = "blue") +
     # geom_text(nudge_x = 5) +
-    labs(x = "Game Number"
-         , y = "Ratio") +
+    labs(x = "Game"
+         , y = "Ratio"
+         , caption = "Grey lines represent all non-selected QBs") +
     coord_cartesian(xlim = c(0, 8)
                     , ylim = c(0, 15)) +
     scale_color_discrete(guide = FALSE) +
     geom_text(data = temp.last.dta(),
-              mapping = aes(x = game, y = TD.Int.cum, label = plyr.lbl)
-              , vjust = "left", hjust = "bottom"
-              , angle = 20, color = "blue" )
+              mapping = aes(x = game - 0.8, y = TD.Int.cum, label = plyr.lbl)
+              ,  color = "blue" )
 
 })
 ```
 
 
-Running Backs {data-navmenu="Offense"}
+Running Backs {data-navmenu="Offense" data-orientation=rows}
 =====================================
 
-Wide Receivers {data-navmenu="Offense"}
+
+Inputs {.sidebar data-width=250}
+-----------------------------------------------------------------------
+
+
+```{r rushing.input}
+# What players (QBs) will be compared/analyzed
+selectInput("rb", "RB (>50 attempts)", choices = c('', unique(rush.sum.dta$Player))
+              , selected = NULL, multiple = FALSE, selectize = TRUE)
+
+checkboxInput("comprb", "Compare to another RB", value = FALSE)
+
+# Player rankings on side: 
+
+
+conditionalPanel(
+      condition = "input.comprb",
+      selectInput("comp.rb", ""
+            , choices =  c('', unique(rush.sum.dta$Player))
+            , selected = NULL, multiple = FALSE
+            , selectize = TRUE))
+
+
+
+# All weeks for the players selected
+temp.rb.dta <- reactive({
+    dta <- rush.sum.dta %>% 
+                filter(Player %in% c(input$rb, input$comp.rb)) %>%
+      ungroup
+    
+    dta
+  })
+
+# Only the last week played of data for the players selected
+temp.rb.last.dta <- reactive({
+  temp.rb.dta() %>%
+      group_by(Player) %>%
+      top_n(1, as.numeric(game)) %>%
+      ungroup
+})
+
+# A table of the rating of the QB, by passer rating (last weeks data)
+temp.rb.comp.dta <- reactive({
+  temp.df <- temp.rb.last.dta() %>%
+                select(plyr.lbl, Games = game, Carries = car.cum
+                  , TD = TD.cum, `Avg Yds` = avg.cum, `Yds per Game` = yds.cum.game) %>% 
+      t
+            
+      plyr.names <- temp.df[1, ]
+      
+      temp.df <- temp.df %>%
+        data.frame()
+      
+      names(temp.df) <- plyr.names
+      
+      temp.df %>%
+        rownames_to_column("Stat") %>%
+        filter(Stat != "plyr.lbl") 
+})
+
+renderTable(
+  if(input$rb != '' | input$comp.rb != '') {temp.rb.comp.dta()}
+)
+
+
+```
+
+
+Row {data-height=100}
+-----------------------------------------------------------------------
+
+### Team {.value-box}
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  value <- temp.rb.last.dta() %>% 
+             filter(Player == input$rb) %>%
+             select(team)
+  valueBox(value
+           , icon = "fa-football-ball")
+})
+
+```
+
+### Total Yards {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  value <- temp.rb.last.dta() %>% 
+             filter(Player == input$rb) %>%
+             select(yds.cum)
+  valueBox(value
+           , icon = "fa-football-ball")
+})
+
+```
+
+
+### Touchdowns {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  valueBox(temp.rb.last.dta() %>% 
+             filter(Player == input$rb) %>%
+             select(TD.cum)
+           , icon = "fa-football-ball")
+})
+```
+
+### Player Ranking {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  valueBox("TBD"
+           , icon = "fa-trophy")
+})
+```
+
+
+Row {data-height=350}
+-------------------------------------------------------------
+
+
+### Rushing Yards by Game
+
+```{r rush.yrds.game}
+renderPlot({
+   temp.rb.dta() %>%
+    ggplot(aes(x = game, y = as.numeric(Yards)
+               , group = Player)) +
+    
+       geom_line(data = rush.sum.dta 
+            , mapping = aes(x = game, y = as.numeric(Yards)
+                            , group = factor(Player))
+            , color = "grey") +
+    
+    geom_point(size = 3, color = "blue") +
+    geom_line(color = "blue") +
+    # geom_text(nudge_x = 5) +
+    labs(x = "Game"
+         , y = "Yards"
+         , caption = "Grey lines represent non-selected runningbacks.") +
+    coord_cartesian(xlim = c(1, 8)
+                    , ylim = c(0, 300)) +
+    scale_color_discrete(guide = FALSE) +
+    geom_text(data = temp.rb.last.dta(),
+              mapping = aes(x = game - 0.8, y = as.numeric(Yards)
+                            , label = plyr.lbl)
+              , color = "blue" ) 
+
+})
+```
+
+### Rushing Yards per Carry by Game
+```{r rush.yrds.car}
+renderPlot({
+   temp.rb.dta() %>%
+    ggplot(aes(x = game, y = yds.game
+               , group = Player)) +
+    
+       geom_line(data = rush.sum.dta 
+            , mapping = aes(x = game, y = yds.game
+                            , group = factor(Player))
+            , color = "grey") +
+    
+    geom_point(size = 3, color = "blue") +
+    geom_line(color = "blue") +
+    # geom_text(nudge_x = 5) +
+    labs(x = "Game"
+         , y = "Yards per Carry"
+         , caption = "Grey lines represent non-selected runningbacks.") +
+    coord_cartesian(xlim = c(1, 8)
+                    , ylim = c(0, 40)) +
+    scale_color_discrete(guide = FALSE) +
+    geom_text(data = temp.rb.last.dta(),
+              mapping = aes(x = game - 0.8, y = yds.game
+                            , label = plyr.lbl)
+              , color = "blue" ) 
+
+})
+```
+
+
+Wide Receivers {data-navmenu="Offense" data-orientation=rows}
 =====================================
 
+
+
+
+Inputs {.sidebar data-width=250}
+-----------------------------------------------------------------------
+
+
+```{r receiving.input}
+# What players (QBs) will be compared/analyzed
+ selectInput("wr", "wr (>10 attempts)", choices = c('', unique(rec.sum.dta$Player))
+              , selected = NULL, multiple = FALSE, selectize = TRUE)
+
+checkboxInput("compwr", "Compare to another Receiver", value = FALSE)
+
+# Player rankings on side: 
+
+
+conditionalPanel(
+      condition = "input.compwr",
+      selectInput("comp.wr", ""
+            , choices =  c('', unique(rec.sum.dta$Player))
+            , selected = NULL, multiple = FALSE
+            , selectize = TRUE))
+
+
+
+# All weeks for the players selected
+temp.wr.dta <- reactive({
+    dta <- rec.sum.dta %>% 
+                filter(Player %in% c(input$wr, input$comp.wr)) %>%
+      ungroup
+    dta
+  })
+
+# Only the last week played of data for the players selected
+temp.wr.last.dta <- reactive({
+  temp.wr.dta() %>%
+      group_by(Player) %>%
+      top_n(1, as.numeric(game)) %>%
+      ungroup
+})
+
+# A table of the rating of the QB, by passer rating (last weeks data)
+temp.wr.comp.dta <- reactive({
+  temp.df <- temp.wr.last.dta() %>%
+                select(plyr.lbl, Games = game, Receptions = rec.cum
+                  , TD = TD.cum, `Avg Yds` = avg.cum, `Yds per Game` = yds.cum.game) %>% 
+      t
+            
+      plyr.names <- temp.df[1, ]
+      
+      temp.df <- temp.df %>%
+        data.frame()
+      
+      names(temp.df) <- plyr.names
+      
+      temp.df %>%
+        rownames_to_column("Stat") %>%
+        filter(Stat != "plyr.lbl") 
+})
+
+renderTable(
+  if(input$wr != '' | input$comp.wr != '') {temp.wr.comp.dta()}
+)
+
+
+```
+
+
+Row {data-height=100}
+-----------------------------------------------------------------------
+
+### Team {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  value <- temp.wr.last.dta() %>% 
+             filter(Player == input$wr) %>%
+             select(team)
+  valueBox(value
+           , icon = "fa-football-ball")
+})
+
+```
+
+### Total Yards {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  value <- temp.wr.last.dta() %>% 
+             filter(Player == input$wr) %>%
+             select(yds.cum)
+  valueBox(value
+           , icon = "fa-football-ball")
+})
+
+```
+
+
+### Touchdowns {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  valueBox(temp.wr.last.dta() %>% 
+             filter(Player == input$wr) %>%
+             select(TD.cum)
+           , icon = "fa-football-ball")
+})
+```
+
+### Player Ranking {.value-box}
+
+```{r}
+# A box showing the total cumulative yards for the selected player
+renderValueBox({
+  valueBox("TBD"
+           , icon = "fa-trophy")
+})
+```
+
+
+
+Complete Stats {data-navmenu="Offense"}
+=====================================
+
+Row
+----------------------------------------------------------------------
+
+### Passing 
+
+```{r}
+datatable(pass.sum.dta %>% 
+  group_by(Player) %>%
+          top_n(1, as.numeric(game)) %>%
+          select(Player, Games = game, Rating, Attempts = Att.cum
+                 , Comp = comp.cum, Yds = Yds.cum, Avg = avg.cum
+                 , TD = TD.cum) %>%
+          arrange(desc(as.numeric(Rating)))
+  , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
+          
+```
+
+
+### Rushing
+
+```{r}
+
+```
+
+
+### Receiving
 
 <!--  DEFENSE -->
 
@@ -286,24 +633,6 @@ By Position {data-navmenu="Defense"}
 By Player {data-navmenu="Defense"}
 =====================================
 
-Column {.tabset}
--------------------------------------
-
-### Season 
-
-```{r}
-print("offensive stats")
-```
-
-
-### Comparison
-
-```{r}
-plot(mtcars$mpg, mtcars$wt)
-```
-
-
-
 
 League {data-navmenu="Special Teams"}
 =====================================
@@ -313,30 +642,6 @@ By Division {data-navmenu="Special Teams"}
 
 By Team {data-navmenu="Special Teams"}
 =====================================
-
-Column {.tabset}
--------------------------------------
-
-### Kick-off/return
-
-```{r}
-print("offensive stats")
-```
-
-
-### Punt
-
-```{r}
-plot(mtcars$mpg, mtcars$wt)
-```
-
-### Kicking
-
-```{r}
-plot(mtcars$mpg, mtcars$wt)
-```
-
-
 
 
 Prediction {data-navmenu="Analytics"}
