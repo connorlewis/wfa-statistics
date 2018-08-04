@@ -243,31 +243,8 @@ renderPlot({
 
 ```{r td.int.plot}
 renderPlot({
-
-   temp.dta() %>%
-    ggplot(aes(x = game, y = TD.Int.cum
-               , group = Player, color = Player)) +
-    
-       geom_line(data = pass.sum.dta 
-            , mapping = aes(x = game, y = TD.Int.cum
-                            , group = factor(Player))
-            , color = "grey") +
-       geom_smooth(data = pass.sum.dta 
-                , mapping = aes(x = game, y = TD.Int.cum)
-                , method = "loess", se = FALSE, color = "red") +
-   
-    geom_point(size = 3) +
-    geom_line() +
-    # geom_text(nudge_x = 5) +
-    labs(x = "Game"
-         , y = "Ratio"
-         , caption = "Grey lines represent all non-selected QBs") +
-    coord_cartesian(xlim = c(1, 8)
-                    , ylim = c(0, 15)) +
-    scale_color_discrete(guide = FALSE) +
-    geom_text(data = temp.last.dta(),
-              mapping = aes(x = game - 0.8, y = TD.Int.cum, label = plyr.lbl, color = Player))
-
+  var.by.game.plot(temp.dta(), pass.sum.dta
+                 , TD.Int.cum, "Ratio", c(0,15))
 })
 ```
 
@@ -275,36 +252,14 @@ Row {data-height=250}
 --------------------------------------------------------
 
 ### QB Rating Cumulative
-
-```{r rate.plot}
+ 
+```{r}
 renderPlot({
-
-   temp.dta() %>%
-    ggplot(aes(x = game, y = qb.rate.cum
-               , group = Player, color = Player)) +
-    
-       geom_line(data = pass.sum.dta 
-            , mapping = aes(x = game, y = qb.rate.cum
-                            , group = factor(Player))
-            , color = "grey") +
-       geom_smooth(data = pass.sum.dta 
-                , mapping = aes(x = game, y = qb.rate.cum)
-                , method = "loess", se = FALSE, color = "red") +
-   
-    geom_point(size = 3) +
-    geom_line() +
-    # geom_text(nudge_x = 5) +
-    labs(x = "Game"
-         , y = "QB Rating"
-         , caption = "Grey lines represent all non-selected QBs") +
-    coord_cartesian(xlim = c(1, 8)
-                    , ylim = c(0, 168)) +
-    scale_color_discrete(guide = FALSE) +
-    geom_text(data = temp.last.dta(),
-              mapping = aes(x = game - 0.8, y = qb.rate.cum, label = plyr.lbl, color = Player))
-
+  var.by.game.plot(temp.dta(), pass.sum.dta
+                 , qb.rate.cum, "QB Rating", c(0,168))
 })
 ```
+  
 
 Running Backs {data-navmenu="Offense" data-orientation=rows}
 =====================================
@@ -316,7 +271,7 @@ Inputs {.sidebar data-width=250}
 
 ```{r rushing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("rb", "RB (>50 attempts)", choices = c('', unique(rush.sum.dta$Player))
+selectInput("rb", "RB (>50 Carries)", choices = c('', unique(rush.sum.dta$Player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("comprb", "Compare to another RB", value = FALSE)
@@ -439,56 +394,16 @@ Row {data-height=350}
 
 ```{r rush.yrds.game}
 renderPlot({
-   temp.rb.dta() %>%
-    ggplot(aes(x = game, y = as.numeric(Yards)
-               , group = Player, color = Player)) +
-    
-       geom_line(data = rush.sum.dta 
-            , mapping = aes(x = game, y = as.numeric(Yards)
-                            , group = factor(Player))
-            , color = "grey") +
-    
-    geom_point(size = 3) +
-    geom_line() +
-    # geom_text(nudge_x = 5) +
-    labs(x = "Game"
-         , y = "Yards"
-         , caption = "Grey lines represent non-selected runningbacks.") +
-    coord_cartesian(xlim = c(1, 8)
-                    , ylim = c(0, 300)) +
-    scale_color_discrete(guide = FALSE) +
-    geom_text(data = temp.rb.last.dta(),
-              mapping = aes(x = game - 0.8, y = as.numeric(Yards)
-                            , label = plyr.lbl, color = Player)) 
-
+  var.by.game.plot(temp.rb.dta(), rush.sum.dta
+                 , as.numeric(Yards), "Yards", c(0,300))
 })
 ```
 
 ### Rushing Yards per Carry by Game
 ```{r rush.yrds.car}
 renderPlot({
-   temp.rb.dta() %>%
-    ggplot(aes(x = game, y = yds.game
-               , group = Player, color = Player)) +
-    
-       geom_line(data = rush.sum.dta 
-            , mapping = aes(x = game, y = yds.game
-                            , group = factor(Player))
-            , color = "grey") +
-    
-    geom_point(size = 3) +
-    geom_line() +
-    # geom_text(nudge_x = 5) +
-    labs(x = "Game"
-         , y = "Yards per Carry"
-         , caption = "Grey lines represent non-selected runningbacks.") +
-    coord_cartesian(xlim = c(1, 8)
-                    , ylim = c(0, 40)) +
-    scale_color_discrete(guide = FALSE) +
-    geom_text(data = temp.rb.last.dta(),
-              mapping = aes(x = game - 0.8, y = yds.game
-                            , label = plyr.lbl, color = Player)) 
-
+  var.by.game.plot(temp.rb.dta(), rush.sum.dta
+                 , yds.car, "Yards", c(0,30))
 })
 ```
 
@@ -505,7 +420,7 @@ Inputs {.sidebar data-width=250}
 
 ```{r receiving.input}
 # What players (QBs) will be compared/analyzed
- selectInput("wr", "wr (>10 attempts)", choices = c('', unique(rec.sum.dta$Player))
+ selectInput("wr", "WR (>10 Receptions)", choices = c('', unique(rec.sum.dta$Player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("compwr", "Compare to another Receiver", value = FALSE)
@@ -619,12 +534,34 @@ renderValueBox({
 })
 ```
 
+Row {data-height=350}
+-----------------------------------------------------------------
 
 
-Complete Stats {data-navmenu="Offense"}
+### Yards per game (by single game)
+
+```{r}
+renderPlot({
+  var.by.game.plot(temp.wr.dta(), rec.sum.dta
+                 , as.numeric(Yards), "Yards", c(0,200))
+})
+```
+
+### Yards per Reception (by single game)
+
+```{r}
+renderPlot({
+  var.by.game.plot(temp.wr.dta(), rec.sum.dta
+                 , yds.rec, "Yards", c(0,50))
+})
+```
+
+
+
+Complete Stats {data-navmenu="Offense" data-orientation=rows}
 =====================================
 
-Row
+Row {.tabset data-height=600}
 ----------------------------------------------------------------------
 
 ### Passing 
@@ -633,7 +570,7 @@ Row
 datatable(pass.sum.dta %>% 
   group_by(Player) %>%
           top_n(1, as.numeric(game)) %>%
-          select(Player, Games = game, Rating, Attempts = Att.cum
+          select(Player, Games = game, Rating = qb.rate.cum, Attempts = Att.cum
                  , Comp = comp.cum, Yds = Yds.cum, Avg = avg.cum
                  , TD = TD.cum) %>%
           arrange(desc(as.numeric(Rating)))
@@ -645,11 +582,32 @@ datatable(pass.sum.dta %>%
 ### Rushing
 
 ```{r}
-
+datatable(rush.sum.dta %>% 
+  group_by(Player) %>%
+          top_n(1, as.numeric(game)) %>%
+          select(Player, Games = game, Carries = car.cum
+                 , Yds = yds.cum, Avg = avg.cum
+                 , TD = TD.cum, `Yds per Game` = yds.cum.game) %>%
+          arrange(desc(as.numeric(Yds)))
+  , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
 ```
 
 
 ### Receiving
+
+
+```{r}
+datatable(rec.sum.dta %>% 
+  group_by(Player) %>%
+          top_n(1, as.numeric(game)) %>%
+          select(Player, Games = game, Recs = rec.cum
+                 , Yds = yds.cum, Avg = avg.cum
+                 , TD = TD.cum, `Yds per Game` = yds.cum.game) %>%
+          arrange(desc(as.numeric(Yds)))
+  , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
+```
+
+
 
 <!--  DEFENSE -->
 

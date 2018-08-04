@@ -18,3 +18,45 @@ create.name.vars <- function(dta) {
     select(-plyr.temp)
 }
 
+# This function creates plots over the season by game and highlights the 
+# selected players' paths
+# Input: 
+#    react.dta the reactive data,
+#    dta: underlying data (all)
+#    y.var: the variable to be plotted on the Y axis,
+#    y.axis.lbl: the title of the y.axis
+#    y.lims: the limits for the y-axis (e.g. c(0,200))
+#    
+var.by.game.plot <- function(react.dta, dta, y.var, y.axis.lbl, y.lims){
+  
+  # using tidyeval language
+  quo_var <- enquo(y.var)
+  
+  react.dta %>%
+    ggplot(aes(x = game, y = !!quo_var
+               , group = Player, color = Player)) +
+    
+    geom_line(data = dta 
+              , mapping = aes(x = game, y = !!quo_var
+                              , group = factor(Player))
+              , color = "grey") +
+    # geom_smooth(data = dta 
+    #             , mapping = aes(x = game, y = !!quo_var)
+    #             , method = "loess", se = FALSE, color = "red") +
+    
+    geom_point(size = 3) +
+    geom_line(size = 1.5) +
+    labs(x = "Game"
+         , y = y.axis.lbl
+         , caption = "Grey lines represent all non-selected players.") +
+    coord_cartesian(xlim = c(1, 8)
+                    , ylim = y.lims) +
+    scale_color_discrete(guide = FALSE) +
+    geom_text(data = (react.dta %>%
+                group_by(Player) %>%
+                top_n(1, as.numeric(game))),
+              mapping = aes(x = game - 0.5, y = !!quo_var
+                            , label = plyr.lbl, color = Player)
+              , size = 5)
+  
+}

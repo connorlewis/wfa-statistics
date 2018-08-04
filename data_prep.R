@@ -137,7 +137,7 @@ rush.sum.dta <- rush.dta %>%
          , TD.rate.cum = TD.cum/car.cum
          , avg.cum = round(yds.cum/car.cum, 1)
          , yds.cum.game = round(yds.cum/game, 1)
-         , yds.game = round(as.numeric(Yards)/as.numeric(Carries), 1)) %>%
+         , yds.car = round(as.numeric(Yards)/as.numeric(Carries), 1)) %>%
   filter(last(car.cum) > 50 & season == 2018) %>%
   ungroup %>%
   arrange(Name)
@@ -154,7 +154,7 @@ rec.sum.dta <- rec.dta %>%
          , TD.rate.cum = TD.cum/rec.cum
          , avg.cum = round(yds.cum/rec.cum, 1)
          , yds.cum.game = round(yds.cum/game, 1)
-         , yds.game = round(as.numeric(Yards)/as.numeric(Rec), 1)) %>%
+         , yds.rec = round(as.numeric(Yards)/as.numeric(Rec), 1)) %>%
   filter(last(rec.cum) > 10 & season == 2018) %>%
   ungroup %>%
   arrange(Name)
