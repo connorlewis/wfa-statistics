@@ -118,9 +118,10 @@ temp.last.dta <- reactive({
 # A table of the rating of the QB, by passer rating (last weeks data)
 temp.comp.dta <- reactive({
   temp.df <- temp.last.dta() %>%
-                select(plyr.lbl, Games = game, Attempts = Att.cum
-                  , `Comp (%)` = comp.rate, TD = TD.cum
-                  , `Avg Yds` = avg.cum) %>% 
+                select(plyr.lbl, Games = game, Rating = qb.rate.cum
+                       , Attempts = Att.cum
+                       , `Comp (%)` = comp.cum.rate, TD = TD.cum
+                       , `Avg Yds` = avg.cum) %>% 
       t
             
       plyr.names <- temp.df[1, ]
@@ -197,7 +198,7 @@ renderValueBox({
 ```
 
 
-Row {data-height=350}
+Row {data-height=250}
 -----------------------------------------------------------------------
 
 ### Total passing yards vs. passing attempts
@@ -208,7 +209,7 @@ renderPlot({
 
   temp.last.dta() %>%
     ggplot(aes(x = Att.cum, y = Yds.cum
-               , label = plyr.lbl)) +
+               , label = plyr.lbl, color = Player)) +
     
     # plots all of the players in grey with a red line for the lm
     geom_point(data = pass.sum.dta %>%
@@ -224,8 +225,8 @@ renderPlot({
                 , method = "lm", se = FALSE, color = "red") +
     
     # plot the selected players
-    geom_point(size = 3, color = "blue") +
-    geom_text(nudge_y = 100, color = "blue") +
+    geom_point(size = 3) +
+    geom_text(nudge_y = 100) +
     labs(x = "Total Attempts", y = "Total Yards"
          , caption = "Grey dots represent all non-selected QBs") +
     coord_cartesian(xlim = c(50, pass.att.max)
@@ -242,7 +243,7 @@ renderPlot({
 
    temp.dta() %>%
     ggplot(aes(x = game, y = TD.Int.cum
-               , group = Player)) +
+               , group = Player, color = Player)) +
     
        geom_line(data = pass.sum.dta 
             , mapping = aes(x = game, y = TD.Int.cum
@@ -252,22 +253,55 @@ renderPlot({
                 , mapping = aes(x = game, y = TD.Int.cum)
                 , method = "loess", se = FALSE, color = "red") +
    
-    geom_point(size = 3, color = "blue") +
-    geom_line(color = "blue") +
+    geom_point(size = 3) +
+    geom_line() +
     # geom_text(nudge_x = 5) +
     labs(x = "Game"
          , y = "Ratio"
          , caption = "Grey lines represent all non-selected QBs") +
-    coord_cartesian(xlim = c(0, 8)
+    coord_cartesian(xlim = c(1, 8)
                     , ylim = c(0, 15)) +
     scale_color_discrete(guide = FALSE) +
     geom_text(data = temp.last.dta(),
-              mapping = aes(x = game - 0.8, y = TD.Int.cum, label = plyr.lbl)
-              ,  color = "blue" )
+              mapping = aes(x = game - 0.8, y = TD.Int.cum, label = plyr.lbl, color = Player))
 
 })
 ```
 
+Row {data-height=250}
+--------------------------------------------------------
+
+### QB Rating Cumulative
+
+```{r rate.plot}
+renderPlot({
+
+   temp.dta() %>%
+    ggplot(aes(x = game, y = qb.rate.cum
+               , group = Player, color = Player)) +
+    
+       geom_line(data = pass.sum.dta 
+            , mapping = aes(x = game, y = qb.rate.cum
+                            , group = factor(Player))
+            , color = "grey") +
+       geom_smooth(data = pass.sum.dta 
+                , mapping = aes(x = game, y = qb.rate.cum)
+                , method = "loess", se = FALSE, color = "red") +
+   
+    geom_point(size = 3) +
+    geom_line() +
+    # geom_text(nudge_x = 5) +
+    labs(x = "Game"
+         , y = "QB Rating"
+         , caption = "Grey lines represent all non-selected QBs") +
+    coord_cartesian(xlim = c(1, 8)
+                    , ylim = c(0, 168)) +
+    scale_color_discrete(guide = FALSE) +
+    geom_text(data = temp.last.dta(),
+              mapping = aes(x = game - 0.8, y = qb.rate.cum, label = plyr.lbl, color = Player))
+
+})
+```
 
 Running Backs {data-navmenu="Offense" data-orientation=rows}
 =====================================
