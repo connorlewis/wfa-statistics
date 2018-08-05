@@ -4,18 +4,21 @@
 # plyr name, number, and initials for labelling and selection purposed
 # used in the dashboard.
 
-create.name.vars <- function(dta) {
-  dta %>% 
+create.name.vars <- function(df) {
+  
+  df %>% 
+    rename_all(tolower) %>%
     unique %>%
     # first creat just the first initial and last name 
     # of player for plotting labeling: 
-    separate(Name, c("First", "Last"), sep = " ", remove = FALSE) %>%
+    separate(name, c("First", "Last"), sep = " ", remove = FALSE) %>%
     mutate(First = substr(First, 1,1) 
            , Last = substr(Last, 1,1)) %>%
     unite("plyr.temp", First, Last, sep = "", remove = TRUE) %>%
-    unite("plyr.lbl", plyr.temp, No., sep = " ", remove = FALSE) %>%
-    unite("Player", No., Name, sep = " ", remove = FALSE) %>%
-    select(-plyr.temp)
+    unite("plyr.lbl", plyr.temp, no., sep = " ", remove = FALSE) %>%
+    unite("player", no., name, sep = " ", remove = FALSE) %>%
+    select(-plyr.temp) %>%
+    mutate(team = gsub("+", " ", team, fixed = TRUE))
 }
 
 # This function creates plots over the season by game and highlights the 
@@ -34,11 +37,11 @@ var.by.game.plot <- function(react.dta, dta, y.var, y.axis.lbl, y.lims){
   
   react.dta %>%
     ggplot(aes(x = game, y = !!quo_var
-               , group = Player, color = Player)) +
+               , group = player, color = player)) +
     
     geom_line(data = dta 
               , mapping = aes(x = game, y = !!quo_var
-                              , group = factor(Player))
+                              , group = factor(player))
               , color = "grey") +
     # geom_smooth(data = dta 
     #             , mapping = aes(x = game, y = !!quo_var)
@@ -54,10 +57,39 @@ var.by.game.plot <- function(react.dta, dta, y.var, y.axis.lbl, y.lims){
     scale_x_continuous(breaks = seq(1,8,1)) +
     scale_color_discrete(guide = FALSE) +
     geom_text(data = (react.dta %>%
-                group_by(Player) %>%
+                group_by(player) %>%
                 top_n(1, as.numeric(game))),
               mapping = aes(x = game + 0.6, y = !!quo_var
-                            , label = plyr.lbl, color = Player)
+                            , label = plyr.lbl, color = player)
               , size = 4.5)
   
 }
+
+
+# This function creates the player stats and comparison tables, given the temp.dta
+create.stats.tbl <- function(temp.df) {
+  
+  plyr.names <- temp.df[2, ]
+  
+  temp.df <- temp.df %>%
+    data.frame()
+  
+  names(temp.df) <- plyr.names
+  
+  temp.df %>%
+    rownames_to_column("Stat") %>%
+    filter(!(Stat %in% c('player', "plyr.lbl")))
+}  
+  
+
+# This function takes a temp data set and gets the latest value for the given 
+# val.var. Used for the value boxes and reactive input (e.g. input$player)
+get.value <- function(temp.df, inp, val.var) {
+  q.var <- enquo(val.var)
+  
+  temp.df %>% 
+      filter(player == inp) %>%
+      top_n(1, game) %>%
+      select(!!q.var)
+}
+

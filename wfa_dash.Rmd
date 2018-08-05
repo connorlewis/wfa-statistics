@@ -84,63 +84,46 @@ Inputs {.sidebar data-width=250}
 
 ```{r passing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("player", "QB (>50 attempts)", choices = c('', unique(pass.sum.dta$Player))
+selectInput("qb", "QB (>50 attempts)", choices = c('', unique(pass.sum.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("comp", "Compare to another QB", value = FALSE)
 
-# Player rankings on side: 
+# player rankings on side: 
 
 
 conditionalPanel(
       condition = "input.comp",
-      selectInput("comp.plyr", ""
-            , choices =  c('', unique(pass.sum.dta$Player))
+      selectInput("comp.qb", ""
+            , choices =  c('', unique(pass.sum.dta$player))
             , selected = NULL, multiple = FALSE
             , selectize = TRUE))
 
 
 
 # All weeks for the players selected
-temp.dta <- reactive({
-    dta <- pass.sum.dta %>% 
-                filter(Player %in% c(input$player, input$comp.plyr)) %>%
-                ungroup
-    
-    dta
+qb.dta <- reactive({
+        pass.sum.dta %>% 
+            filter(player %in% c(input$qb, input$comp.qb)) 
   })
 
-# Only the last week played of data for the players selected
-temp.last.dta <- reactive({
-  temp.dta() %>%
-      group_by(Player) %>%
-      top_n(1, as.numeric(game)) %>%
-      ungroup
-})
 
 # A table of the rating of the QB, by passer rating (last weeks data)
-temp.comp.dta <- reactive({
-  temp.df <- temp.last.dta() %>%
-                select(plyr.lbl, Team = team, Games = game, Rating = qb.rate.cum
-                       , Attempts = Att.cum
-                       , `Comp (%)` = comp.cum.rate, TD = TD.cum
-                       , `Avg Yds` = avg.cum) %>% 
-      t
-            
-      plyr.names <- temp.df[1, ]
-      
-      temp.df <- temp.df %>%
-        data.frame()
-      
-      names(temp.df) <- plyr.names
-      
-      temp.df %>%
-        rownames_to_column("Stat") %>%
-        filter(Stat != "plyr.lbl") 
+qb.comp.dta <- reactive({
+      qb.dta() %>%       
+          group_by(player) %>%      
+          top_n(1, as.numeric(game)) %>%       
+          select(plyr.lbl, Team = team, Games = game
+                 , Rating = qb_rate_cum
+                 , Attempts = att_cum
+                 , `Comp (%)` = comp_cum_rate, TD = td_cum
+                 , `Avg Yds` = avg_cum) %>% 
+          t %>%
+          create.stats.tbl
 })
 
 renderTable(
-  if(input$player != '' | input$comp.plyr != '') {temp.comp.dta()}
+  if(input$qb != '' | input$comp.qb != '') {qb.comp.dta()}
 )
 
 
@@ -154,43 +137,35 @@ Row {data-height=100}
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  value <- temp.last.dta() %>% 
-             filter(Player == input$player) %>%
-             select(team)
-  valueBox(value
+  valueBox(get.value(qb.dta(), input$qb, team)
            , icon = "fa-football-ball")
 })
 
 ```
 
-### Total Passing Yards {.value-box}
+### Passing Yards {.value-box}
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  value <- temp.last.dta() %>% 
-             filter(Player == input$player) %>%
-             select(Yds.cum)
-  valueBox(value
+  valueBox(get.value(qb.dta(), input$qb, yards_cum)
            , icon = "fa-football-ball")
 })
 
 ```
 
 
-### Total Touchdowns {.value-box}
+### Passing TDs {.value-box}
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(temp.last.dta() %>% 
-             filter(Player == input$player) %>%
-             select(TD.cum)
+  valueBox(get.value(qb.dta(), input$qb, td_cum)
            , icon = "fa-football-ball")
 })
 ```
 
-### Player Ranking {.value-box}
+### player Ranking {.value-box}
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
@@ -209,22 +184,24 @@ Row {data-height=250}
 
 ```{r passyrds.plot}
 renderPlot({
-
-  temp.last.dta() %>%
-    ggplot(aes(x = Att.cum, y = Yds.cum
-               , label = plyr.lbl, color = Player)) +
+  
+    qb.dta() %>%       
+        group_by(player) %>%      
+        top_n(1, as.numeric(game)) %>% 
+    ggplot(aes(x = att_cum, y = yards_cum
+               , label = plyr.lbl, color = player)) +
     
     # plots all of the players in grey with a red line for the lm
     geom_point(data = pass.sum.dta %>%
-                group_by(Player) %>%
-                filter(Player != input$player) %>%
+                group_by(player) %>%
+                filter(player != input$qb) %>%
                 top_n(1, week)
-                , mapping = aes(x = Att.cum, y = Yds.cum)
+                , mapping = aes(x = att_cum, y = yards_cum)
                 , color = "grey") +
     geom_smooth(data = pass.sum.dta %>%
-                group_by(Player) %>%
+                group_by(player) %>%
                 top_n(1, week)
-                , mapping = aes(x = Att.cum, y = Yds.cum)
+                , mapping = aes(x = att_cum, y = yards_cum)
                 , method = "lm", se = FALSE, color = "red") +
     
     # plot the selected players
@@ -243,8 +220,8 @@ renderPlot({
 
 ```{r td.int.plot}
 renderPlot({
-  var.by.game.plot(temp.dta(), pass.sum.dta
-                 , TD.Int.cum, "Ratio", c(0,15))
+  var.by.game.plot(qb.dta(), pass.sum.dta
+                 , td_int_cum, "Ratio", c(0,15))
 })
 ```
 
@@ -255,8 +232,8 @@ Row {data-height=250}
  
 ```{r}
 renderPlot({
-  var.by.game.plot(temp.dta(), pass.sum.dta
-                 , qb.rate.cum, "QB Rating", c(0,168))
+  var.by.game.plot(qb.dta(), pass.sum.dta
+                 , qb_rate_cum, "QB Rating", c(0,168))
 })
 ```
   
@@ -271,61 +248,41 @@ Inputs {.sidebar data-width=250}
 
 ```{r rushing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("rb", "RB (>50 Carries)", choices = c('', unique(rush.sum.dta$Player))
+selectInput("rb", "RB (>25 Carries)", choices = c('', unique(rush.sum.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("comprb", "Compare to another RB", value = FALSE)
 
-# Player rankings on side: 
+# player rankings on side: 
 
 
 conditionalPanel(
       condition = "input.comprb",
       selectInput("comp.rb", ""
-            , choices =  c('', unique(rush.sum.dta$Player))
+            , choices =  c('', unique(rush.sum.dta$player))
             , selected = NULL, multiple = FALSE
             , selectize = TRUE))
 
-
-
 # All weeks for the players selected
-temp.rb.dta <- reactive({
-    dta <- rush.sum.dta %>% 
-                filter(Player %in% c(input$rb, input$comp.rb)) %>%
-      ungroup
-    
-    dta
+rb.dta <- reactive({
+   rush.sum.dta %>% 
+        filter(player %in% c(input$rb, input$comp.rb))
   })
 
-# Only the last week played of data for the players selected
-temp.rb.last.dta <- reactive({
-  temp.rb.dta() %>%
-      group_by(Player) %>%
-      top_n(1, as.numeric(game)) %>%
-      ungroup
-})
-
 # A table of the rating of the QB, by passer rating (last weeks data)
-temp.rb.comp.dta <- reactive({
-  temp.df <- temp.rb.last.dta() %>%
-                select(plyr.lbl, Team = team, Games = game, Carries = car.cum
-                  , TD = TD.cum, `Avg Yds` = avg.cum, `Yds per Game` = yds.cum.game) %>% 
-      t
-            
-      plyr.names <- temp.df[1, ]
-      
-      temp.df <- temp.df %>%
-        data.frame()
-      
-      names(temp.df) <- plyr.names
-      
-      temp.df %>%
-        rownames_to_column("Stat") %>%
-        filter(Stat != "plyr.lbl") 
+rb.comp.dta <- reactive({
+  rb.dta() %>%
+      group_by(player) %>%
+      top_n(1, as.numeric(game)) %>%
+      select(plyr.lbl, Team = team, Games = game
+             , Carries = carries_cum, TD = td_cum
+             , Avg = avg_cum, `Yds per Game` = yds_cum_game) %>% 
+      t %>%
+      create.stats.tbl
 })
 
 renderTable(
-  if(input$rb != '' | input$comp.rb != '') {temp.rb.comp.dta()}
+  if(input$rb != '' | input$comp.rb != '') {rb.comp.dta()}
 )
 
 
@@ -339,24 +296,18 @@ Row {data-height=100}
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  value <- temp.rb.last.dta() %>% 
-             filter(Player == input$rb) %>%
-             select(team)
-  valueBox(value
+  valueBox(get.value(rb.dta(), input$rb, team)
            , icon = "fa-football-ball")
 })
 
 ```
 
-### Total Yards {.value-box}
+### Yards {.value-box}
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  value <- temp.rb.last.dta() %>% 
-             filter(Player == input$rb) %>%
-             select(yds.cum)
-  valueBox(value
+  valueBox(get.value(rb.dta(), input$rb, yards_cum)
            , icon = "fa-football-ball")
 })
 
@@ -368,14 +319,12 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(temp.rb.last.dta() %>% 
-             filter(Player == input$rb) %>%
-             select(TD.cum)
+  valueBox(get.value(rb.dta(), input$rb, td_cum)
            , icon = "fa-football-ball")
 })
 ```
 
-### Player Ranking {.value-box}
+### player Ranking {.value-box}
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
@@ -394,16 +343,16 @@ Row {data-height=350}
 
 ```{r rush.yrds.game}
 renderPlot({
-  var.by.game.plot(temp.rb.dta(), rush.sum.dta
-                 , as.numeric(Yards), "Yards", c(0,300))
+  var.by.game.plot(rb.dta(), rush.sum.dta
+                 , as.numeric(yards), "Yards", c(0,300))
 })
 ```
 
 ### Rushing Yards per Carry by Game
 ```{r rush.yrds.car}
 renderPlot({
-  var.by.game.plot(temp.rb.dta(), rush.sum.dta
-                 , yds.car, "Yards", c(0, 40))
+  var.by.game.plot(rb.dta(), rush.sum.dta
+                 , yds_car, "Yards", c(0, 40))
 })
 ```
 
@@ -411,69 +360,53 @@ renderPlot({
 Wide Receivers {data-navmenu="Offense" data-orientation=rows}
 =====================================
 
-
-
-
 Inputs {.sidebar data-width=250}
 -----------------------------------------------------------------------
 
 
 ```{r receiving.input}
 # What players (QBs) will be compared/analyzed
- selectInput("wr", "WR (>10 Receptions)", choices = c('', unique(rec.sum.dta$Player))
+ selectInput("wr", "WR (>10 Receptions)", choices = c('', unique(rec.sum.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("compwr", "Compare to another Receiver", value = FALSE)
 
-# Player rankings on side: 
+# player rankings on side: 
 
 
 conditionalPanel(
       condition = "input.compwr",
       selectInput("comp.wr", ""
-            , choices =  c('', unique(rec.sum.dta$Player))
+            , choices =  c('', unique(rec.sum.dta$player))
             , selected = NULL, multiple = FALSE
             , selectize = TRUE))
 
 
 
 # All weeks for the players selected
-temp.wr.dta <- reactive({
+wr.dta <- reactive({
     dta <- rec.sum.dta %>% 
-                filter(Player %in% c(input$wr, input$comp.wr)) %>%
+                filter(player %in% c(input$wr, input$comp.wr)) %>%
       ungroup
     dta
   })
 
-# Only the last week played of data for the players selected
-temp.wr.last.dta <- reactive({
-  temp.wr.dta() %>%
-      group_by(Player) %>%
-      top_n(1, as.numeric(game)) %>%
-      ungroup
-})
 
 # A table of the rating of the QB, by passer rating (last weeks data)
-temp.wr.comp.dta <- reactive({
-  temp.df <- temp.wr.last.dta() %>%
-                select(plyr.lbl, Team = team, Games = game, Receptions = rec.cum
-                  , TD = TD.cum, `Avg Yds` = avg.cum, `Yds per Game` = yds.cum.game) %>% 
-      t
-            
-      plyr.names <- temp.df[1, ]
-      
-      temp.df <- temp.df %>%
-        data.frame()
-      
-      names(temp.df) <- plyr.names
-      
-      temp.df %>%
-        rownames_to_column("Stat") %>%
-        filter(Stat != "plyr.lbl") 
+wr.comp.dta <- reactive({
+  wr.dta() %>%
+      group_by(player) %>%
+      top_n(1, game) %>%
+      select(plyr.lbl, Team = team, Games = game
+             , Receptions = rec_cum, TD = td_cum
+             , `Avg Yds` = avg_cum
+             , `Yds per Game` = yds_cum_game) %>% 
+      t %>%
+      create.stats.tbl
 })
 
 renderTable(
-  if(input$wr != '' | input$comp.wr != '') {temp.wr.comp.dta()}
+  if(input$wr != '' | input$comp.wr != '') {wr.comp.dta()}
 )
 
 
@@ -488,10 +421,7 @@ Row {data-height=100}
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  value <- temp.wr.last.dta() %>% 
-             filter(Player == input$wr) %>%
-             select(team)
-  valueBox(value
+  valueBox(get.value(wr.dta(), input$wr, team)
            , icon = "fa-football-ball")
 })
 
@@ -501,11 +431,8 @@ renderValueBox({
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
-renderValueBox({
-  value <- temp.wr.last.dta() %>% 
-             filter(Player == input$wr) %>%
-             select(yds.cum)
-  valueBox(value
+renderValueBox({ 
+  valueBox(get.value(wr.dta(), input$wr, yards_cum)
            , icon = "fa-football-ball")
 })
 
@@ -517,14 +444,12 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(temp.wr.last.dta() %>% 
-             filter(Player == input$wr) %>%
-             select(TD.cum)
+  valueBox(get.value(wr.dta(), input$wr, td_cum)
            , icon = "fa-football-ball")
 })
 ```
 
-### Player Ranking {.value-box}
+### player Ranking {.value-box}
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
@@ -542,8 +467,8 @@ Row {data-height=350}
 
 ```{r}
 renderPlot({
-  var.by.game.plot(temp.wr.dta(), rec.sum.dta
-                 , as.numeric(Yards), "Yards", c(0,200))
+  var.by.game.plot(wr.dta(), rec.sum.dta
+                 , as.numeric(yards), "Yards", c(0,200))
 })
 ```
 
@@ -551,8 +476,8 @@ renderPlot({
 
 ```{r}
 renderPlot({
-  var.by.game.plot(temp.wr.dta(), rec.sum.dta
-                 , yds.rec, "Yards", c(0,50))
+  var.by.game.plot(wr.dta(), rec.sum.dta
+                 , yds_rec, "Yards", c(0,50))
 })
 ```
 
@@ -568,11 +493,12 @@ Row {.tabset data-height=600}
 
 ```{r}
 datatable(pass.sum.dta %>% 
-  group_by(Player) %>%
+  group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
-          select(Player, Team = team, Games = game, Rating = qb.rate.cum, Attempts = Att.cum
-                 , Comp = comp.cum, Yds = Yds.cum, Avg = avg.cum
-                 , TD = TD.cum) %>%
+          select(player, Team = team, Games = game
+                 , Rating = qb_rate_cum, Attempts = att_cum
+                 , Comp = comp_cum, Yds = yards_cum, Avg = avg_cum
+                 , TD = td_cum) %>%
           arrange(desc(as.numeric(Rating)))
   , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
           
@@ -583,11 +509,11 @@ datatable(pass.sum.dta %>%
 
 ```{r}
 datatable(rush.sum.dta %>% 
-  group_by(Player) %>%
+  group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
-          select(Player, Team = team, Games = game, Carries = car.cum
-                 , Yds = yds.cum, Avg = avg.cum
-                 , TD = TD.cum, `Yds per Game` = yds.cum.game) %>%
+          select(player, Team = team, Games = game, Carries = carries_cum
+                 , Yds = yards_cum, Avg = avg_cum
+                 , TD = td_cum, `Yds per Game` = yds_cum_game) %>%
           arrange(desc(as.numeric(Yds)))
   , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
 ```
@@ -598,11 +524,11 @@ datatable(rush.sum.dta %>%
 
 ```{r}
 datatable(rec.sum.dta %>% 
-  group_by(Player) %>%
+  group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
-          select(Player, Team = team, Games = game, Recs = rec.cum
-                 , Yds = yds.cum, Avg = avg.cum
-                 , TD = TD.cum, `Yds per Game` = yds.cum.game) %>%
+          select(player, Team = team, Games = game, Recs = rec_cum
+                 , Yds = yards_cum, Avg = avg_cum
+                 , TD = td_cum, `Yds per Game` = yds_cum_game) %>%
           arrange(desc(as.numeric(Yds)))
   , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
 ```
@@ -623,7 +549,7 @@ By Team {data-navmenu="Defense"}
 By Position {data-navmenu="Defense"}
 =====================================
 
-By Player {data-navmenu="Defense"}
+By player {data-navmenu="Defense"}
 =====================================
 
 
@@ -643,6 +569,6 @@ Prediction {data-navmenu="Analytics"}
 Team Rankings {data-navmenu="Analytics"}
 =====================================
 
-Player Rankings {data-navmenu="Analytics"}
+player Rankings {data-navmenu="Analytics"}
 =====================================
 

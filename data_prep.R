@@ -72,89 +72,85 @@ sp.dta <- dta.list[sp.tbl.names] %>%
 
 # Passing Data Prep -------------------------------------------------------
 # Create the necessary stats of interest:
-# 1. 
 pass.sum.dta <- pass.dta %>% 
   create.name.vars %>%
-  group_by(Player, team, season) %>%
-  mutate(game = 1:length(Player)
-         , Yds.cum = cumsum(Yards)
-         , Att.cum = cumsum(Att) 
-         , TD.cum = cumsum(TD) 
-         , comp.cum = cumsum(Comp)
-         , TD.rate.cum = TD.cum/Att.cum
-         , comp.cum.rate = round(comp.cum/Att.cum*100)
-         , Int.rate.cum = cumsum(Int)/Att.cum
-         , Yds.Att.cum = Yds.cum/Att.cum
-         , avg.cum = round(Yds.cum/comp.cum, 1)
-         , TD.Int.cum = case_when(
-                          Int.rate.cum == 0 ~ TD.rate.cum
-                          , TD.rate.cum == 0 ~ 0
-                          , TRUE              ~ TD.rate.cum/Int.rate.cum)
-  
+  mutate_at(.funs = funs(as.numeric(.)), .vars = vars(yards:week, season)) %>%
+  group_by(player, team, season) %>%
+  arrange(week) %>%
+  mutate_at(vars(yards:att, td:int), funs(cum = cumsum)) %>%
+  mutate(game = as.numeric(1:length(player))
+         , td_rate_cum = td_cum/att_cum
+         , comp_cum_rate = round(comp_cum/att_cum*100)
+         , int_rate_cum = int_cum/att_cum
+         , yds_att_cum = yards_cum/att_cum
+         , avg_cum = round(yards_cum/comp_cum, 1)
+         , td_int_cum = case_when(
+                          int_rate_cum == 0 ~ td_rate_cum
+                          , td_rate_cum == 0 ~ 0
+                          , TRUE              ~ td_rate_cum/int_rate_cum)
+         # Now create the NFL passer rating:
          , qb.part1 = case_when(
-              (comp.cum/Att.cum*100-30)*0.05 < 0     ~ 0
-              , (comp.cum/Att.cum*100-30)*0.05 > 2.375 ~2.375
-              , TRUE ~ (comp.cum/Att.cum*100-30)*0.05
+              (comp_cum/att_cum*100-30)*0.05 < 0     ~ 0
+              , (comp_cum/att_cum*100-30)*0.05 > 2.375 ~2.375
+              , TRUE ~ (comp_cum/att_cum*100-30)*0.05
          )
          , qb.part2 = case_when(
-           (Yds.Att.cum-3)*.25 < 0 ~ 0
-           , (Yds.Att.cum-3)*.25 > 2.375 ~ 2.375
-           , TRUE ~ (Yds.Att.cum-3)*.25
+           (yds_att_cum-3)*.25 < 0 ~ 0
+           , (yds_att_cum-3)*.25 > 2.375 ~ 2.375
+           , TRUE ~ (yds_att_cum-3)*.25
          )
          , qb.part3 = case_when(
-           (TD.rate.cum*100*.2) < 0 ~ 0
-           , (TD.rate.cum*100*.2) > 2.375 ~ 2.375
-           , TRUE ~ (TD.rate.cum*100*.2)
+           (td_rate_cum*100*.2) < 0 ~ 0
+           , (td_rate_cum*100*.2) > 2.375 ~ 2.375
+           , TRUE ~ (td_rate_cum*100*.2)
          )
          , qb.part4 = case_when(
-           2.375-(Int.rate.cum*100*.25) < 0 ~ 0
-           , 2.375-(Int.rate.cum*100*.25) > 2.375 ~ 2.375
-           , TRUE ~ 2.375-(Int.rate.cum*100*.25)
+           2.375-(int_rate_cum*100*.25) < 0 ~ 0
+           , 2.375-(int_rate_cum*100*.25) > 2.375 ~ 2.375
+           , TRUE ~ 2.375-(int_rate_cum*100*.25)
          )
-         , qb.rate.cum = round((qb.part1 + qb.part2 
+         , qb_rate_cum = round((qb.part1 + qb.part2 
                              + qb.part3 + qb.part4)/6*100, 1)) %>%
-  filter(last(Att.cum) > 50 & season == 2018) %>%
+  filter(last(att_cum) > 50 & season == 2018) %>%
   ungroup %>%
-  arrange(Name)
+  arrange(name)
   
 # important values to save: 
-pass.yrd.max <- max(pass.sum.dta$Yds.cum)
-pass.yrd.min <- min(pass.sum.dta$Yds.cum)
-pass.td.max <- max(pass.sum.dta$TD.cum)
-pass.att.max <- max(pass.sum.dta$Att.cum)
+pass.yrd.max <- max(pass.sum.dta$yards_cum)
+pass.yrd.min <- min(pass.sum.dta$yards_cum)
+pass.td.max <- max(pass.sum.dta$td_cum)
+pass.att.max <- max(pass.sum.dta$att_cum)
 
 
 
 # Rushing Data Prep -------------------------------------------------------
-# 1. 
 rush.sum.dta <- rush.dta %>% 
   create.name.vars() %>%
-  group_by(Player, team, season) %>%
-  mutate(game = 1:length(Player)
-         , yds.cum = cumsum(as.numeric(Yards))
-         , car.cum = cumsum(as.numeric(Carries))
-         , TD.cum = cumsum(as.numeric(TD))
-         , TD.rate.cum = TD.cum/car.cum
-         , avg.cum = round(yds.cum/car.cum, 1)
-         , yds.cum.game = round(yds.cum/game, 1)
-         , yds.car = round(as.numeric(Yards)/as.numeric(Carries), 1)) %>%
-  filter(last(car.cum) > 50 & season == 2018) %>%
+  mutate_at(.funs = funs(as.numeric(.)), .vars = vars(yards:week, season)) %>%
+  group_by(player, team, season) %>%
+  arrange(week) %>%
+  mutate_at(vars(yards:carries, td), funs(cum = cumsum)) %>%
+  mutate(game = as.numeric(1:length(player))
+         , td_rate_cum = td_cum/carries_cum
+         , avg_cum = round(yards_cum/carries_cum, 1)
+         , yds_cum_game = round(yards_cum/game, 1)
+         , yds_car = round(yards/carries, 1)) %>%
+  filter(last(carries_cum) > 25 & season == 2018) %>%
   ungroup %>%
-  arrange(Name)
+  arrange(name)
 
 
 # Receiving data prep -------------------------------------------------------
 rec.sum.dta <- rec.dta %>% 
   create.name.vars() %>%
-  group_by(Player, team, season) %>%
-  mutate(game = 1:length(Player)
-         , yds.cum = cumsum(as.numeric(Yards))
-         , rec.cum = cumsum(as.numeric(Rec))
-         , TD.cum = cumsum(as.numeric(TD))
-         , TD.rate.cum = TD.cum/rec.cum
-         , avg.cum = round(yds.cum/rec.cum, 1)
-         , yds.cum.game = round(yds.cum/game, 1)
-         , yds.rec = round(as.numeric(Yards)/as.numeric(Rec), 1)) %>%
-  filter(last(rec.cum) > 10 & season == 2018) %>%
+  mutate_at(.funs = funs(as.numeric(.)), .vars = vars(yards:week, season)) %>%
+  group_by(player, team, season) %>%
+  mutate_at(vars(yards, rec, td), funs(cum = cumsum)) %>%
+  mutate(game = as.numeric(1:length(player))
+         , td_rate_cum = td_cum/rec_cum
+         , avg_cum = round(yards_cum/rec_cum, 1)
+         , yds_cum_game = round(yards_cum/game, 1)
+         , yds_rec = round(yards/rec, 1)) %>%
+  filter(last(rec_cum) > 10 & season == 2018) %>%
   ungroup %>%
-  arrange(Name)
+  arrange(name)
