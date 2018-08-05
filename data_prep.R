@@ -72,7 +72,7 @@ sp.dta <- dta.list[sp.tbl.names] %>%
 
 # Passing Data Prep -------------------------------------------------------
 # Create the necessary stats of interest:
-pass.sum.dta <- pass.dta %>% 
+pass.cum.dta <- pass.dta %>% 
   create.name.vars %>%
   mutate_at(.funs = funs(as.numeric(.)), .vars = vars(yards:week, season)) %>%
   group_by(player, team, season) %>%
@@ -110,21 +110,13 @@ pass.sum.dta <- pass.dta %>%
            , TRUE ~ 2.375-(int_rate_cum*100*.25)
          )
          , qb_rate_cum = round((qb.part1 + qb.part2 
-                             + qb.part3 + qb.part4)/6*100, 1)) %>%
-  filter(last(att_cum) > 50 & season == 2018) %>%
-  ungroup %>%
-  arrange(name)
-  
-# important values to save: 
-pass.yrd.max <- max(pass.sum.dta$yards_cum)
-pass.yrd.min <- min(pass.sum.dta$yards_cum)
-pass.td.max <- max(pass.sum.dta$td_cum)
-pass.att.max <- max(pass.sum.dta$att_cum)
+                             + qb.part3 + qb.part4)/6*100, 1)) 
 
 
 
 # Rushing Data Prep -------------------------------------------------------
-rush.sum.dta <- rush.dta %>% 
+# create cumulative data that can be merged with other datasets.
+rush.cum.dta <- rush.dta %>% 
   create.name.vars() %>%
   mutate_at(.funs = funs(as.numeric(.)), .vars = vars(yards:week, season)) %>%
   group_by(player, team, season) %>%
@@ -134,14 +126,13 @@ rush.sum.dta <- rush.dta %>%
          , td_rate_cum = td_cum/carries_cum
          , avg_cum = round(yards_cum/carries_cum, 1)
          , yds_cum_game = round(yards_cum/game, 1)
-         , yds_car = round(yards/carries, 1)) %>%
-  filter(last(carries_cum) > 25 & season == 2018) %>%
-  ungroup %>%
-  arrange(name)
+         , yds_car = round(yards/carries, 1))
+
+
 
 
 # Receiving data prep -------------------------------------------------------
-rec.sum.dta <- rec.dta %>% 
+rec.cum.dta <- rec.dta %>% 
   create.name.vars() %>%
   mutate_at(.funs = funs(as.numeric(.)), .vars = vars(yards:week, season)) %>%
   group_by(player, team, season) %>%
@@ -150,7 +141,34 @@ rec.sum.dta <- rec.dta %>%
          , td_rate_cum = td_cum/rec_cum
          , avg_cum = round(yards_cum/rec_cum, 1)
          , yds_cum_game = round(yards_cum/game, 1)
-         , yds_rec = round(yards/rec, 1)) %>%
-  filter(last(rec_cum) > 10 & season == 2018) %>%
-  ungroup %>%
-  arrange(name)
+         , yds_rec = round(yards/rec, 1))
+
+
+  
+
+# Subsets for dashboard ---------------------------------------------------
+
+
+
+qb.dash.dta <- pass.cum.dta %>%
+        filter(last(att_cum) > 50 & season == 2018) %>%
+        left_join(rush.cum.dta, by = c("player", "season", "game")
+                  , suffix = c("", ".rush")) %>%
+        ungroup %>%
+        arrange(name)
+
+rb.dash.dta <- rush.cum.dta %>%
+        filter(last(carries_cum) > 25 & season == 2018) %>%
+        ungroup %>%
+        arrange(name)
+
+wr.dash.dta <- rec.cum.dta %>%
+        filter(last(rec_cum) > 10 & season == 2018) %>%
+        ungroup %>%
+        arrange(name)
+        
+# other values necessary for the dashboard: 
+pass.yrd.max <- max(qb.dash.dta$yards_cum)
+pass.yrd.min <- min(qb.dash.dta$yards_cum)
+pass.td.max <- max(qb.dash.dta$td_cum)
+pass.att.max <- max(qb.dash.dta$att_cum)

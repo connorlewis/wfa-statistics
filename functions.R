@@ -18,7 +18,10 @@ create.name.vars <- function(df) {
     unite("plyr.lbl", plyr.temp, no., sep = " ", remove = FALSE) %>%
     unite("player", no., name, sep = " ", remove = FALSE) %>%
     select(-plyr.temp) %>%
-    mutate(team = gsub("+", " ", team, fixed = TRUE))
+    mutate(team = str_replace_all(team, c('[+]' =' '
+                                          , '_' = ' '
+                                          , '[-]' = ' ')))
+    #mutate(team = gsub("+", " ", team, fixed = TRUE))
 }
 
 # This function creates plots over the season by game and highlights the 
@@ -67,9 +70,14 @@ var.by.game.plot <- function(react.dta, dta, y.var, y.axis.lbl, y.lims){
 
 
 # This function creates the player stats and comparison tables, given the temp.dta
-create.stats.tbl <- function(temp.df) {
+create.stats.tbl <- function(df) {
+  temp.df <- df %>%
+          group_by(plyr.lbl) %>%
+          top_n(1, Games) %>%
+          t
+        
   
-  plyr.names <- temp.df[2, ]
+  plyr.names <- temp.df[1, ]
   
   temp.df <- temp.df %>%
     data.frame()
@@ -78,7 +86,7 @@ create.stats.tbl <- function(temp.df) {
   
   temp.df %>%
     rownames_to_column("Stat") %>%
-    filter(!(Stat %in% c('player', "plyr.lbl")))
+    filter(Stat != "plyr.lbl")
 }  
   
 

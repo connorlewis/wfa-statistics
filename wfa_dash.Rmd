@@ -26,7 +26,7 @@ theme_set(theme_minimal() +
                   , axis.title=element_text(size=14,face="bold")))
 
 source("data_prep.R")
-#pass.sum.dta <- read_csv("PassingDataTemp.csv")
+#qb.dash.dta <- read_csv("PassingDataTemp.csv")
 #rsconnect::setAccountInfo(name='connorjo',
 #			  token='966F109BEA1433280CB80AACEF59B28F',
 #			  secret='7l/D0vouhjiFkeEZwmyB0anPqXFAXJogfqqifjN7')
@@ -84,7 +84,7 @@ Inputs {.sidebar data-width=250}
 
 ```{r passing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("qb", "QB (>50 attempts)", choices = c('', unique(pass.sum.dta$player))
+selectInput("qb", "QB (>50 attempts)", choices = c('', unique(qb.dash.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("comp", "Compare to another QB", value = FALSE)
@@ -95,7 +95,7 @@ checkboxInput("comp", "Compare to another QB", value = FALSE)
 conditionalPanel(
       condition = "input.comp",
       selectInput("comp.qb", ""
-            , choices =  c('', unique(pass.sum.dta$player))
+            , choices =  c('', unique(qb.dash.dta$player))
             , selected = NULL, multiple = FALSE
             , selectize = TRUE))
 
@@ -103,22 +103,20 @@ conditionalPanel(
 
 # All weeks for the players selected
 qb.dta <- reactive({
-        pass.sum.dta %>% 
-            filter(player %in% c(input$qb, input$comp.qb)) 
+        qb.dash.dta %>% 
+            filter(player %in% c(input$qb, input$comp.qb))
   })
 
 
 # A table of the rating of the QB, by passer rating (last weeks data)
 qb.comp.dta <- reactive({
       qb.dta() %>%       
-          group_by(player) %>%      
-          top_n(1, as.numeric(game)) %>%       
           select(plyr.lbl, Team = team, Games = game
                  , Rating = qb_rate_cum
                  , Attempts = att_cum
                  , `Comp (%)` = comp_cum_rate, TD = td_cum
-                 , `Avg Yds` = avg_cum) %>% 
-          t %>%
+                 ,  Int = int_cum
+                 , `Avg` = avg_cum) %>% 
           create.stats.tbl
 })
 
@@ -192,13 +190,13 @@ renderPlot({
                , label = plyr.lbl, color = player)) +
     
     # plots all of the players in grey with a red line for the lm
-    geom_point(data = pass.sum.dta %>%
+    geom_point(data = qb.dash.dta %>%
                 group_by(player) %>%
                 filter(player != input$qb) %>%
                 top_n(1, week)
                 , mapping = aes(x = att_cum, y = yards_cum)
                 , color = "grey") +
-    geom_smooth(data = pass.sum.dta %>%
+    geom_smooth(data = qb.dash.dta %>%
                 group_by(player) %>%
                 top_n(1, week)
                 , mapping = aes(x = att_cum, y = yards_cum)
@@ -220,7 +218,7 @@ renderPlot({
 
 ```{r td.int.plot}
 renderPlot({
-  var.by.game.plot(qb.dta(), pass.sum.dta
+  var.by.game.plot(qb.dta(), qb.dash.dta
                  , td_int_cum, "Ratio", c(0,15))
 })
 ```
@@ -232,7 +230,7 @@ Row {data-height=250}
  
 ```{r}
 renderPlot({
-  var.by.game.plot(qb.dta(), pass.sum.dta
+  var.by.game.plot(qb.dta(), qb.dash.dta
                  , qb_rate_cum, "QB Rating", c(0,168))
 })
 ```
@@ -248,7 +246,7 @@ Inputs {.sidebar data-width=250}
 
 ```{r rushing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("rb", "RB (>25 Carries)", choices = c('', unique(rush.sum.dta$player))
+selectInput("rb", "RB (>25 Carries)", choices = c('', unique(rb.dash.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("comprb", "Compare to another RB", value = FALSE)
@@ -259,25 +257,22 @@ checkboxInput("comprb", "Compare to another RB", value = FALSE)
 conditionalPanel(
       condition = "input.comprb",
       selectInput("comp.rb", ""
-            , choices =  c('', unique(rush.sum.dta$player))
+            , choices =  c('', unique(rb.dash.dta$player))
             , selected = NULL, multiple = FALSE
             , selectize = TRUE))
 
 # All weeks for the players selected
 rb.dta <- reactive({
-   rush.sum.dta %>% 
+   rb.dash.dta %>% 
         filter(player %in% c(input$rb, input$comp.rb))
   })
 
 # A table of the rating of the QB, by passer rating (last weeks data)
 rb.comp.dta <- reactive({
   rb.dta() %>%
-      group_by(player) %>%
-      top_n(1, as.numeric(game)) %>%
       select(plyr.lbl, Team = team, Games = game
              , Carries = carries_cum, TD = td_cum
              , Avg = avg_cum, `Yds per Game` = yds_cum_game) %>% 
-      t %>%
       create.stats.tbl
 })
 
@@ -343,7 +338,7 @@ Row {data-height=350}
 
 ```{r rush.yrds.game}
 renderPlot({
-  var.by.game.plot(rb.dta(), rush.sum.dta
+  var.by.game.plot(rb.dta(), rb.dash.dta
                  , as.numeric(yards), "Yards", c(0,300))
 })
 ```
@@ -351,7 +346,7 @@ renderPlot({
 ### Rushing Yards per Carry by Game
 ```{r rush.yrds.car}
 renderPlot({
-  var.by.game.plot(rb.dta(), rush.sum.dta
+  var.by.game.plot(rb.dta(), rb.dash.dta
                  , yds_car, "Yards", c(0, 40))
 })
 ```
@@ -366,7 +361,7 @@ Inputs {.sidebar data-width=250}
 
 ```{r receiving.input}
 # What players (QBs) will be compared/analyzed
- selectInput("wr", "WR (>10 Receptions)", choices = c('', unique(rec.sum.dta$player))
+ selectInput("wr", "WR (>10 Receptions)", choices = c('', unique(wr.dash.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("compwr", "Compare to another Receiver", value = FALSE)
@@ -377,7 +372,7 @@ checkboxInput("compwr", "Compare to another Receiver", value = FALSE)
 conditionalPanel(
       condition = "input.compwr",
       selectInput("comp.wr", ""
-            , choices =  c('', unique(rec.sum.dta$player))
+            , choices =  c('', unique(wr.dash.dta$player))
             , selected = NULL, multiple = FALSE
             , selectize = TRUE))
 
@@ -385,7 +380,7 @@ conditionalPanel(
 
 # All weeks for the players selected
 wr.dta <- reactive({
-    dta <- rec.sum.dta %>% 
+    dta <- wr.dash.dta %>% 
                 filter(player %in% c(input$wr, input$comp.wr)) %>%
       ungroup
     dta
@@ -395,13 +390,10 @@ wr.dta <- reactive({
 # A table of the rating of the QB, by passer rating (last weeks data)
 wr.comp.dta <- reactive({
   wr.dta() %>%
-      group_by(player) %>%
-      top_n(1, game) %>%
       select(plyr.lbl, Team = team, Games = game
              , Receptions = rec_cum, TD = td_cum
              , `Avg Yds` = avg_cum
              , `Yds per Game` = yds_cum_game) %>% 
-      t %>%
       create.stats.tbl
 })
 
@@ -467,7 +459,7 @@ Row {data-height=350}
 
 ```{r}
 renderPlot({
-  var.by.game.plot(wr.dta(), rec.sum.dta
+  var.by.game.plot(wr.dta(), wr.dash.dta
                  , as.numeric(yards), "Yards", c(0,200))
 })
 ```
@@ -476,7 +468,7 @@ renderPlot({
 
 ```{r}
 renderPlot({
-  var.by.game.plot(wr.dta(), rec.sum.dta
+  var.by.game.plot(wr.dta(), wr.dash.dta
                  , yds_rec, "Yards", c(0,50))
 })
 ```
@@ -492,7 +484,7 @@ Row {.tabset data-height=600}
 ### Passing 
 
 ```{r}
-datatable(pass.sum.dta %>% 
+datatable(qb.dash.dta %>% 
   group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
           select(player, Team = team, Games = game
@@ -508,7 +500,7 @@ datatable(pass.sum.dta %>%
 ### Rushing
 
 ```{r}
-datatable(rush.sum.dta %>% 
+datatable(rb.dash.dta %>% 
   group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
           select(player, Team = team, Games = game, Carries = carries_cum
@@ -523,7 +515,7 @@ datatable(rush.sum.dta %>%
 
 
 ```{r}
-datatable(rec.sum.dta %>% 
+datatable(wr.dash.dta %>% 
   group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
           select(player, Team = team, Games = game, Recs = rec_cum
