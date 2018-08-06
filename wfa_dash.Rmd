@@ -16,21 +16,27 @@ library(tidyverse)
 library(DT)
 library(rsconnect)
 
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.align = 'center', fig.dim = c(4, 6) )
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE
+                      , message = FALSE, fig.align = 'center'
+                      , fig.dim = c(4, 6))
 
 
-# set the theme for all ggplots: 
-theme_set(theme_minimal() +
-            theme(plot.title = element_text(hjust = 0.5)
-                  , axis.text = element_text(size = 10)
-                  , axis.title=element_text(size=14,face="bold")))
 
 source("data_prep.R")
-#qb.dash.dta <- read_csv("PassingDataTemp.csv")
+#load("tempworkspace.RData")
 #rsconnect::setAccountInfo(name='connorjo',
 #			  token='966F109BEA1433280CB80AACEF59B28F',
 #			  secret='7l/D0vouhjiFkeEZwmyB0anPqXFAXJogfqqifjN7')
 #rsconnect::deployApp('wfa_dash.Rmd')
+# for working offline: 
+# qb.dash.dta <- read_csv("qb.csv")
+# rb.dash.dta <- read_csv("rb.csv")
+# wr.dash.dta <- read_csv("wr.csv")
+# pass.yrd.max <- max(qb.dash.dta$yards_cum)
+# pass.yrd.min <- min(qb.dash.dta$yards_cum)
+# pass.td.max <- max(qb.dash.dta$td_cum)
+# pass.att.max <- max(qb.dash.dta$att_cum)
+# source("functions.R")
 ```
 
 
@@ -45,7 +51,7 @@ source("data_prep.R")
 <!-- css: styles.css -->
 
 
-About {data-navmenu="Home"}
+Home {data-orientation=rows}
 =====================================
 
 We are currently only looking at the 2018 season (end of season). 
@@ -57,28 +63,29 @@ _Pages that contain some content_
     +  Runningbacks
     +  Widereceivers
     
-League Overview {data-navmenu="Home"}
-=====================================
+All season-to-date individual statistics can be found [here](#stats).
 
-Top Performers {data-navmenu="Home"}
-=====================================
+
+__This tool and all analytics completed are at the mercy of reporting. Not all teams report every game and not all stats for players are reported (e.g. a runningback has one carry, but 150 yards). Also, the accuracy of statistics reported are at the teams' discretion, particularly for defensive statistics. Ideally, a player ranking system at each position would be created; however, on the defensive side of the ball, determining a player's position is nearly impossible.__
+
+_As always the intangibles of a player cannot be measure, neither can their heart_
+
 
 
 <!-- OFFENSE -->
 
-Overall {data-navmenu="Offense"}
+Team
 =====================================
-
 
 Inputs {.sidebar data-width=250}
 ----------------------------------------------------------------------
 
 
-Quarterbacks {data-navmenu="Offense" data-orientation=rows}
+Quarterbacks {data-navmenu="Individual" data-orientation=rows}
 =====================================
 
 
-Inputs {.sidebar data-width=250}
+Inputs {.sidebar data-width=300}
 -----------------------------------------------------------------------
 
 
@@ -110,13 +117,18 @@ qb.dta <- reactive({
 
 # A table of the rating of the QB, by passer rating (last weeks data)
 qb.comp.dta <- reactive({
-      qb.dta() %>%       
+      qb.dta() %>%   
+          group_by(plyr.lbl) %>%
+          mutate(yards_cum.rush = max(yards_cum.rush, na.rm = TRUE)) %>%
           select(plyr.lbl, Team = team, Games = game
                  , Rating = qb_rate_cum
                  , Attempts = att_cum
+                 , `Pass Yds` = yards_cum
+                 , `Pass Yds/G` = yds_cum_game
                  , `Comp (%)` = comp_cum_rate, TD = td_cum
                  ,  Int = int_cum
-                 , `Avg` = avg_cum) %>% 
+                 , `Avg` = avg_cum
+                 , `Rush Yds` = yards_cum.rush) %>% 
           create.stats.tbl
 })
 
@@ -163,7 +175,7 @@ renderValueBox({
 })
 ```
 
-### player Ranking {.value-box}
+### Player Ranking {.value-box}
 
 ```{r}
 # A box showing the total cumulative yards for the selected player
@@ -179,68 +191,54 @@ Row {data-height=250}
 
 ### Total passing yards vs. passing attempts
 
-
-```{r passyrds.plot}
+```{r}
 renderPlot({
-  
-    qb.dta() %>%       
-        group_by(player) %>%      
-        top_n(1, as.numeric(game)) %>% 
-    ggplot(aes(x = att_cum, y = yards_cum
-               , label = plyr.lbl, color = player)) +
-    
-    # plots all of the players in grey with a red line for the lm
-    geom_point(data = qb.dash.dta %>%
-                group_by(player) %>%
-                filter(player != input$qb) %>%
-                top_n(1, week)
-                , mapping = aes(x = att_cum, y = yards_cum)
-                , color = "grey") +
-    geom_smooth(data = qb.dash.dta %>%
-                group_by(player) %>%
-                top_n(1, week)
-                , mapping = aes(x = att_cum, y = yards_cum)
-                , method = "lm", se = FALSE, color = "red") +
-    
-    # plot the selected players
-    geom_point(size = 3) +
-    geom_text(nudge_y = 100) +
-    labs(x = "Total Attempts", y = "Total Yards"
-         , caption = "Grey dots represent all non-selected QBs") +
-    coord_cartesian(xlim = c(50, pass.att.max)
-                    , ylim = c(pass.yrd.min, pass.yrd.max)) +
-    scale_color_discrete(guide = FALSE) 
+  plot.std(qb.dta(), qb.dash.dta
+           , att_cum, yards_cum
+           , "Attempts", "Yards")
 })
 ```
-
 
 ### Touchdown Rate/Interception Rate
 
 ```{r td.int.plot}
 renderPlot({
-  var.by.game.plot(qb.dta(), qb.dash.dta
-                 , td_int_cum, "Ratio", c(0,15))
+  plot.var.by.game(qb.dta(), qb.dash.dta
+                 , td_int_cum, "Ratio")
 })
 ```
 
 Row {data-height=250}
 --------------------------------------------------------
 
-### QB Rating Cumulative
+### QB Rating (Cumulative)
  
 ```{r}
 renderPlot({
-  var.by.game.plot(qb.dta(), qb.dash.dta
-                 , qb_rate_cum, "QB Rating", c(0,168))
+  plot.var.by.game(qb.dta(), qb.dash.dta
+                 , qb_rate_cum, "QB Rating")
 })
 ```
-  
 
-Running Backs {data-navmenu="Offense" data-orientation=rows}
+
+### Rushing Yards by game
+
+```{r}
+renderPlot({
+  plot.var.by.game(qb.dta(), qb.dash.dta
+                 , yards_cum.rush, "Yards")
+})
+```
+
+
+
+
+
+Running Backs {data-navmenu="Individual" data-orientation=rows}
 =====================================
 
 
-Inputs {.sidebar data-width=250}
+Inputs {.sidebar data-width=300}
 -----------------------------------------------------------------------
 
 
@@ -272,7 +270,7 @@ rb.comp.dta <- reactive({
   rb.dta() %>%
       select(plyr.lbl, Team = team, Games = game
              , Carries = carries_cum, TD = td_cum
-             , Avg = avg_cum, `Yds per Game` = yds_cum_game) %>% 
+             , Avg = avg_cum, `Yds/G` = yds_cum_game) %>% 
       create.stats.tbl
 })
 
@@ -330,7 +328,7 @@ renderValueBox({
 ```
 
 
-Row {data-height=350}
+Row {data-height=250}
 -------------------------------------------------------------
 
 
@@ -338,28 +336,53 @@ Row {data-height=350}
 
 ```{r rush.yrds.game}
 renderPlot({
-  var.by.game.plot(rb.dta(), rb.dash.dta
-                 , as.numeric(yards), "Yards", c(0,300))
+  plot.var.by.game(rb.dta(), rb.dash.dta
+                 , yards, "Yards")
 })
 ```
 
 ### Rushing Yards per Carry by Game
 ```{r rush.yrds.car}
 renderPlot({
-  var.by.game.plot(rb.dta(), rb.dash.dta
-                 , yds_car, "Yards", c(0, 40))
+  plot.var.by.game(rb.dta(), rb.dash.dta
+                 , yds_car, "Yards")
+})
+```
+
+Row {data-height=250}
+--------------------------------------------------------
+
+### TD by Carries (season)
+ 
+```{r}
+renderPlot({
+  plot.std(rb.dta(), rb.dash.dta
+           , carries_cum, td_cum
+           , "Carries", "TD")
 })
 ```
 
 
-Wide Receivers {data-navmenu="Offense" data-orientation=rows}
+### Attempts by Game
+
+```{r}
+renderPlot({
+  plot.var.by.game(rb.dta(), rb.dash.dta
+                 , carries, "Carries")
+})
+```
+
+
+
+
+
+Wide Receivers {data-navmenu="Individual" data-orientation=rows}
 =====================================
 
-Inputs {.sidebar data-width=250}
+Inputs {.sidebar data-width=300}
 -----------------------------------------------------------------------
 
-
-```{r receiving.input}
+```{r wr.input}
 # What players (QBs) will be compared/analyzed
  selectInput("wr", "WR (>10 Receptions)", choices = c('', unique(wr.dash.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
@@ -393,7 +416,7 @@ wr.comp.dta <- reactive({
       select(plyr.lbl, Team = team, Games = game
              , Receptions = rec_cum, TD = td_cum
              , `Avg Yds` = avg_cum
-             , `Yds per Game` = yds_cum_game) %>% 
+             , `Yds/G` = yds_cum_game) %>% 
       create.stats.tbl
 })
 
@@ -451,7 +474,7 @@ renderValueBox({
 })
 ```
 
-Row {data-height=350}
+Row {data-height=250}
 -----------------------------------------------------------------
 
 
@@ -459,8 +482,8 @@ Row {data-height=350}
 
 ```{r}
 renderPlot({
-  var.by.game.plot(wr.dta(), wr.dash.dta
-                 , as.numeric(yards), "Yards", c(0,200))
+  plot.var.by.game(wr.dta(), wr.dash.dta
+                 , yards, "Yards")
 })
 ```
 
@@ -468,14 +491,56 @@ renderPlot({
 
 ```{r}
 renderPlot({
-  var.by.game.plot(wr.dta(), wr.dash.dta
-                 , yds_rec, "Yards", c(0,50))
+  plot.var.by.game(wr.dta(), wr.dash.dta
+                 , yds_rec, "Yards")
 })
 ```
 
 
 
-Complete Stats {data-navmenu="Offense" data-orientation=rows}
+Row {data-height=250}
+--------------------------------------------------------
+
+### TD by Carries (season)
+ 
+```{r}
+renderPlot({
+  plot.std(wr.dta(), wr.dash.dta
+           , td_cum, rec_cum
+           , "TD", "Receptions")
+})
+```
+
+
+### Attempts by Game
+
+```{r}
+renderPlot({
+  plot.var.by.game(wr.dta(), wr.dash.dta
+                 , rec, "Receptions")
+})
+```
+
+
+
+Defensive Players {data-navmenu="Individual" data-orientation=rows}
+=====================================
+
+Specialists {data-navmenu="Individual"}
+=====================================
+
+
+Prediction {data-navmenu="Analytics"}
+=====================================
+
+Team Rankings {data-navmenu="Analytics"}
+=====================================
+
+Player Rankings {data-navmenu="Analytics"}
+=====================================
+
+<!-- this page is being linked to:  -->
+Stats {.hidden data-orientation=rows}
 =====================================
 
 Row {.tabset data-height=600}
@@ -527,40 +592,4 @@ datatable(wr.dash.dta %>%
 
 
 
-<!--  DEFENSE -->
-
-League {data-navmenu="Defense"}
-=====================================
-
-By Division {data-navmenu="Defense"}
-=====================================
-
-By Team {data-navmenu="Defense"}
-=====================================
-
-By Position {data-navmenu="Defense"}
-=====================================
-
-By player {data-navmenu="Defense"}
-=====================================
-
-
-League {data-navmenu="Special Teams"}
-=====================================
-
-By Division {data-navmenu="Special Teams"}
-=====================================
-
-By Team {data-navmenu="Special Teams"}
-=====================================
-
-
-Prediction {data-navmenu="Analytics"}
-=====================================
-
-Team Rankings {data-navmenu="Analytics"}
-=====================================
-
-player Rankings {data-navmenu="Analytics"}
-=====================================
 

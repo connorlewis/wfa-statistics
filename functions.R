@@ -1,5 +1,22 @@
 # These are the supporting functions for the wfa data prep and dashboard.
 
+
+# set the theme for all ggplots: 
+theme_set(theme_classic() +
+            theme(
+              plot.title = element_text(hjust = 0.5)
+              , axis.text = element_text(size = 10)
+              , axis.title = element_text(size=14
+                                          , face="bold")
+              , plot.caption = element_text(hjust = 0.5)
+              , legend.position = c(0.5, 1)
+              , legend.direction = "horizontal"
+              , legend.text = element_text(size = 11)
+            ))
+
+
+
+# Data prep functions -----------------------------------------------------
 # This function creates the columns with various combinations of 
 # plyr name, number, and initials for labelling and selection purposed
 # used in the dashboard.
@@ -24,51 +41,151 @@ create.name.vars <- function(df) {
     #mutate(team = gsub("+", " ", team, fixed = TRUE))
 }
 
+
+
+
+# Plotting functions ------------------------------------------------------
+
 # This function creates plots over the season by game and highlights the 
 # selected players' paths
 # Input: 
 #    react.dta the reactive data,
 #    dta: underlying data (all)
-#    y.var: the variable to be plotted on the Y axis,
+#    var: the variable to be plotted on the Y axis,
 #    y.axis.lbl: the title of the y.axis
-#    y.lims: the limits for the y-axis (e.g. c(0,200))
-#    
-var.by.game.plot <- function(react.dta, dta, y.var, y.axis.lbl, y.lims){
-  
+ 
+plot.var.by.game <- function(react.dta, dta, var, y.axis.lbl){
+
   # using tidyeval language
-  quo_var <- enquo(y.var)
+  quo_var <- enquo(var)
+  
+  # removing NAs, replacing with zeros for the variable of interest
+  dta <- dta %>%
+    mutate(y.var = replace_na(!!quo_var, 0))
+  
+  react.dta <- react.dta %>%
+    mutate(y.var = replace_na(!!quo_var, 0))
+  
+  ylim.max <- dta %>% 
+                select(y.var) %>%
+                max
   
   react.dta %>%
-    ggplot(aes(x = game, y = !!quo_var
-               , group = player, color = player)) +
+    filter(game != 9) %>%
+    ggplot(aes(x = game, y = y.var
+               , group = plyr.lbl, color = plyr.lbl)) +
     
-    geom_line(data = dta 
-              , mapping = aes(x = game, y = !!quo_var
-                              , group = factor(player))
+    # This section puts all players information on the plot
+    # and adds the league for the season
+    geom_line(data = dta %>%
+                filter(game != 9) 
+              , mapping = aes(x = game, y = y.var
+                              , group = factor(plyr.lbl))
               , color = "grey") +
-    # geom_smooth(data = dta 
-    #             , mapping = aes(x = game, y = !!quo_var)
-    #             , method = "loess", se = FALSE, color = "red") +
-    
-    geom_point(size = 3) +
-    geom_line(size = 1.5) +
+    geom_line(data = dta %>%
+                filter(game != 9) 
+              , mapping = aes(y = mean(y.var), group = NULL
+                              , color = NULL)
+              , color = "black", size = 1.05) +
+    # stat_summary(data = dta %>% 
+    #                filter(game != 9)
+    #              , mapping = aes(x = game, y = y.var,
+    #                              color = NULL, group = NULL)
+    #              , fun.y = "mean", color = "black"
+    #          , size = 1, geom = "line") +
+    geom_point(size = 1) +
+    geom_line(size = 1.2) +
     labs(x = "Game"
          , y = y.axis.lbl
-         , caption = "Grey lines represent all non-selected players.") +
-    coord_cartesian(xlim = c(1, 9)
-                    , ylim = y.lims) +
+         , caption = paste0("Grey lines represent all non-selected players.\n"
+                             , "The black line represents the league average per game.")
+         , color = "") +
+    coord_cartesian(xlim = c(1, 8)
+                    , ylim = c(0, ylim.max)) +
     scale_x_continuous(breaks = seq(1,8,1)) +
-    scale_color_discrete(guide = FALSE) +
-    geom_text(data = (react.dta %>%
-                group_by(player) %>%
-                top_n(1, as.numeric(game))),
-              mapping = aes(x = game + 0.6, y = !!quo_var
-                            , label = plyr.lbl, color = player)
-              , size = 4.5)
+    # geom_text(data = (react.dta %>%
+    #             group_by(player) %>%
+    #             top_n(-1, game)),
+    #           mapping = aes(x = game - 1, y = y.var
+    #                         , label = plyr.lbl, color = plyr.lbl)
+    #           , size = 4, fontface = "bold", angle = 30) +
+    scale_color_manual(values = c("blue", "darkgreen"))
+  
+}
+
+# This function plots the season to date values:
+# Input: 
+#    react.df the reactive data,
+#    dash.df: underlying data (all)
+#    x.var: the variable to be plotted on the x axis,
+#    y.var: the variable to be plotted on the y axis
+#    x.axis.lbl: the title of the x.axis
+#    y.axis.lbl: the title of the y.axis
+
+
+plot
+plot.std <- function(react.df, dash.df, x.var, y.var
+                     , x.axis.lbl, y.axis.lbl) {
+  
+  quo_x <- enquo(x.var)
+  quo_y <- enquo(y.var)
+   
+  x.min <- c(dash.df %>% 
+                group_by(plyr.lbl) %>%
+                top_n(1, game) %>%
+                ungroup %>%
+                select(!!quo_x) %>%
+                min)
+  
+  x.max <- c(dash.df %>% 
+               select(!!quo_x) %>%
+               max)
+  
+  y.min <- c(dash.df %>% 
+               group_by(plyr.lbl) %>%
+               top_n(1, game) %>%
+               ungroup %>%
+               select(!!quo_y) %>%
+               min)
+  
+  y.max <- c(dash.df %>% 
+               select(!!quo_y) %>%
+               max)
+  
+  react.df %>%       
+    group_by(player) %>%      
+    top_n(1, game) %>% 
+    ggplot(aes(x = !!quo_x, y = !!quo_y
+               , color = factor(plyr.lbl))) +
+    
+    # plots all of the players in grey with a red line for the lm
+    geom_point(data = dash.df %>%
+                         group_by(plyr.lbl) %>%
+                         top_n(1, game)
+               , mapping = aes(x = !!quo_x, y = !!quo_y
+                               , color = NULL)
+               , color = "grey") +
+    geom_smooth(data = dash.df %>%
+                          group_by(player) %>%
+                          top_n(1, game)
+                , mapping = aes(x = !!quo_x, y = !!quo_y
+                                , color = NULL)
+                , method = "lm", se = FALSE, color = "black") +
+    
+    # plot the selected players
+    geom_point(size = 3) +
+    labs(x = x.axis.lbl, y = y.axis.lbl
+         , caption = paste0("Grey dots represent all non-selected players.\n"
+                            , "The black line represents the mean trend.")
+         , color = "") +
+    coord_cartesian(xlim = c(x.min, x.max)
+                    , ylim = c(y.min, y.max)) +
+    scale_color_manual(values = c("blue", "darkgreen"))
   
 }
 
 
+# Table Functions ---------------------------------------------------------
 # This function creates the player stats and comparison tables, given the temp.dta
 create.stats.tbl <- function(df) {
   temp.df <- df %>%
