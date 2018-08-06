@@ -84,6 +84,7 @@ pass.cum.dta <- pass.dta %>%
          , int_rate_cum = int_cum/att_cum
          , yds_att_cum = yards_cum/att_cum
          , avg_cum = round(yards_cum/comp_cum, 1)
+         , yds_cum_game = round(yards_cum/game, 1)
          , td_int_cum = case_when(
                           int_rate_cum == 0 ~ td_rate_cum
                           , td_rate_cum == 0 ~ 0
@@ -152,13 +153,14 @@ rec.cum.dta <- rec.dta %>%
 
 qb.dash.dta <- pass.cum.dta %>%
         filter(last(att_cum) > 50 & season == 2018) %>%
-        left_join(rush.cum.dta, by = c("player", "season", "game")
+        left_join(rush.cum.dta, by = c("player", "plyr.lbl", "season", "game")
                   , suffix = c("", ".rush")) %>%
         ungroup %>%
         arrange(name)
 
 rb.dash.dta <- rush.cum.dta %>%
-        filter(last(carries_cum) > 25 & season == 2018) %>%
+        filter(last(carries_cum) > 25 & carries > 1
+               & season == 2018) %>%
         ungroup %>%
         arrange(name)
 
@@ -172,3 +174,8 @@ pass.yrd.max <- max(qb.dash.dta$yards_cum)
 pass.yrd.min <- min(qb.dash.dta$yards_cum)
 pass.td.max <- max(qb.dash.dta$td_cum)
 pass.att.max <- max(qb.dash.dta$att_cum)
+
+# for offline working
+# write_csv(qb.dash.dta, "qb.csv")
+# write_csv(rb.dash.dta, "rb.csv")
+# write_csv(wr.dash.dta, "wr.csv")
