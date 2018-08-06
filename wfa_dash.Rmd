@@ -58,17 +58,17 @@ We are currently only looking at the 2018 season (end of season).
 
 _Pages that contain some content_
 
-* Offense:
-    +  Quarterbacks
-    +  Runningbacks
-    +  Widereceivers
+* Individual:
+    +  [Quarterbacks](#quarterbacks)
+    +  [Running backs](#running-backs)
+    +  [Wide receivers](#wide-receivers)
     
 All season-to-date individual statistics can be found [here](#stats).
 
 
-__This tool and all analytics completed are at the mercy of reporting. Not all teams report every game and not all stats for players are reported (e.g. a runningback has one carry, but 150 yards). Also, the accuracy of statistics reported are at the teams' discretion, particularly for defensive statistics. Ideally, a player ranking system at each position would be created; however, on the defensive side of the ball, determining a player's position is nearly impossible.__
+_This tool and all analytics completed are at the mercy of reporting. Not all teams report every game and not all stats for players are reported (e.g. a running back has one carry, but 150 yards). Also, the accuracy of statistics reported are at the teams' discretion, particularly for defensive statistics. Ideally, a player ranking system at each position would be created; however, on the defensive side of the ball determining a player's position based entirely on the statistics provided is nearly impossible._
 
-_As always the intangibles of a player cannot be measure, neither can their heart_
+__As always the intangibles of a player cannot be measured, neither can their heart.__
 
 
 
