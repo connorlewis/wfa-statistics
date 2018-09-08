@@ -24,7 +24,7 @@ season <- c("2017","2018")
 tier <- "1"
 tiers <- c("WFA+I","WFA+II","WFA+III")
 weeks <- c("1","2","3","4","5","6","7","8","9","10")
-teams_div_1 <- c("Shockwaves","Majestics","War+Angels","Warriors","Surge","Titans",
+teams_div_1 <- c("Fighting+Shockwaves","Majestics","War+Angels","Warriors","Surge","Titans",
           "Elite","Impact","Force","Renegades","Divas","Passion",
           "Fusion","AT_Phoenix")
 teams_div_2 <- c("Dixie+Blues","Fury","Inferno","Fusion","Nighthawks","Comets",
@@ -37,7 +37,7 @@ teams_div_3 <- c("CA_Phoenix","Fire","Trojans","MD_Blaze","Waverunners","Tigers"
           "Lady+Renegades","Blitz","Wolf-Pack","Dukes","Wildkatz","Freeze","Destroyers","Power",
           "Zydeco","Wildcats","Outlaws","Knockout")
 
-teams <- c(teams_div1,teams_div_2,teams_div_3)
+teams <- c(teams_div_1,teams_div_2,teams_div_3)
 
 
 #stats_url <- "http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=2018&tier=WFA+II&selected_team=Inferno&selected_week=10"
@@ -48,17 +48,24 @@ teams <- c(teams_div1,teams_div_2,teams_div_3)
 table_data <- NULL
 headers <- NULL
 
+#l=1
+#i=1
+#j=1
 
 for(l in 1:length(season)) {
 
-  for(j in 1:length(teams)) {
+  print(season[l])
   
+  for(j in 1:length(teams)) {
+    
+    print(teams[j])
+    
     for(i in 1:length(weeks)) {
     #for(i in 1:2) {
       print(i)
       # eventually loop on all possibilities, i.e. 2017, all tiers and all weeks
       # "&tier=",tiers[2], -- not needed
-      stats_url <- paste0("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=",season[2],"&selected_team=",teams[j],"&selected_week=",weeks[i])
+      stats_url <- paste0("http://www.hostedstatistics.com/football/team_stats.asp?league=WFA&season=",season[l],"&selected_team=",teams[j],"&selected_week=",weeks[i])
     
       # read page data
       stats_page_results <- read_html(stats_url)
@@ -68,10 +75,10 @@ for(l in 1:length(season)) {
         html_nodes("table") %>% 
         html_table(fill=TRUE,header=TRUE) %>%
         keep(~(length(grep("Name",names(.))) == 1)) %>% 
-        map(~mutate(.x,week = i,team = teams[j])) %>% 
+        map(~mutate(.x,week = i,team = teams[j],season = season[l])) %>% 
         map(~mutate_all(.x,as.character))
       
-      if(is.null(table_data)) {
+      if(is.null(table_data)||length(table_data) == 0) {
         table_data <- table_data_temp
       } else {
         if(length(table_data_temp) > 0) {
@@ -94,7 +101,7 @@ for(l in 1:length(season)) {
   
 }
 
-# saveRDS(table_data,"div_2_stats.rds")
+#saveRDS(table_data,"div_all_stats.rds")
 
 #data <- readRDS("/Users/heatherlendway/Documents/Code/wfa-statistics/div_2_stats.rds")
 
@@ -111,9 +118,53 @@ for(k in 1:length(headers)) {
 ```{r}
 # get score historical
 
-
 # http://www.hostedstatistics.com/football/schedule.asp?league=wfa&year=2013
+# http://www.hostedstatistics.com/football/schedule.asp?league=wfa&year=2009
 
+week_results_table <- NULL
+header_table <- NULL
+years <- c(2009,2010,2011,2012,2013,2014,2015,2016,2017,2018)
+
+for(m in 1:length(years)) {
+  # m = 2 # for testing
+  print(years[m])
+
+  scores_url <- paste0("http://www.hostedstatistics.com/football/schedule.asp?league=wfa&year=",years[m])
+
+  # read page data
+  scores_page_results <- read_html(scores_url)
+    
+  heading_data_temp <- scores_page_results %>% 
+    html_nodes(".weekHeading") %>% 
+    html_text()
+  
+  # compile page results
+  week_data_temp <- scores_page_results %>% 
+    html_nodes(".schduleTableGrid") %>% 
+    html_table(fill=TRUE,header=TRUE) %>% 
+    map(set_names,c("test1","test2","visitor","visitor_score","test5","test6","test7","home_team","home_team_score","test10")) %>% # error said needed to name all columns
+    map(select,3:4,8:9) %>% 
+    map2_df(heading_data_temp, ~mutate(.x, week = .y, year = years[m])) 
+  
+  if(is.null(week_results_table)||length(week_results_table) == 0) {
+    week_results_table <- week_data_temp
+  } else {
+    if(length(week_data_temp) > 0) {
+      week_results_table <- bind_rows(week_results_table,week_data_temp)
+    }
+  }
+  
+}
+
+
+#saveRDS(week_results_table,"game_score_historical.rds")
 
 ```
 
+```{r}
+function(x,y) {
+  z = x+y
+  z2 = z - 1
+  paste0(x, " plus ", y, " is ", z, " minus 1 that's ", z2, " quick maths")
+}
+```
