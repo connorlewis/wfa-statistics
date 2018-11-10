@@ -15,23 +15,24 @@ library(shiny)
 library(tidyverse)
 library(DT)
 library(rsconnect)
+library(plotly)
 
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE
                       , message = FALSE, fig.align = 'center'
                       , fig.dim = c(4, 6))
 
 
-
-source("data_prep.R")
+source("functions.r")
+#source("data_prep.R")
 #load("tempworkspace.RData")
 #rsconnect::setAccountInfo(name='connorjo',
 #			  token='966F109BEA1433280CB80AACEF59B28F',
 #			  secret='7l/D0vouhjiFkeEZwmyB0anPqXFAXJogfqqifjN7')
 #rsconnect::deployApp('wfa_dash.Rmd')
 # for working offline: 
-# qb.dash.dta <- read_csv("qb.csv")
-# rb.dash.dta <- read_csv("rb.csv")
-# wr.dash.dta <- read_csv("wr.csv")
+ qb.dash.dta <- read_csv("qb.csv")
+ rb.dash.dta <- read_csv("rb.csv")
+ wr.dash.dta <- read_csv("wr.csv")
 # pass.yrd.max <- max(qb.dash.dta$yards_cum)
 # pass.yrd.min <- min(qb.dash.dta$yards_cum)
 # pass.td.max <- max(qb.dash.dta$td_cum)
@@ -66,7 +67,7 @@ _Pages that contain some content_
 All season-to-date individual statistics can be found [here](#stats).
 
 
-_This tool and all analytics completed are at the mercy of reporting. Not all teams report every game and not all stats for players are reported (e.g. a running back has one carry, but 150 yards). Also, the accuracy of statistics reported are at the teams' discretion, particularly for defensive statistics. Ideally, a player ranking system at each position would be created; however, on the defensive side of the ball determining a player's position based entirely on the statistics provided is nearly impossible._
+_This tool and all analytics completed are at the mercy of reporting. Not all teams report every game and not all stats for players are reported (e.g. a running back could only have one carry, but 150 yards). Also, the accuracy of statistics reported are at the teams' discretion, particularly for defensive statistics. Ideally, a player ranking system at each position would be created; however, on the defensive side of the ball determining a player's position based entirely on the statistics provided is nearly impossible._
 
 __As always the intangibles of a player cannot be measured, neither can their heart.__
 
@@ -79,6 +80,8 @@ Team
 
 Inputs {.sidebar data-width=250}
 ----------------------------------------------------------------------
+
+
 
 
 Quarterbacks {data-navmenu="Individual" data-orientation=rows}
@@ -119,16 +122,17 @@ qb.dta <- reactive({
 qb.comp.dta <- reactive({
       qb.dta() %>%   
           group_by(plyr.lbl) %>%
-          mutate(yards_cum.rush = max(yards_cum.rush, na.rm = TRUE)) %>%
-          select(plyr.lbl, Team = team, Games = game
+          mutate(rush_yards_total = max(rush_yards_cum, na.rm = TRUE)) %>%
+          select(plyr.lbl, Team = team
+                 , Games = game
                  , Rating = qb_rate_cum
                  , Attempts = att_cum
-                 , `Pass Yds` = yards_cum
-                 , `Pass Yds/G` = yds_cum_game
-                 , `Comp (%)` = comp_cum_rate, TD = td_cum
-                 ,  Int = int_cum
-                 , `Avg` = avg_cum
-                 , `Rush Yds` = yards_cum.rush) %>% 
+                 , `Avg` = pass_avg_cum
+                 , `Pass Yds` = pass_yards_cum
+                 , `Pass Yds/G` = pass_yards_cum_game
+                 , `Comp (%)` = comp_cum_rate
+                 , TD = pass_td_cum
+                 , `Rush Yds` = rush_yards_total) %>% 
           create.stats.tbl
 })
 
@@ -158,7 +162,7 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(get.value(qb.dta(), input$qb, yards_cum)
+  valueBox(get.value(qb.dta(), input$qb, pass_yards_cum)
            , icon = "fa-football-ball")
 })
 
@@ -170,7 +174,7 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(get.value(qb.dta(), input$qb, td_cum)
+  valueBox(get.value(qb.dta(), input$qb, pass_td_cum)
            , icon = "fa-football-ball")
 })
 ```
@@ -194,7 +198,7 @@ Row {data-height=250}
 ```{r}
 renderPlot({
   plot.std(qb.dta(), qb.dash.dta
-           , att_cum, yards_cum
+           , att_cum, pass_yards_cum
            , "Attempts", "Yards")
 })
 ```
@@ -204,7 +208,7 @@ renderPlot({
 ```{r td.int.plot}
 renderPlot({
   plot.var.by.game(qb.dta(), qb.dash.dta
-                 , td_int_cum, "Ratio")
+                 , pass_td_int_cum, "Ratio")
 })
 ```
 
@@ -226,7 +230,7 @@ renderPlot({
 ```{r}
 renderPlot({
   plot.var.by.game(qb.dta(), qb.dash.dta
-                 , yards_cum.rush, "Yards")
+                 , rush_yards_cum, "Yards")
 })
 ```
 
@@ -269,8 +273,10 @@ rb.dta <- reactive({
 rb.comp.dta <- reactive({
   rb.dta() %>%
       select(plyr.lbl, Team = team, Games = game
-             , Carries = carries_cum, TD = td_cum
-             , Avg = avg_cum, `Yds/G` = yds_cum_game) %>% 
+             , Carries = carries_cum
+             , TD = rush_td_cum
+             , Avg = rush_avg_cum
+             , `Yds/G` = rush_yards_cum_game) %>% 
       create.stats.tbl
 })
 
@@ -300,7 +306,7 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(get.value(rb.dta(), input$rb, yards_cum)
+  valueBox(get.value(rb.dta(), input$rb, rush_yards_cum)
            , icon = "fa-football-ball")
 })
 
@@ -312,7 +318,7 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(get.value(rb.dta(), input$rb, td_cum)
+  valueBox(get.value(rb.dta(), input$rb, rush_td_cum)
            , icon = "fa-football-ball")
 })
 ```
@@ -337,7 +343,7 @@ Row {data-height=250}
 ```{r rush.yrds.game}
 renderPlot({
   plot.var.by.game(rb.dta(), rb.dash.dta
-                 , yards, "Yards")
+                 , rush_yards, "Yards")
 })
 ```
 
@@ -345,7 +351,7 @@ renderPlot({
 ```{r rush.yrds.car}
 renderPlot({
   plot.var.by.game(rb.dta(), rb.dash.dta
-                 , yds_car, "Yards")
+                 , rush_yards_car, "Yards")
 })
 ```
 
@@ -357,7 +363,7 @@ Row {data-height=250}
 ```{r}
 renderPlot({
   plot.std(rb.dta(), rb.dash.dta
-           , carries_cum, td_cum
+           , carries_cum, rush_td_cum
            , "Carries", "TD")
 })
 ```
@@ -414,9 +420,9 @@ wr.dta <- reactive({
 wr.comp.dta <- reactive({
   wr.dta() %>%
       select(plyr.lbl, Team = team, Games = game
-             , Receptions = rec_cum, TD = td_cum
-             , `Avg Yds` = avg_cum
-             , `Yds/G` = yds_cum_game) %>% 
+             , Receptions = rec_cum, TD = rec_td_cum
+             , `Avg Yds` = rec_avg_cum
+             , `Yds/G` = rec_yards_cum_game) %>% 
       create.stats.tbl
 })
 
@@ -447,7 +453,7 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({ 
-  valueBox(get.value(wr.dta(), input$wr, yards_cum)
+  valueBox(get.value(wr.dta(), input$wr, rec_yards_cum)
            , icon = "fa-football-ball")
 })
 
@@ -459,7 +465,7 @@ renderValueBox({
 ```{r}
 # A box showing the total cumulative yards for the selected player
 renderValueBox({
-  valueBox(get.value(wr.dta(), input$wr, td_cum)
+  valueBox(get.value(wr.dta(), input$wr, rec_td_cum)
            , icon = "fa-football-ball")
 })
 ```
@@ -483,7 +489,7 @@ Row {data-height=250}
 ```{r}
 renderPlot({
   plot.var.by.game(wr.dta(), wr.dash.dta
-                 , yards, "Yards")
+                 , rec_yards, "Yards")
 })
 ```
 
@@ -492,7 +498,7 @@ renderPlot({
 ```{r}
 renderPlot({
   plot.var.by.game(wr.dta(), wr.dash.dta
-                 , yds_rec, "Yards")
+                 , rec_yards_rec, "Yards")
 })
 ```
 
@@ -504,11 +510,12 @@ Row {data-height=250}
 ### TD by Carries (season)
  
 ```{r}
-renderPlot({
+renderPlotly({
   plot.std(wr.dta(), wr.dash.dta
-           , td_cum, rec_cum
+           , rec_td_cum, rec_cum
            , "TD", "Receptions")
 })
+
 ```
 
 
@@ -517,7 +524,7 @@ renderPlot({
 ```{r}
 renderPlot({
   plot.var.by.game(wr.dta(), wr.dash.dta
-                 , rec, "Receptions")
+                , rec, "Receptions")
 })
 ```
 
@@ -554,8 +561,8 @@ datatable(qb.dash.dta %>%
           top_n(1, as.numeric(game)) %>%
           select(player, Team = team, Games = game
                  , Rating = qb_rate_cum, Attempts = att_cum
-                 , Comp = comp_cum, Yds = yards_cum, Avg = avg_cum
-                 , TD = td_cum) %>%
+                 , Comp = comp_cum, Yds = pass_yards_cum, Avg = pass_avg_cum
+                 , TD = pass_td_cum) %>%
           arrange(desc(as.numeric(Rating)))
   , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
           
@@ -569,8 +576,8 @@ datatable(rb.dash.dta %>%
   group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
           select(player, Team = team, Games = game, Carries = carries_cum
-                 , Yds = yards_cum, Avg = avg_cum
-                 , TD = td_cum, `Yds per Game` = yds_cum_game) %>%
+                 , Yds = rush_yards_cum, Avg = rush_avg_cum
+                 , TD = rush_td_cum, `Yds per Game` = rush_yards_cum_game) %>%
           arrange(desc(as.numeric(Yds)))
   , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
 ```
@@ -584,8 +591,8 @@ datatable(wr.dash.dta %>%
   group_by(player) %>%
           top_n(1, as.numeric(game)) %>%
           select(player, Team = team, Games = game, Recs = rec_cum
-                 , Yds = yards_cum, Avg = avg_cum
-                 , TD = td_cum, `Yds per Game` = yds_cum_game) %>%
+                 , Yds = rec_yards_cum, Avg = rec_avg_cum
+                 , TD = rec_td_cum, `Yds per Game` = rec_yards_cum_game) %>%
           arrange(desc(as.numeric(Yds)))
   , options = list(bPaginate = FALSE, pageLength = 10), fillContainer = TRUE)
 ```

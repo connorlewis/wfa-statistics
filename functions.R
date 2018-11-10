@@ -1,7 +1,7 @@
 # These are the supporting functions for the wfa data prep and dashboard.
+pacman::p_load(tidyverse, plotly)
 
-
-# set the theme for all ggplots: 
+# set the theme for all ggplots: ------------------------------------- 
 theme_set(theme_classic() +
             theme(
               plot.title = element_text(hjust = 0.5)
@@ -32,6 +32,9 @@ create.name.vars <- function(df) {
     mutate(First = substr(First, 1,1) 
            , Last = substr(Last, 1,1)) %>%
     unite("plyr.temp", First, Last, sep = "", remove = TRUE) %>%
+    group_by(name) %>%
+    mutate(no. = first(no.)) %>%
+    ungroup %>%
     unite("plyr.lbl", plyr.temp, no., sep = " ", remove = FALSE) %>%
     unite("player", no., name, sep = " ", remove = FALSE) %>%
     select(-plyr.temp) %>%
@@ -122,14 +125,12 @@ plot.var.by.game <- function(react.dta, dta, var, y.axis.lbl){
 #    x.axis.lbl: the title of the x.axis
 #    y.axis.lbl: the title of the y.axis
 
-
-plot
 plot.std <- function(react.df, dash.df, x.var, y.var
                      , x.axis.lbl, y.axis.lbl) {
   
   quo_x <- enquo(x.var)
   quo_y <- enquo(y.var)
-   
+  # To get the x,y axis limits:  
   x.min <- c(dash.df %>% 
                 group_by(plyr.lbl) %>%
                 top_n(1, game) %>%
@@ -152,7 +153,7 @@ plot.std <- function(react.df, dash.df, x.var, y.var
                select(!!quo_y) %>%
                max)
   
-  react.df %>%       
+   p <- react.df %>%       
     group_by(player) %>%      
     top_n(1, game) %>% 
     ggplot(aes(x = !!quo_x, y = !!quo_y
@@ -181,6 +182,7 @@ plot.std <- function(react.df, dash.df, x.var, y.var
     coord_cartesian(xlim = c(x.min, x.max)
                     , ylim = c(y.min, y.max)) +
     scale_color_manual(values = c("blue", "darkgreen"))
+ p
   
 }
 
@@ -190,7 +192,8 @@ plot.std <- function(react.df, dash.df, x.var, y.var
 create.stats.tbl <- function(df) {
   temp.df <- df %>%
           group_by(plyr.lbl) %>%
-          top_n(1, Games) %>%
+          filter(row_number() == n()) %>%
+          #top_n(1, Games) %>%
           t
         
   
