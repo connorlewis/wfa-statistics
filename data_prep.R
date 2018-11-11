@@ -195,3 +195,29 @@ write_csv(rb.dash.dta, "rb.csv")
 write_csv(wr.dash.dta, "wr.csv")
 # 
 # 
+# 
+
+# Read in Team Data -------------------------------------------------------
+team.raw.dta <- readRDS("data/game_score_historical.rds")
+View(team.raw.dta)
+
+check <- team.raw.dta %>%
+  mutate_at(vars(visitor_score, home_team_score)
+            , funs(str_remove(str_remove(., "[)]"), "[(]"))) %>% 
+  separate(week, c("wk.part1", "wk.part2", "wk.part3", "wk.part4", "wk.part5"), sep = " ", remove = TRUE) %>%
+  mutate(postseason = case_when(
+          wk.part1 == "Postseason" ~ 1
+          , TRUE  ~ 0)
+         , week = case_when(
+            postseason == 1     ~ wk.part3
+            , TRUE              ~ wk.part2)) %>%
+  select(-c(wk.part1:wk.part5))
+  
+        
+        
+        
+        
+        
+        
+        
+        
