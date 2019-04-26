@@ -117,7 +117,10 @@ pass.cum.dta <- pass.dta %>%
            , TRUE ~ 2.375-(int_rate_cum*100*.25)
          )
          , qb_rate_cum = round((qb.part1 + qb.part2 
-                             + qb.part3 + qb.part4)/6*100, 1)) 
+                             + qb.part3 + qb.part4)/6*100, 1)) %>%
+  # join with the WL data for team calculations. 
+  mutate(team_for_merge)
+  left_join(wl.dta.2018.prepped, )
 
 
 
@@ -195,6 +198,7 @@ write_csv(rb.dash.dta, "rb.csv")
 write_csv(wr.dash.dta, "wr.csv")
 # 
 # 
+<<<<<<< HEAD
 
         
         
@@ -204,3 +208,87 @@ write_csv(wr.dash.dta, "wr.csv")
         
         
         
+=======
+# 
+
+# Read in Team Data -------------------------------------------------------
+team.raw.dta <- readRDS("data/game_score_historical.rds")
+View(team.raw.dta)
+
+w.l.2018.dta <- team.raw.dta %>%
+  mutate_at(vars(visitor_score, home_team_score)
+            , funs(str_remove(str_remove(., "[)]"), "[(]"))) %>% 
+  separate(week, c("wk.part1", "wk.part2", "wk.part3", "wk.part4", "wk.part5"), sep = " ", remove = TRUE) %>%
+  mutate(postseason = case_when(
+          wk.part1 == "Postseason" ~ 1
+          , TRUE  ~ 0)
+         , week = case_when(
+            postseason == 1     ~ wk.part3
+            , TRUE              ~ wk.part2)) %>%
+  select(-c(wk.part1:wk.part5)) %>%
+  filter(year == 2018)
+  
+
+# Rankings using: https://cran.r-project.org/web/packages/fbRanks/vignettes/Basic_team_ranking.pdf
+
+# pacman::p_load(fbRanks, glmnet)      
+# rank.team.dta  <- w.l.2018.dta %>%
+#   filter(postseason == 0) %>%
+#   select(home.team = home_team, home.score = home_team_score, 
+#          away.score = visitor_score, away.team = visitor
+#          , week, year) %>%
+#   mutate(date = as.Date(paste0(year, "-03-31")) + as.numeric(week)*7
+#          , home.score = as.numeric(home.score)
+#          ,away.score = as.numeric(away.score)) %>%
+#   select(-week, -year)
+# 
+# 
+# ranks = rank.teams(scores = rank.team.dta)
+# print(ranks)
+# ranks %>% View()
+# str(rank.team.dta)
+
+table(rb.dash.dta$team)
+table(w.l.2018.dta$home_team)
+        
+        
+        
+
+wl.dta.2018.prepped <- w.l.2018.dta %>% 
+  separate(home_team, c("home1", "home2", "home3", "home4"), remove = FALSE) %>%
+  separate(visitor, c("away1", "away2", "away3", "away4"), remove = FALSE) %>%
+  mutate(home_temp = case_when(
+        !is.na(home4) ~ home4
+        , !is.na(home3) ~ home3
+        , TRUE          ~ home2)
+        , home_for_merge = case_when(
+                 home_temp == "Blaze" & home1 == "Madison"  ~ "MD Blaze"
+                 , home_temp == "Blaze" & home1 == "Mile"   ~ "MH Blaze"
+                 , home_temp == "Reign" & home1 == "Everett" ~ "EV Reign"
+                 , home_temp == "Reign" & home1 == "Toledo" ~ "TO Reign"
+                 , home_temp == "Phoenix" & home1 == "Atlanta" ~ "AT Phoenix"
+                 , home_temp == "Phoenix" & home1 == "Carolina" ~ "CA Phoenix"                   
+                 , TRUE                                         ~ home_temp)
+        , away_temp = case_when(
+                  !is.na(away4) ~ away4
+                  , !is.na(away3) ~ away3
+                  , TRUE          ~ away2)
+        
+        ## When we do 2017, be careful of war angels and dark angels
+        , away_for_merge = case_when(
+                  away_temp == "Blaze" & away1 == "Madison"  ~ "MD Blaze"
+                , away_temp == "Blaze" & away1 == "Mile"   ~ "MH Blaze"
+                , away_temp == "Reign" & away1 == "Everett" ~ "EV Reign"
+                , away_temp == "Reign" & away1 == "Toledo" ~ "TO Reign"
+                , away_temp == "Phoenix" & away1 == "Atlanta" ~ "AT Phoenix"
+                , away_temp == "Phoenix" & away1 == "Carolina" ~ "CA Phoenix"                   
+                , TRUE                                         ~ away_temp)
+        , date = as.Date(paste0(year, "-03-31")) + as.numeric(week)*7) %>%
+  select(-c(home1:home4, home_temp, away1:away4, away_temp)) 
+  
+w.l.2018.dta %>% 
+  gather("location", "team", c(1,3)) %>% View()
+      
+
+
+>>>>>>> 9cf3c5df7e3e87a2b7c8abae8aaf657c518ec6d3

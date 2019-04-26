@@ -2,6 +2,7 @@
 title: "WFA Statistics"
 output:
   flexdashboard::flex_dashboard:
+    orientation: rows
     theme: cosmo
     vertical_layout: scroll
 runtime: shiny
@@ -15,7 +16,7 @@ library(shiny)
 library(tidyverse)
 library(DT)
 library(rsconnect)
-library(plotly)
+#library(plotly)
 
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE
                       , message = FALSE, fig.align = 'center'
@@ -55,15 +56,15 @@ source("functions.r")
 Home {data-orientation=rows}
 =====================================
 
-We are currently only looking at the 2018 season (end of season). 
+We are currently only looking at the 2018 season (end of season). This site is only a preview of what is to come, a mock-up per say. The end goal is to have accurate statistics reported from each team that can be relayed into visualizations and player rankings for each position. Please contact **clewis.stat@gmail.com** with any comments or questions. 
 
-_Pages that contain some content_
+<!-- _Pages that contain some content_ -->
 
-* Individual:
-    +  [Quarterbacks](#quarterbacks)
-    +  [Running backs](#running-backs)
-    +  [Wide receivers](#wide-receivers)
-    
+<!-- *  [Quarterbacks](#quarterbacks) -->
+<!-- *  [Running backs](#running-backs) -->
+<!-- *  [Wide receivers](#wide-receivers) -->
+
+
 All season-to-date individual statistics can be found [here](#stats).
 
 
@@ -75,16 +76,16 @@ __As always the intangibles of a player cannot be measured, neither can their he
 
 <!-- OFFENSE -->
 
-Team
-=====================================
+<!-- Team -->
+<!-- ===================================== -->
 
-Inputs {.sidebar data-width=250}
-----------------------------------------------------------------------
-
-
+<!-- Inputs {.sidebar data-width=250} -->
+<!-- ---------------------------------------------------------------------- -->
 
 
-Quarterbacks {data-navmenu="Individual" data-orientation=rows}
+
+
+Quarterbacks <!-- {data-navmenu="Individual" data-orientation=rows} -->
 =====================================
 
 
@@ -238,7 +239,7 @@ renderPlot({
 
 
 
-Running Backs {data-navmenu="Individual" data-orientation=rows}
+Running Backs  <!-- {data-navmenu="Individual" data-orientation=rows} -->
 =====================================
 
 
@@ -382,7 +383,7 @@ renderPlot({
 
 
 
-Wide Receivers {data-navmenu="Individual" data-orientation=rows}
+Wide Receivers <!-- {data-navmenu="Individual" data-orientation=rows} -->
 =====================================
 
 Inputs {.sidebar data-width=300}
@@ -510,7 +511,7 @@ Row {data-height=250}
 ### TD by Carries (season)
  
 ```{r}
-renderPlotly({
+renderPlot({
   plot.std(wr.dta(), wr.dash.dta
            , rec_td_cum, rec_cum
            , "TD", "Receptions")
@@ -530,21 +531,21 @@ renderPlot({
 
 
 
-Defensive Players {data-navmenu="Individual" data-orientation=rows}
-=====================================
+<!-- Defensive Players {data-navmenu="Individual" data-orientation=rows} -->
+<!-- ===================================== -->
 
-Specialists {data-navmenu="Individual"}
-=====================================
+<!-- Specialists {data-navmenu="Individual"} -->
+<!-- ===================================== -->
 
 
-Prediction {data-navmenu="Analytics"}
-=====================================
+<!-- Prediction {data-navmenu="Analytics"} -->
+<!-- ===================================== -->
 
-Team Rankings {data-navmenu="Analytics"}
-=====================================
+<!-- Team Rankings {data-navmenu="Analytics"} -->
+<!-- ===================================== -->
 
-Player Rankings {data-navmenu="Analytics"}
-=====================================
+<!-- Player Rankings {data-navmenu="Analytics"} -->
+<!-- ===================================== -->
 
 <!-- this page is being linked to:  -->
 Stats {.hidden data-orientation=rows}

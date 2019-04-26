@@ -5,8 +5,8 @@ account: connorjo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 394517
-bundleId: 1517283
+bundleId: 1519964
 url: https://connorjo.shinyapps.io/wfa_dash/
-when: 1533321580.17133
+when: 1533530676.78929
 asMultiple: FALSE
 asStatic: FALSE

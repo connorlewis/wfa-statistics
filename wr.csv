@@ -1,0 +1,294 @@
+plyr.lbl,player,no..rec,name.rec,rec_yards,rec,long.rec,avg.rec,rec_td,week.rec,team,season,rec_yards_cum,rec_cum,rec_td_cum,game,rec_td_rate_cum,rec_avg_cum,rec_yards_cum_game,rec_yards_rec,no..rush,name.rush,rush_yards,carries,avg.rush,long.rush,rush_td,week.rush,rush_yards_cum,carries_cum,rush_td_cum,rush_td_rate_cum,rush_avg_cum,rush_yards_cum_game,rush_yards_car
+AL #10,#10 Alaina Lange,#10,Alaina Lange,35,2,17,17.5,0,2,Knockout,2018,35,2,0,1,0,17.5,35,17.5,#10,Alaina Lange,10,3,3.3,4,0,3,10,3,0,0,3.3,10,3.3
+AL #10,#10 Alaina Lange,#10,Alaina Lange,58,5,24,11.6,0,3,Knockout,2018,93,7,0,2,0,13.3,46.5,11.6,#10,Alaina Lange,0,1,0,NA,0,6,10,4,0,0,2.5,5,0
+AL #10,#10 Alaina Lange,#10,Alaina Lange,40,3,14,13.3,0,4,Knockout,2018,133,10,0,3,0,13.3,44.3,13.3,#10,Alaina Lange,47,4,11.8,15,1,7,57,8,1,0.125,7.1,19,11.8
+AL #10,#10 Alaina Lange,#10,Alaina Lange,58,6,18,9.7,0,6,Knockout,2018,191,16,0,4,0,11.9,47.8,9.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AL #10,#10 Alaina Lange,#10,Alaina Lange,52,5,14,10.4,0,7,Knockout,2018,243,21,0,5,0,11.6,48.6,10.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AA #32,#32 Alicia Aguirre,#32,Alicia Aguirre,4,3,3,1.3,0,1,Las Cruces,2018,4,3,0,1,0,1.3,4,1.3,#32,Alicia Aguirre,70,10,7,12,0,1,70,10,0,0,7,70,7
+AA #32,#32 Alicia Aguirre,#32,Alicia Aguirre,68,1,68,68,1,3,Las Cruces,2018,72,4,1,2,0.25,18,36,68,#32,Alicia Aguirre,109,6,18.2,51,1,3,179,16,1,0.0625,11.2,89.5,18.2
+AA #32,#32 Alicia Aguirre,#32,Alicia Aguirre,14,3,8,4.7,0,4,Las Cruces,2018,86,7,1,3,0.14285714285714285,12.3,28.7,4.7,#32,Alicia Aguirre,45,8,5.6,17,1,4,224,24,2,0.08333333333333333,9.3,74.7,5.6
+AA #32,#32 Alicia Aguirre,#32,Alicia Aguirre,12,2,6,6,0,5,Las Cruces,2018,98,9,1,4,0.1111111111111111,10.9,24.5,6,#32,Alicia Aguirre,93,13,7.2,15,0,5,317,37,2,0.05405405405405406,8.6,79.2,7.2
+AA #32,#32 Alicia Aguirre,#32,Alicia Aguirre,15,2,8,7.5,0,6,Las Cruces,2018,113,11,1,5,0.09090909090909091,10.3,22.6,7.5,#32,Alicia Aguirre,68,12,5.7,23,1,6,385,49,3,0.061224489795918366,7.9,77,5.7
+AS #1,#1 Amoni Suttice,#1,Amoni Suttice,25,1,25,25,0,1,Waverunners,2018,25,1,0,1,0,25,25,25,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AS #1,#1 Amoni Suttice,#1,Amoni Suttice,40,2,25,20,0,3,Waverunners,2018,65,3,0,2,0,21.7,32.5,20,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AS #1,#1 Amoni Suttice,#1,Amoni Suttice,25,2,15,12.5,0,5,Waverunners,2018,90,5,0,3,0,18,30,12.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AS #1,#1 Amoni Suttice,#1,Amoni Suttice,75,5,NA,15,0,6,Waverunners,2018,165,10,0,4,0,16.5,41.2,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AS #1,#1 Amoni Suttice,#1,Amoni Suttice,35,5,NA,7,0,7,Waverunners,2018,200,15,0,5,0,13.3,40,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AS #1,#1 Amoni Suttice,#1,Amoni Suttice,35,5,10,7,0,8,Waverunners,2018,235,20,0,6,0,11.8,39.2,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AS #1,#1 Amoni Suttice,#1,Amoni Suttice,10,2,NA,5,0,8,Waverunners,2018,245,22,0,7,0,11.1,35,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AB #82,#82 Angela Baker,#82,Angela Baker,53,6,19,8.8,2,3,Passion,2018,53,6,2,1,0.3333333333333333,8.8,53,8.8,#82,Angela Baker,0,1,0,NA,0,3,0,1,0,0,0,0,0
+AB #82,#82 Angela Baker,#82,Angela Baker,191,16,23,11.9,2,4,Passion,2018,244,22,4,2,0.18181818181818182,11.1,122,11.9,#82,Angela Baker,11,1,11,11,0,5,11,2,0,0,5.5,5.5,11
+AB #82,#82 Angela Baker,#82,Angela Baker,80,6,24,13.3,2,5,Passion,2018,324,28,6,3,0.21428571428571427,11.6,108,13.3,#82,Angela Baker,0,1,0,NA,0,7,11,3,0,0,3.7,3.7,0
+AB #82,#82 Angela Baker,#82,Angela Baker,168,7,63,24,2,6,Passion,2018,492,35,8,4,0.22857142857142856,14.1,123,24,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AB #82,#82 Angela Baker,#82,Angela Baker,193,11,85,17.5,2,7,Passion,2018,685,46,10,5,0.21739130434782608,14.9,137,17.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AB #82,#82 Angela Baker,#82,Angela Baker,12,3,NA,4,0,8,Passion,2018,697,49,10,6,0.20408163265306123,14.2,116.2,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AB #82,#82 Angela Baker,#82,Angela Baker,157,8,38,19.6,4,10,Passion,2018,854,57,14,7,0.24561403508771928,15,122,19.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+A #47,#47 Ankara  West,#47,Ankara  West,15,2,10,7.5,0,4,Smash,2018,15,2,0,1,0,7.5,15,7.5,#47,Ankara  West,40,5,8,15,0,1,40,5,0,0,8,40,8
+A #47,#47 Ankara  West,#47,Ankara  West,25,1,25,25,0,7,Smash,2018,40,3,0,2,0,13.3,20,25,#47,Ankara  West,33,11,3,10,0,2,73,16,0,0,4.6,36.5,3
+A #47,#47 Ankara  West,#47,Ankara  West,38,38,38,1,2,9,Smash,2018,78,41,2,3,0.04878048780487805,1.9,26,1,#47,Ankara  West,116,13,8.9,30,1,4,189,29,1,0.034482758620689655,6.5,63,8.9
+AB #19,#19 Asia Bell,#19,Asia Bell,5,1,5,5,1,3,Dixie Blues,2018,5,1,1,1,1,5,5,5,#19,Asia Bell,23,8,2.9,15,0,1,23,8,0,0,2.9,23,2.9
+AB #19,#19 Asia Bell,#19,Asia Bell,19,3,9,6.3,0,5,Dixie Blues,2018,24,4,1,2,0.25,6,12,6.3,#19,Asia Bell,35,3,11.7,15,1,3,58,11,1,0.09090909090909091,5.3,29,11.7
+AB #19,#19 Asia Bell,#19,Asia Bell,61,5,14,12.2,2,6,Dixie Blues,2018,85,9,3,3,0.3333333333333333,9.4,28.3,12.2,#19,Asia Bell,18,5,3.6,7,0,4,76,16,1,0.0625,4.8,25.3,3.6
+AB #19,#19 Asia Bell,#19,Asia Bell,33,2,24,16.5,2,7,Dixie Blues,2018,118,11,5,4,0.45454545454545453,10.7,29.5,16.5,#19,Asia Bell,21,10,2.1,13,0,5,97,26,1,0.038461538461538464,3.7,24.2,2.1
+AB #19,#19 Asia Bell,#19,Asia Bell,68,2,53,34,2,10,Dixie Blues,2018,186,13,7,5,0.5384615384615384,14.3,37.2,34,#19,Asia Bell,44,9,4.9,15,1,6,141,35,2,0.05714285714285714,4,28.2,4.9
+BC #21,#21 Brennan Crabtree,#21,Brennan Crabtree,36,3,22,12,1,1,Mizfits,2018,36,3,1,1,0.3333333333333333,12,36,12,#21,Brennan Crabtree,2,1,2,2,0,1,2,1,0,0,2,2,2
+BC #21,#21 Brennan Crabtree,#21,Brennan Crabtree,32,2,22,16,0,3,Mizfits,2018,68,5,1,2,0.2,13.6,34,16,#21,Brennan Crabtree,17,1,17,17,0,3,19,2,0,0,9.5,9.5,17
+BC #21,#21 Brennan Crabtree,#21,Brennan Crabtree,54,3,30,18,0,5,Mizfits,2018,122,8,1,3,0.125,15.2,40.7,18,#21,Brennan Crabtree,35,1,35,35,1,5,54,3,1,0.3333333333333333,18,18,35
+BC #21,#21 Brennan Crabtree,#21,Brennan Crabtree,71,4,35,17.8,1,6,Mizfits,2018,193,12,2,4,0.16666666666666666,16.1,48.2,17.8,#21,Brennan Crabtree,17,1,17,17,0,6,71,4,1,0.25,17.8,17.8,17
+BC #21,#21 Brennan Crabtree,#21,Brennan Crabtree,30,1,30,30,0,7,Mizfits,2018,223,13,2,5,0.15384615384615385,17.2,44.6,30,#21,Brennan Crabtree,2,1,2,2,0,9,73,5,1,0.2,14.6,14.6,2
+BC #21,#21 Brennan Crabtree,#21,Brennan Crabtree,45,4,14,11.2,0,9,Mizfits,2018,268,17,2,6,0.11764705882352941,15.8,44.7,11.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BB #25,#25 Brianna Brewer,#25,Brianna Brewer,17,2,12,8.5,0,4,Sizzle,2018,17,2,0,1,0,8.5,17,8.5,#25,Brianna Brewer,4,3,1.3,12,0,4,4,3,0,0,1.3,4,1.3
+BB #25,#25 Brianna Brewer,#25,Brianna Brewer,62,3,25,20.7,1,5,Sizzle,2018,79,5,1,2,0.2,15.8,39.5,20.7,#25,Brianna Brewer,116,12,9.7,36,1,5,120,15,1,0.06666666666666667,8,60,9.7
+BB #25,#25 Brianna Brewer,#25,Brianna Brewer,115,4,65,28.8,0,6,Sizzle,2018,194,9,1,3,0.1111111111111111,21.6,64.7,28.8,#25,Brianna Brewer,10,3,3.3,7,0,8,130,18,1,0.05555555555555555,7.2,43.3,3.3
+BB #25,#25 Brianna Brewer,#25,Brianna Brewer,29,2,18,14.5,0,8,Sizzle,2018,223,11,1,4,0.09090909090909091,20.3,55.8,14.5,#25,Brianna Brewer,33,4,8.2,37,0,10,163,22,1,0.045454545454545456,7.4,40.8,8.2
+BB #25,#25 Brianna Brewer,#25,Brianna Brewer,0,1,NA,0,0,10,Sizzle,2018,223,12,1,5,0.08333333333333333,18.6,44.6,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BF #25,#25 Brilynn Fields,#25,Brilynn Fields,114,4,NA,28.5,1,1,Sharks,2018,114,4,1,1,0.25,28.5,114,28.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BF #25,#25 Brilynn Fields,#25,Brilynn Fields,95,3,NA,31.7,1,4,Sharks,2018,209,7,2,2,0.2857142857142857,29.9,104.5,31.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BF #25,#25 Brilynn Fields,#25,Brilynn Fields,3,1,NA,3,1,5,Sharks,2018,212,8,3,3,0.375,26.5,70.7,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BF #25,#25 Brilynn Fields,#25,Brilynn Fields,12,1,NA,12,0,6,Sharks,2018,224,9,3,4,0.3333333333333333,24.9,56,12,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BF #25,#25 Brilynn Fields,#25,Brilynn Fields,44,2,NA,22,0,7,Sharks,2018,268,11,3,5,0.2727272727272727,24.4,53.6,22,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BF #25,#25 Brilynn Fields,#25,Brilynn Fields,17,1,NA,17,1,9,Sharks,2018,285,12,4,6,0.3333333333333333,23.8,47.5,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BK #20,#20 Brittany Koziara,#20,Brittany Koziara,20,1,NA,20,1,1,Anarchy,2018,20,1,1,1,1,20,20,20,#20,Brittany Koziara,62,3,20.7,35,1,1,62,3,1,0.3333333333333333,20.7,62,20.7
+BK #20,#20 Brittany Koziara,#20,Brittany Koziara,57,2,39,28.5,1,3,Anarchy,2018,77,3,2,2,0.6666666666666666,25.7,38.5,28.5,#20,Brittany Koziara,82,2,41,65,1,3,144,5,2,0.4,28.8,72,41
+BK #20,#20 Brittany Koziara,#20,Brittany Koziara,155,9,60,17.2,3,4,Anarchy,2018,232,12,5,3,0.4166666666666667,19.3,77.3,17.2,#20,Brittany Koziara,95,9,10.6,NA,1,4,239,14,3,0.21428571428571427,17.1,79.7,10.6
+CG #45,#45 Celina Graves,#45,Celina Graves,17,1,17,17,0,1,Rebellion,2018,17,1,0,1,0,17,17,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CG #45,#45 Celina Graves,#45,Celina Graves,13,2,8,6.5,0,2,Rebellion,2018,30,3,0,2,0,10,15,6.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CG #45,#45 Celina Graves,#45,Celina Graves,3,1,3,3,0,4,Rebellion,2018,33,4,0,3,0,8.2,11,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CG #45,#45 Celina Graves,#45,Celina Graves,18,3,NA,6,1,6,Rebellion,2018,51,7,1,4,0.14285714285714285,7.3,12.8,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CG #45,#45 Celina Graves,#45,Celina Graves,70,3,42,23.3,1,9,Rebellion,2018,121,10,2,5,0.2,12.1,24.2,23.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CG #45,#45 Celina Graves,#45,Celina Graves,116,7,30,16.6,3,10,Rebellion,2018,237,17,5,6,0.29411764705882354,13.9,39.5,16.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CB #21,#21 Chante Bonds,#21,Chante Bonds,42,4,23,10.5,0,1,Renegades,2018,42,4,0,1,0,10.5,42,10.5,#21,Chante Bonds,161,20,8,25,1,1,161,20,1,0.05,8.1,161,8.1
+CB #21,#21 Chante Bonds,#21,Chante Bonds,33,3,19,11,0,2,Renegades,2018,75,7,0,2,0,10.7,37.5,11,#21,Chante Bonds,4,1,4,4,0,2,165,21,1,0.047619047619047616,7.9,82.5,4
+CB #21,#21 Chante Bonds,#21,Chante Bonds,71,3,57,23.7,0,3,Renegades,2018,146,10,0,3,0,14.6,48.7,23.7,#21,Chante Bonds,0,1,0,NA,0,3,165,22,1,0.045454545454545456,7.5,55,0
+CB #21,#21 Chante Bonds,#21,Chante Bonds,38,3,18,12.7,0,7,Renegades,2018,184,13,0,4,0,14.2,46,12.7,#21,Chante Bonds,6,3,2,4,0,6,171,25,1,0.04,6.8,42.8,2
+CB #21,#21 Chante Bonds,#21,Chante Bonds,48,2,41,24,1,9,Renegades,2018,232,15,1,5,0.06666666666666667,15.5,46.4,24,#21,Chante Bonds,6,1,6,6,0,7,177,26,1,0.038461538461538464,6.8,35.4,6
+CB #21,#21 Chante Bonds,#21,Chante Bonds,55,1,55,55,1,10,Renegades,2018,287,16,2,6,0.125,17.9,47.8,55,#21,Chante Bonds,5,1,5,5,0,10,182,27,1,0.037037037037037035,6.7,30.3,5
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,35,2,29,17.5,0,1,Sizzle,2018,35,2,0,1,0,17.5,35,17.5,#1,Charetta  Pride,8,1,8,8,0,1,8,1,0,0,8,8,8
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,17,2,12,8.5,0,2,Sizzle,2018,52,4,0,2,0,13,26,8.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,60,4,22,15,1,4,Sizzle,2018,112,8,1,3,0.125,14,37.3,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,24,1,24,24,0,5,Sizzle,2018,136,9,1,4,0.1111111111111111,15.1,34,24,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,65,3,45,21.7,2,6,Sizzle,2018,201,12,3,5,0.25,16.8,40.2,21.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,64,4,30,16,0,8,Sizzle,2018,265,16,3,6,0.1875,16.6,44.2,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,37,3,16,12.3,0,10,Sizzle,2018,302,19,3,7,0.15789473684210525,15.9,43.1,12.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CB #96,#96 Chrystal Bell,#96,Chrystal Bell,145,2,85,72.5,2,3,Anarchy,2018,145,2,2,1,1,72.5,145,72.5,#96,Chrystal Bell,1,1,1,NA,1,1,1,1,1,1,1,1,1
+CB #96,#96 Chrystal Bell,#96,Chrystal Bell,151,11,26,13.7,0,4,Anarchy,2018,296,13,2,2,0.15384615384615385,22.8,148,13.7,#96,Chrystal Bell,7,1,7,7,1,3,8,2,2,1,4,4,7
+CB #96,#96 Chrystal Bell,#96,Chrystal Bell,23,1,NA,23,0,5,Anarchy,2018,319,14,2,3,0.14285714285714285,22.8,106.3,23,#96,Chrystal Bell,53,3,17.7,38,0,4,61,5,2,0.4,12.2,20.3,17.7
+CB #96,#96 Chrystal Bell,#96,Chrystal Bell,130,8,45,16.2,3,7,Anarchy,2018,449,22,5,4,0.22727272727272727,20.4,112.2,16.2,#96,Chrystal Bell,12,1,12,NA,0,7,73,6,2,0.3333333333333333,12.2,18.2,12
+CR #25,#25 Courtney Rhodes,#25,Courtney Rhodes,11,1,11,11,0,1,Outlaws,2018,11,1,0,1,0,11,11,11,#25,Courtney Rhodes,24,3,8,15,0,3,24,3,0,0,8,24,8
+CR #25,#25 Courtney Rhodes,#25,Courtney Rhodes,76,3,35,25.3,1,2,Outlaws,2018,87,4,1,2,0.25,21.8,43.5,25.3,#25,Courtney Rhodes,85,4,21.2,51,1,4,109,7,1,0.14285714285714285,15.6,54.5,21.2
+CR #25,#25 Courtney Rhodes,#25,Courtney Rhodes,19,2,12,9.5,0,3,Outlaws,2018,106,6,1,3,0.16666666666666666,17.7,35.3,9.5,#25,Courtney Rhodes,26,4,6.5,13,0,5,135,11,1,0.09090909090909091,12.3,45,6.5
+CR #25,#25 Courtney Rhodes,#25,Courtney Rhodes,53,3,48,17.7,1,4,Outlaws,2018,159,9,2,4,0.2222222222222222,17.7,39.8,17.7,#25,Courtney Rhodes,16,3,5.3,9,0,7,151,14,1,0.07142857142857142,10.8,37.8,5.3
+CR #25,#25 Courtney Rhodes,#25,Courtney Rhodes,45,3,12,15,0,5,Outlaws,2018,204,12,2,5,0.16666666666666666,17,40.8,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CR #25,#25 Courtney Rhodes,#25,Courtney Rhodes,98,4,45,24.5,0,7,Outlaws,2018,302,16,2,6,0.125,18.9,50.3,24.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+D #4,#4 Dajah  Scott,#4,Dajah  Scott,12,3,10,4,0,2,Divas,2018,12,3,0,1,0,4,12,4,#4,Dajah  Scott,20,6,3.3,8,0,2,20,6,0,0,3.3,20,3.3
+D #4,#4 Dajah  Scott,#4,Dajah  Scott,15,1,15,15,1,3,Divas,2018,27,4,1,2,0.25,6.8,13.5,15,#4,Dajah  Scott,70,6,11.7,35,0,3,90,12,0,0,7.5,45,11.7
+D #4,#4 Dajah  Scott,#4,Dajah  Scott,4,4,2,1,0,4,Divas,2018,31,8,1,3,0.125,3.9,10.3,1,#4,Dajah  Scott,34,7,4.9,23,1,4,124,19,1,0.05263157894736842,6.5,41.3,4.9
+D #4,#4 Dajah  Scott,#4,Dajah  Scott,1,1,1,1,0,7,Divas,2018,32,9,1,4,0.1111111111111111,3.6,8,1,#4,Dajah  Scott,112,6,18.7,86,2,6,236,25,3,0.12,9.4,59,18.7
+D #4,#4 Dajah  Scott,#4,Dajah  Scott,54,2,52,27,1,8,Divas,2018,86,11,2,5,0.18181818181818182,7.8,17.2,27,#4,Dajah  Scott,84,8,10.5,77,2,7,320,33,5,0.15151515151515152,9.7,64,10.5
+D #4,#4 Dajah  Scott,#4,Dajah  Scott,10,3,4,3.3,0,10,Divas,2018,96,14,2,6,0.14285714285714285,6.9,16,3.3,#4,Dajah  Scott,55,12,4.6,17,2,8,375,45,7,0.15555555555555556,8.3,62.5,4.6
+DM #56,#56 Dana Mitchell,#56,Dana Mitchell,32,2,26,16,1,1,Anarchy,2018,32,2,1,1,0.5,16,32,16,#56,Dana Mitchell,61,5,12.2,NA,1,4,61,5,1,0.2,12.2,61,12.2
+DM #56,#56 Dana Mitchell,#56,Dana Mitchell,0,1,NA,0,0,8,Anarchy,2018,32,3,1,2,0.3333333333333333,10.7,16,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DM #56,#56 Dana Mitchell,#56,Dana Mitchell,52,2,37,26,0,9,Anarchy,2018,84,5,1,3,0.2,16.8,28,26,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DM #56,#56 Dana Mitchell,#56,Dana Mitchell,49,6,17,8.2,0,10,Anarchy,2018,133,11,1,4,0.09090909090909091,12.1,33.2,8.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DT #12,#12 Deasha Talley,#12,Deasha Talley,50,3,24,16.7,0,1,Comets,2018,50,3,0,1,0,16.7,50,16.7,#12,Deasha Talley,0,2,0,6,0,3,0,2,0,0,0,0,0
+DT #12,#12 Deasha Talley,#12,Deasha Talley,21,1,21,21,0,2,Comets,2018,71,4,0,2,0,17.8,35.5,21,#12,Deasha Talley,52,8,6.5,24,0,5,52,10,0,0,5.2,26,6.5
+DT #12,#12 Deasha Talley,#12,Deasha Talley,131,6,68,21.8,1,3,Comets,2018,202,10,1,3,0.1,20.2,67.3,21.8,#12,Deasha Talley,0,1,0,NA,0,9,52,11,0,0,4.7,17.3,0
+DT #12,#12 Deasha Talley,#12,Deasha Talley,47,5,21,9.4,4,7,Comets,2018,249,15,5,4,0.3333333333333333,16.6,62.2,9.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DT #12,#12 Deasha Talley,#12,Deasha Talley,7,1,7,7,0,9,Comets,2018,256,16,5,5,0.3125,16,51.2,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DP #84,#84 Denessa Pack,#84,Denessa Pack,19,1,19,19,0,1,Hawks,2018,19,1,0,1,0,19,19,19,#84,Denessa Pack,9,3,3,11,0,1,9,3,0,0,3,9,3
+DP #84,#84 Denessa Pack,#84,Denessa Pack,120,9,35,13.3,0,3,Hawks,2018,139,10,0,2,0,13.9,69.5,13.3,#84,Denessa Pack,15,4,3.8,16,1,3,24,7,1,0.14285714285714285,3.4,12,3.8
+DP #84,#84 Denessa Pack,#84,Denessa Pack,35,2,22,17.5,0,4,Hawks,2018,174,12,0,3,0,14.5,58,17.5,#84,Denessa Pack,21,2,10.5,19,0,6,45,9,1,0.1111111111111111,5,15,10.5
+DP #84,#84 Denessa Pack,#84,Denessa Pack,1,1,1,1,0,6,Hawks,2018,175,13,0,4,0,13.5,43.8,1,#84,Denessa Pack,33,3,11,14,0,7,78,12,1,0.08333333333333333,6.5,19.5,11
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,5,1,5,5,0,1,Tidal Waves,2018,5,1,0,1,0,5,5,5,#15,Dessiree Trevino,35,2,17.5,20,0,4,35,2,0,0,17.5,35,17.5
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,10,2,9,5,0,3,Tidal Waves,2018,15,3,0,2,0,5,7.5,5,#15,Dessiree Trevino,10,3,3.3,8,0,5,45,5,0,0,9,22.5,3.3
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,37,3,16,12.3,1,4,Tidal Waves,2018,52,6,1,3,0.16666666666666666,8.7,17.3,12.3,#15,Dessiree Trevino,1,1,1,1,0,7,46,6,0,0,7.7,15.3,1
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,28,4,10,7,0,6,Tidal Waves,2018,80,10,1,4,0.1,8,20,7,#15,Dessiree Trevino,18,1,18,18,0,9,64,7,0,0,9.1,16,18
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,51,5,21,10.2,0,7,Tidal Waves,2018,131,15,1,5,0.06666666666666667,8.7,26.2,10.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,11,2,6,5.5,0,8,Tidal Waves,2018,142,17,1,6,0.058823529411764705,8.4,23.7,5.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,11,1,11,11,0,9,Tidal Waves,2018,153,18,1,7,0.05555555555555555,8.5,21.9,11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,62,2,51,31,1,1,Inferno,2018,62,2,1,1,0.5,31,62,31,#25,Dominique  Jacobs,4,1,4,NA,0,5,4,1,0,0,4,4,4
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,8,1,8,8,0,2,Inferno,2018,70,3,1,2,0.3333333333333333,23.3,35,8,#25,Dominique  Jacobs,10,1,10,10,1,6,14,2,1,0.5,7,7,10
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,58,4,18,14.5,1,4,Inferno,2018,128,7,2,3,0.2857142857142857,18.3,42.7,14.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,27,1,27,27,0,5,Inferno,2018,155,8,2,4,0.25,19.4,38.8,27,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,21,3,10,7,0,6,Inferno,2018,176,11,2,5,0.18181818181818182,16,35.2,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,15,3,15,5,0,10,Inferno,2018,191,14,2,6,0.14285714285714285,13.6,31.8,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EB #87,#87 Emily Beinecke,#87,Emily Beinecke,57,4,32,14.2,0,1,Renegades,2018,57,4,0,1,0,14.2,57,14.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EB #87,#87 Emily Beinecke,#87,Emily Beinecke,187,11,60,17,2,2,Renegades,2018,244,15,2,2,0.13333333333333333,16.3,122,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EB #87,#87 Emily Beinecke,#87,Emily Beinecke,179,10,40,17.9,3,3,Renegades,2018,423,25,5,3,0.2,16.9,141,17.9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EB #87,#87 Emily Beinecke,#87,Emily Beinecke,46,5,26,9.2,0,7,Renegades,2018,469,30,5,4,0.16666666666666666,15.6,117.2,9.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EB #87,#87 Emily Beinecke,#87,Emily Beinecke,64,4,19,16,1,10,Renegades,2018,533,34,6,5,0.17647058823529413,15.7,106.6,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EB #85,#85 Erika Bobo,#85,Erika Bobo,155,4,64,38.8,3,1,Elite,2018,155,4,3,1,0.75,38.8,155,38.8,#85,Erika Bobo,43,1,43,43,1,1,43,1,1,1,43,43,43
+EB #85,#85 Erika Bobo,#85,Erika Bobo,13,2,11,6.5,0,3,Elite,2018,168,6,3,2,0.5,28,84,6.5,#85,Erika Bobo,13,1,13,13,0,3,56,2,1,0.5,28,28,13
+EB #85,#85 Erika Bobo,#85,Erika Bobo,55,4,23,13.8,1,4,Elite,2018,223,10,4,3,0.4,22.3,74.3,13.8,#85,Erika Bobo,16,1,16,16,0,4,72,3,1,0.3333333333333333,24,24,16
+EB #85,#85 Erika Bobo,#85,Erika Bobo,42,2,32,21,1,5,Elite,2018,265,12,5,4,0.4166666666666667,22.1,66.2,21,#85,Erika Bobo,24,1,24,24,0,5,96,4,1,0.25,24,24,24
+EB #85,#85 Erika Bobo,#85,Erika Bobo,35,3,13,11.7,0,7,Elite,2018,300,15,5,5,0.3333333333333333,20,60,11.7,#85,Erika Bobo,24,4,6,17,0,7,120,8,1,0.125,15,24,6
+EB #85,#85 Erika Bobo,#85,Erika Bobo,34,1,34,34,1,8,Elite,2018,334,16,6,6,0.375,20.9,55.7,34,#85,Erika Bobo,78,3,26,60,2,8,198,11,3,0.2727272727272727,18,33,26
+FL #22,#22 Franchesca Long,#22,Franchesca Long,58,3,NA,19.3,0,4,Fire,2018,58,3,0,1,0,19.3,58,19.3,#22,Franchesca Long,5,1,5,NA,0,4,5,1,0,0,5,5,5
+FL #22,#22 Franchesca Long,#22,Franchesca Long,74,4,NA,18.5,1,6,Fire,2018,132,7,1,2,0.14285714285714285,18.9,66,18.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+FL #22,#22 Franchesca Long,#22,Franchesca Long,104,5,NA,20.8,1,7,Fire,2018,236,12,2,3,0.16666666666666666,19.7,78.7,20.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+FL #22,#22 Franchesca Long,#22,Franchesca Long,140,7,NA,20,2,8,Fire,2018,376,19,4,4,0.21052631578947367,19.8,94,20,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+FL #22,#22 Franchesca Long,#22,Franchesca Long,119,8,NA,14.9,2,9,Fire,2018,495,27,6,5,0.2222222222222222,18.3,99,14.9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GC #2,#2 Gina Capardi,#2,Gina Capardi,19,3,NA,6.3,1,1,Sharks,2018,19,3,1,1,0.3333333333333333,6.3,19,6.3,#2,Gina Capardi,9,1,9,NA,0,2,9,1,0,0,9,9,9
+GC #2,#2 Gina Capardi,#2,Gina Capardi,81,6,NA,13.5,0,2,Sharks,2018,100,9,1,2,0.1111111111111111,11.1,50,13.5,#2,Gina Capardi,4,3,1.3,NA,1,7,13,4,1,0.25,3.2,6.5,1.3
+GC #2,#2 Gina Capardi,#2,Gina Capardi,71,4,NA,17.8,2,4,Sharks,2018,171,13,3,3,0.23076923076923078,13.2,57,17.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GC #2,#2 Gina Capardi,#2,Gina Capardi,63,4,NA,15.8,1,5,Sharks,2018,234,17,4,4,0.23529411764705882,13.8,58.5,15.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GC #2,#2 Gina Capardi,#2,Gina Capardi,88,5,NA,17.6,0,6,Sharks,2018,322,22,4,5,0.18181818181818182,14.6,64.4,17.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GC #2,#2 Gina Capardi,#2,Gina Capardi,94,6,NA,15.7,1,7,Sharks,2018,416,28,5,6,0.17857142857142858,14.9,69.3,15.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+GC #2,#2 Gina Capardi,#2,Gina Capardi,77,3,NA,25.7,1,9,Sharks,2018,493,31,6,7,0.1935483870967742,15.9,70.4,25.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,40,1,40,40,1,1,Elite,2018,40,1,1,1,1,40,40,40,#14,Jamie Fornal,0,1,0,NA,0,3,0,1,0,0,0,0,0
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,53,7,15,7.6,0,3,Elite,2018,93,8,1,2,0.125,11.6,46.5,7.6,#14,Jamie Fornal,71,12,5.9,15,0,4,71,13,0,0,5.5,35.5,5.9
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,43,5,24,8.6,0,4,Elite,2018,136,13,1,3,0.07692307692307693,10.5,45.3,8.6,#14,Jamie Fornal,113,7,16.1,30,2,5,184,20,2,0.1,9.2,61.3,16.1
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,99,5,33,19.8,2,5,Elite,2018,235,18,3,4,0.16666666666666666,13.1,58.8,19.8,#14,Jamie Fornal,11,12,0.9,14,0,7,195,32,2,0.0625,6.1,48.8,0.9
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,76,7,28,10.9,0,7,Elite,2018,311,25,3,5,0.12,12.4,62.2,10.9,#14,Jamie Fornal,123,8,15.4,43,2,8,318,40,4,0.1,8,63.6,15.4
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,89,2,85,44.5,2,8,Elite,2018,400,27,5,6,0.18518518518518517,14.8,66.7,44.5,#14,Jamie Fornal,99,16,6.2,14,1,9,417,56,5,0.08928571428571429,7.4,69.5,6.2
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,54,6,22,9,1,9,Elite,2018,454,33,6,7,0.18181818181818182,13.8,64.9,9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JC #3,#3 Janathia Curry,#3,Janathia Curry,101,3,52,33.7,1,1,Impact,2018,101,3,1,1,0.3333333333333333,33.7,101,33.7,#3,Janathia Curry,49,4,12.2,25,2,1,49,4,2,0.5,12.2,49,12.2
+JC #3,#3 Janathia Curry,#3,Janathia Curry,17,1,17,17,0,3,Impact,2018,118,4,1,2,0.25,29.5,59,17,#3,Janathia Curry,41,6,6.8,14,1,3,90,10,3,0.3,9,45,6.8
+JC #3,#3 Janathia Curry,#3,Janathia Curry,75,3,79,25,3,5,Impact,2018,193,7,4,3,0.5714285714285714,27.6,64.3,25,#3,Janathia Curry,65,16,4.1,14,1,4,155,26,4,0.15384615384615385,6,51.7,4.1
+JC #3,#3 Janathia Curry,#3,Janathia Curry,55,3,30,18.3,2,7,Impact,2018,248,10,6,4,0.6,24.8,62,18.3,#3,Janathia Curry,27,14,1.9,9,1,6,182,40,5,0.125,4.5,45.5,1.9
+JC #3,#3 Janathia Curry,#3,Janathia Curry,24,1,24,24,1,8,Impact,2018,272,11,7,5,0.6363636363636364,24.7,54.4,24,#3,Janathia Curry,35,1,35,35,1,8,217,41,6,0.14634146341463414,5.3,43.4,35
+JC #3,#3 Janathia Curry,#3,Janathia Curry,96,3,66,32,1,10,Impact,2018,368,14,8,6,0.5714285714285714,26.3,61.3,32,#3,Janathia Curry,33,5,6.6,15,0,10,250,46,6,0.13043478260869565,5.4,41.7,6.6
+JK #5,#5 Jennifer King,#5,Jennifer King,23,1,NA,23,0,1,Sharks,2018,23,1,0,1,0,23,23,23,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JK #5,#5 Jennifer King,#5,Jennifer King,105,7,NA,15,2,2,Sharks,2018,128,8,2,2,0.25,16,64,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JK #5,#5 Jennifer King,#5,Jennifer King,21,2,NA,10.5,0,4,Sharks,2018,149,10,2,3,0.2,14.9,49.7,10.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JK #5,#5 Jennifer King,#5,Jennifer King,42,1,NA,42,1,7,Sharks,2018,191,11,3,4,0.2727272727272727,17.4,47.8,42,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JK #5,#5 Jennifer King,#5,Jennifer King,55,3,NA,18.3,1,9,Sharks,2018,246,14,4,5,0.2857142857142857,17.6,49.2,18.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KG #44,#44 Katharine Green,#44,Katharine Green,21,2,15,10.5,0,5,Fusion,2018,21,2,0,1,0,10.5,21,10.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KG #44,#44 Katharine Green,#44,Katharine Green,121,8,49,15.1,3,6,Fusion,2018,142,10,3,2,0.3,14.2,71,15.1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KG #44,#44 Katharine Green,#44,Katharine Green,6,1,6,6,0,7,Fusion,2018,148,11,3,3,0.2727272727272727,13.5,49.3,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KG #44,#44 Katharine Green,#44,Katharine Green,37,5,13,7.4,0,9,Fusion,2018,185,16,3,4,0.1875,11.6,46.2,7.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KT #15,#15 Kathryn Tylander,#15,Kathryn Tylander,39,3,25,13,1,1,Renegades,2018,39,3,1,1,0.3333333333333333,13,39,13,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KT #15,#15 Kathryn Tylander,#15,Kathryn Tylander,16,2,11,8,0,6,Renegades,2018,55,5,1,2,0.2,11,27.5,8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KT #15,#15 Kathryn Tylander,#15,Kathryn Tylander,107,8,46,13.4,0,7,Renegades,2018,162,13,1,3,0.07692307692307693,12.5,54,13.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KT #15,#15 Kathryn Tylander,#15,Kathryn Tylander,13,1,13,13,0,9,Renegades,2018,175,14,1,4,0.07142857142857142,12.5,43.8,13,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KT #15,#15 Kathryn Tylander,#15,Kathryn Tylander,35,1,35,35,1,10,Renegades,2018,210,15,2,5,0.13333333333333333,14,42,35,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #85,#85 Kentrina  Wilson,#85,Kentrina  Wilson,130,7,50,18.6,2,2,Divas,2018,130,7,2,1,0.2857142857142857,18.6,130,18.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #85,#85 Kentrina  Wilson,#85,Kentrina  Wilson,60,2,35,30,1,3,Divas,2018,190,9,3,2,0.3333333333333333,21.1,95,30,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #85,#85 Kentrina  Wilson,#85,Kentrina  Wilson,83,8,20,10.4,2,4,Divas,2018,273,17,5,3,0.29411764705882354,16.1,91,10.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #85,#85 Kentrina  Wilson,#85,Kentrina  Wilson,80,3,45,26.7,1,6,Divas,2018,353,20,6,4,0.3,17.6,88.2,26.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #85,#85 Kentrina  Wilson,#85,Kentrina  Wilson,118,8,40,14.8,2,7,Divas,2018,471,28,8,5,0.2857142857142857,16.8,94.2,14.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #85,#85 Kentrina  Wilson,#85,Kentrina  Wilson,73,8,21,9.1,0,8,Divas,2018,544,36,8,6,0.2222222222222222,15.1,90.7,9.1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #85,#85 Kentrina  Wilson,#85,Kentrina  Wilson,97,5,42,19.4,1,10,Divas,2018,641,41,9,7,0.21951219512195122,15.6,91.6,19.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KL #45,#45 Krishna Lee,#45,Krishna Lee,32,2,24,16,0,1,Titans,2018,32,2,0,1,0,16,32,16,#45,Krishna Lee,12,2,6,8,0,1,12,2,0,0,6,12,6
+KL #45,#45 Krishna Lee,#45,Krishna Lee,18,2,9,9,0,3,Titans,2018,50,4,0,2,0,12.5,25,9,#45,Krishna Lee,13,2,6.5,10,0,2,25,4,0,0,6.2,12.5,6.5
+KL #45,#45 Krishna Lee,#45,Krishna Lee,99,5,24,19.8,2,5,Titans,2018,149,9,2,3,0.2222222222222222,16.6,49.7,19.8,#45,Krishna Lee,33,2,16.5,23,1,4,58,6,1,0.16666666666666666,9.7,19.3,16.5
+KL #45,#45 Krishna Lee,#45,Krishna Lee,32,1,32,32,1,9,Titans,2018,181,10,3,4,0.3,18.1,45.2,32,#45,Krishna Lee,0,2,0,NA,0,5,58,8,1,0.125,7.2,14.5,0
+KL #45,#45 Krishna Lee,#45,Krishna Lee,36,3,16,12,0,10,Titans,2018,217,13,3,5,0.23076923076923078,16.7,43.4,12,#45,Krishna Lee,9,7,1.3,9,0,7,67,15,1,0.06666666666666667,4.5,13.4,1.3
+KS #13,#13 Kristin Smereczynski,#13,Kristin Smereczynski,13,1,13,13,0,1,Rebellion,2018,13,1,0,1,0,13,13,13,#13,Kristin Smereczynski,0,2,0,NA,0,2,0,2,0,0,0,0,0
+KS #13,#13 Kristin Smereczynski,#13,Kristin Smereczynski,22,3,19,7.3,1,2,Rebellion,2018,35,4,1,2,0.25,8.8,17.5,7.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #13,#13 Kristin Smereczynski,#13,Kristin Smereczynski,4,2,6,2,0,4,Rebellion,2018,39,6,1,3,0.16666666666666666,6.5,13,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #13,#13 Kristin Smereczynski,#13,Kristin Smereczynski,26,1,26,26,0,6,Rebellion,2018,65,7,1,4,0.14285714285714285,9.3,16.2,26,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #13,#13 Kristin Smereczynski,#13,Kristin Smereczynski,31,4,21,7.8,0,7,Rebellion,2018,96,11,1,5,0.09090909090909091,8.7,19.2,7.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #13,#13 Kristin Smereczynski,#13,Kristin Smereczynski,17,2,15,8.5,1,9,Rebellion,2018,113,13,2,6,0.15384615384615385,8.7,18.8,8.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #13,#13 Kristin Smereczynski,#13,Kristin Smereczynski,16,1,16,16,0,10,Rebellion,2018,129,14,2,7,0.14285714285714285,9.2,18.4,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,87,3,43,29,2,3,Passion,2018,87,3,2,1,0.6666666666666666,29,87,29,#40,Krystal  Cozzo,13,1,13,13,0,7,13,1,0,0,13,13,13
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,8,3,4,2.7,1,4,Passion,2018,95,6,3,2,0.5,15.8,47.5,2.7,#40,Krystal  Cozzo,2,1,2,22,0,10,15,2,0,0,7.5,7.5,2
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,26,1,26,26,0,5,Passion,2018,121,7,3,3,0.42857142857142855,17.3,40.3,26,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,191,5,75,38.2,3,6,Passion,2018,312,12,6,4,0.5,26,78,38.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,58,2,45,29,0,7,Passion,2018,370,14,6,5,0.42857142857142855,26.4,74,29,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,35,4,NA,8.8,0,8,Passion,2018,405,18,6,6,0.3333333333333333,22.5,67.5,8.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,37,2,22,18.5,1,10,Passion,2018,442,20,7,7,0.35,22.1,63.1,18.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KM #40,#40 Krystal Molina,#40,Krystal Molina,15,1,NA,15,0,1,Sharks,2018,15,1,0,1,0,15,15,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KM #40,#40 Krystal Molina,#40,Krystal Molina,3,1,NA,3,0,2,Sharks,2018,18,2,0,2,0,9,9,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KM #40,#40 Krystal Molina,#40,Krystal Molina,16,1,NA,16,0,4,Sharks,2018,34,3,0,3,0,11.3,11.3,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KM #40,#40 Krystal Molina,#40,Krystal Molina,106,4,NA,26.5,2,5,Sharks,2018,140,7,2,4,0.2857142857142857,20,35,26.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KM #40,#40 Krystal Molina,#40,Krystal Molina,7,1,NA,7,0,6,Sharks,2018,147,8,2,5,0.25,18.4,29.4,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KM #40,#40 Krystal Molina,#40,Krystal Molina,61,4,NA,15.2,1,9,Sharks,2018,208,12,3,6,0.25,17.3,34.7,15.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LS #3,#3 Liz Sowers,#3,Liz Sowers,93,9,20,10.3,1,1,Titans,2018,93,9,1,1,0.1111111111111111,10.3,93,10.3,#3,Liz Sowers,12,1,12,12,0,9,12,1,0,0,12,12,12
+LS #3,#3 Liz Sowers,#3,Liz Sowers,56,3,24,18.7,2,2,Titans,2018,149,12,3,2,0.25,12.4,74.5,18.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LS #3,#3 Liz Sowers,#3,Liz Sowers,103,12,24,8.6,1,3,Titans,2018,252,24,4,3,0.16666666666666666,10.5,84,8.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LS #3,#3 Liz Sowers,#3,Liz Sowers,35,1,35,35,1,4,Titans,2018,287,25,5,4,0.2,11.5,71.8,35,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LS #3,#3 Liz Sowers,#3,Liz Sowers,43,4,28,10.8,0,5,Titans,2018,330,29,5,5,0.1724137931034483,11.4,66,10.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LS #3,#3 Liz Sowers,#3,Liz Sowers,33,5,NA,6.6,0,7,Titans,2018,363,34,5,6,0.14705882352941177,10.7,60.5,6.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LS #3,#3 Liz Sowers,#3,Liz Sowers,199,9,81,22.1,1,9,Titans,2018,562,43,6,7,0.13953488372093023,13.1,80.3,22.1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LS #3,#3 Liz Sowers,#3,Liz Sowers,133,4,70,33.2,2,10,Titans,2018,695,47,8,8,0.1702127659574468,14.8,86.9,33.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+MN #81,#81 Maggie Natell,#81,Maggie Natell,131,5,NA,26.2,3,1,Sharks,2018,131,5,3,1,0.6,26.2,131,26.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+MN #81,#81 Maggie Natell,#81,Maggie Natell,48,3,NA,16,1,2,Sharks,2018,179,8,4,2,0.5,22.4,89.5,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+MN #81,#81 Maggie Natell,#81,Maggie Natell,112,2,NA,56,1,4,Sharks,2018,291,10,5,3,0.5,29.1,97,56,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+MN #81,#81 Maggie Natell,#81,Maggie Natell,74,2,NA,37,0,6,Sharks,2018,365,12,5,4,0.4166666666666667,30.4,91.2,37,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+MN #81,#81 Maggie Natell,#81,Maggie Natell,131,4,NA,32.8,3,9,Sharks,2018,496,16,8,5,0.5,31,99.2,32.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+MG #7,#7 Mariah Green,#7,Mariah Green,53,4,17,13.2,0,1,Assault,2018,53,4,0,1,0,13.2,53,13.2,#7,Mariah Green,0,1,0,NA,0,3,0,1,0,0,0,0,0
+MG #7,#7 Mariah Green,#7,Mariah Green,46,3,22,15.3,0,2,Assault,2018,99,7,0,2,0,14.1,49.5,15.3,#7,Mariah Green,1,3,0.3,6,0,6,1,4,0,0,0.2,0.5,0.3
+MG #7,#7 Mariah Green,#7,Mariah Green,39,5,11,7.8,0,3,Assault,2018,138,12,0,3,0,11.5,46,7.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+MR #23,#23 Michelle Robinson,#23,Michelle Robinson,6,1,6,6,1,1,Dixie Blues,2018,6,1,1,1,1,6,6,6,#23,Michelle Robinson,58,9,6.4,16,0,1,58,9,0,0,6.4,58,6.4
+MR #23,#23 Michelle Robinson,#23,Michelle Robinson,26,1,26,26,1,4,Dixie Blues,2018,32,2,2,2,1,16,16,26,#23,Michelle Robinson,103,6,17.2,60,1,3,161,15,1,0.06666666666666667,10.7,80.5,17.2
+MR #23,#23 Michelle Robinson,#23,Michelle Robinson,8,3,5,2.7,0,5,Dixie Blues,2018,40,5,2,3,0.4,8,13.3,2.7,#23,Michelle Robinson,63,15,4.2,10,0,4,224,30,1,0.03333333333333333,7.5,74.7,4.2
+MR #23,#23 Michelle Robinson,#23,Michelle Robinson,59,7,33,8.4,0,6,Dixie Blues,2018,99,12,2,4,0.16666666666666666,8.2,24.8,8.4,#23,Michelle Robinson,51,14,3.6,20,0,5,275,44,1,0.022727272727272728,6.2,68.8,3.6
+MR #23,#23 Michelle Robinson,#23,Michelle Robinson,9,3,5,3,1,7,Dixie Blues,2018,108,15,3,5,0.2,7.2,21.6,3,#23,Michelle Robinson,108,12,9,30,0,6,383,56,1,0.017857142857142856,6.8,76.6,9
+MR #23,#23 Michelle Robinson,#23,Michelle Robinson,38,3,22,12.7,0,9,Dixie Blues,2018,146,18,3,6,0.16666666666666666,8.1,24.3,12.7,#23,Michelle Robinson,47,16,2.9,15,0,7,430,72,1,0.013888888888888888,6,71.7,2.9
+MR #23,#23 Michelle Robinson,#23,Michelle Robinson,30,1,30,30,0,10,Dixie Blues,2018,176,19,3,7,0.15789473684210525,9.3,25.1,30,#23,Michelle Robinson,43,19,2.3,9,0,9,473,91,1,0.01098901098901099,5.2,67.6,2.3
+OL #32,#32 Octavia Langston,#32,Octavia Langston,35,2,25,17.5,0,1,Dixie Blues,2018,35,2,0,1,0,17.5,35,17.5,#32,Octavia Langston,5,1,5,5,0,1,5,1,0,0,5,5,5
+OL #32,#32 Octavia Langston,#32,Octavia Langston,153,3,63,51,3,3,Dixie Blues,2018,188,5,3,2,0.6,37.6,94,51,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+OL #32,#32 Octavia Langston,#32,Octavia Langston,113,7,30,16.1,5,4,Dixie Blues,2018,301,12,8,3,0.6666666666666666,25.1,100.3,16.1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+OL #32,#32 Octavia Langston,#32,Octavia Langston,149,8,65,18.6,1,5,Dixie Blues,2018,450,20,9,4,0.45,22.5,112.5,18.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+OL #32,#32 Octavia Langston,#32,Octavia Langston,121,9,25,13.4,2,6,Dixie Blues,2018,571,29,11,5,0.3793103448275862,19.7,114.2,13.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+OL #32,#32 Octavia Langston,#32,Octavia Langston,150,13,21,11.5,1,9,Dixie Blues,2018,721,42,12,6,0.2857142857142857,17.2,120.2,11.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+OL #32,#32 Octavia Langston,#32,Octavia Langston,38,3,17,12.7,0,10,Dixie Blues,2018,759,45,12,7,0.26666666666666666,16.9,108.4,12.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #13,#13 Samantha Barber,#13,Samantha Barber,44,4,15,11,1,1,Vixen,2018,44,4,1,1,0.25,11,44,11,#13,Samantha Barber,5,1,5,5,0,4,5,1,0,0,5,5,5
+SB #13,#13 Samantha Barber,#13,Samantha Barber,120,6,NA,20,0,2,Vixen,2018,164,10,1,2,0.1,16.4,82,20,#13,Samantha Barber,3,1,3,3,0,10,8,2,0,0,4,4,3
+SB #13,#13 Samantha Barber,#13,Samantha Barber,112,7,24,16,2,3,Vixen,2018,276,17,3,3,0.17647058823529413,16.2,92,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #13,#13 Samantha Barber,#13,Samantha Barber,104,5,64,20.8,2,4,Vixen,2018,380,22,5,4,0.22727272727272727,17.3,95,20.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #13,#13 Samantha Barber,#13,Samantha Barber,77,2,47,38.5,2,5,Vixen,2018,457,24,7,5,0.2916666666666667,19,91.4,38.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #13,#13 Samantha Barber,#13,Samantha Barber,64,2,58,32,1,9,Vixen,2018,521,26,8,6,0.3076923076923077,20,86.8,32,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #13,#13 Samantha Barber,#13,Samantha Barber,91,6,44,15.2,1,10,Vixen,2018,612,32,9,7,0.28125,19.1,87.4,15.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #15,#15 Sara Thacker,#15,Sara Thacker,14,2,7,7,0,1,Nighthawks,2018,14,2,0,1,0,7,14,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #15,#15 Sara Thacker,#15,Sara Thacker,107,5,36,21.4,1,2,Nighthawks,2018,121,7,1,2,0.14285714285714285,17.3,60.5,21.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #15,#15 Sara Thacker,#15,Sara Thacker,71,2,61,35.5,1,3,Nighthawks,2018,192,9,2,3,0.2222222222222222,21.3,64,35.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #15,#15 Sara Thacker,#15,Sara Thacker,73,5,27,14.6,2,4,Nighthawks,2018,265,14,4,4,0.2857142857142857,18.9,66.2,14.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #15,#15 Sara Thacker,#15,Sara Thacker,10,1,NA,10,0,6,Nighthawks,2018,275,15,4,5,0.26666666666666666,18.3,55,10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #15,#15 Sara Thacker,#15,Sara Thacker,12,3,10,4,0,9,Nighthawks,2018,287,18,4,6,0.2222222222222222,15.9,47.8,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #1,#1 Satoria Bell,#1,Satoria Bell,34,3,NA,11.3,2,1,Phantomz,2018,34,3,2,1,0.6666666666666666,11.3,34,11.3,#1,Satoria Bell,6,2,3,NA,0,1,6,2,0,0,3,6,3
+SB #1,#1 Satoria Bell,#1,Satoria Bell,52,1,NA,52,0,3,Phantomz,2018,86,4,2,2,0.5,21.5,43,52,#1,Satoria Bell,6,5,1.2,NA,0,2,12,7,0,0,1.7,6,1.2
+SB #1,#1 Satoria Bell,#1,Satoria Bell,186,9,NA,20.7,1,7,Phantomz,2018,272,13,3,3,0.23076923076923078,20.9,90.7,20.7,#1,Satoria Bell,63,11,5.7,NA,0,3,75,18,0,0,4.2,25,5.7
+SG #83,#83 Shaquanda Gainey,#83,Shaquanda Gainey,32,2,25,16,1,3,Divas,2018,32,2,1,1,0.5,16,32,16,#83,Shaquanda Gainey,14,1,14,14,0,6,14,1,0,0,14,14,14
+SG #83,#83 Shaquanda Gainey,#83,Shaquanda Gainey,28,2,19,14,0,4,Divas,2018,60,4,1,2,0.25,15,30,14,#83,Shaquanda Gainey,7,1,7,7,0,10,21,2,0,0,10.5,10.5,7
+SG #83,#83 Shaquanda Gainey,#83,Shaquanda Gainey,36,2,30,18,1,6,Divas,2018,96,6,2,3,0.3333333333333333,16,32,18,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SG #83,#83 Shaquanda Gainey,#83,Shaquanda Gainey,37,2,32,18.5,1,7,Divas,2018,133,8,3,4,0.375,16.6,33.2,18.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SG #83,#83 Shaquanda Gainey,#83,Shaquanda Gainey,10,2,11,5,0,8,Divas,2018,143,10,3,5,0.3,14.3,28.6,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SG #83,#83 Shaquanda Gainey,#83,Shaquanda Gainey,61,3,31,20.3,1,10,Divas,2018,204,13,4,6,0.3076923076923077,15.7,34,20.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SV #8,#8 Sharon Vasquez,#8,Sharon Vasquez,41,3,18,13.7,1,3,Passion,2018,41,3,1,1,0.3333333333333333,13.7,41,13.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SV #8,#8 Sharon Vasquez,#8,Sharon Vasquez,26,4,19,6.5,1,4,Passion,2018,67,7,2,2,0.2857142857142857,9.6,33.5,6.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SV #8,#8 Sharon Vasquez,#8,Sharon Vasquez,36,3,NA,12,0,6,Passion,2018,103,10,2,3,0.2,10.3,34.3,12,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SV #8,#8 Sharon Vasquez,#8,Sharon Vasquez,22,3,10,7.3,1,7,Passion,2018,125,13,3,4,0.23076923076923078,9.6,31.2,7.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SV #8,#8 Sharon Vasquez,#8,Sharon Vasquez,21,2,NA,10.5,0,8,Passion,2018,146,15,3,5,0.2,9.7,29.2,10.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SV #8,#8 Sharon Vasquez,#8,Sharon Vasquez,3,1,3,3,0,10,Passion,2018,149,16,3,6,0.1875,9.3,24.8,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #12,#12 SharQuayla Baker,#12,SharQuayla Baker,30,1,30,30,1,2,Waverunners,2018,30,1,1,1,1,30,30,30,#12,SharQuayla Baker,30,3,10,NA,0,7,30,3,0,0,10,30,10
+SB #12,#12 SharQuayla Baker,#12,SharQuayla Baker,32,3,12,10.7,0,3,Waverunners,2018,62,4,1,2,0.25,15.5,31,10.7,#12,SharQuayla Baker,30,3,10,15,0,8,60,6,0,0,10,30,10
+SB #12,#12 SharQuayla Baker,#12,SharQuayla Baker,90,6,20,15,0,5,Waverunners,2018,152,10,1,3,0.1,15.2,50.7,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #12,#12 SharQuayla Baker,#12,SharQuayla Baker,85,12,25,7.1,1,6,Waverunners,2018,237,22,2,4,0.09090909090909091,10.8,59.2,7.1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SD #3,#3 Stacy Dwyer,#3,Stacy Dwyer,20,1,20,20,0,2,Fury,2018,20,1,0,1,0,20,20,20,#3,Stacy Dwyer,8,1,8,NA,0,5,8,1,0,0,8,8,8
+SD #3,#3 Stacy Dwyer,#3,Stacy Dwyer,30,1,NA,30,1,3,Fury,2018,50,2,1,2,0.5,25,25,30,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SD #3,#3 Stacy Dwyer,#3,Stacy Dwyer,38,3,NA,12.7,1,4,Fury,2018,88,5,2,3,0.4,17.6,29.3,12.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SD #3,#3 Stacy Dwyer,#3,Stacy Dwyer,97,4,29,24.2,0,9,Fury,2018,185,9,2,4,0.2222222222222222,20.6,46.2,24.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SD #3,#3 Stacy Dwyer,#3,Stacy Dwyer,42,2,33,21,0,10,Fury,2018,227,11,2,5,0.18181818181818182,20.6,45.4,21,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB NA,NA Starry Bady,NA,Starry Bady,7,2,NA,3.5,0,1,Fire,2018,7,2,0,1,0,3.5,7,3.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB NA,NA Starry Bady,NA,Starry Bady,60,4,NA,15,0,4,Fire,2018,67,6,0,2,0,11.2,33.5,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB NA,NA Starry Bady,NA,Starry Bady,15,2,NA,7.5,0,6,Fire,2018,82,8,0,3,0,10.2,27.3,7.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB NA,NA Starry Bady,NA,Starry Bady,34,3,NA,11.3,0,8,Fire,2018,116,11,0,4,0,10.5,29,11.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB NA,NA Starry Bady,NA,Starry Bady,10,2,NA,5,0,9,Fire,2018,126,13,0,5,0,9.7,25.2,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,4,1,4,4,0,1,Renegades,2018,4,1,0,1,0,4,4,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,17,2,9,8.5,0,2,Renegades,2018,21,3,0,2,0,7,10.5,8.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,52,2,34,26,2,3,Renegades,2018,73,5,2,3,0.4,14.6,24.3,26,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,34,2,26,17,1,6,Renegades,2018,107,7,3,4,0.42857142857142855,15.3,26.8,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,38,4,17,9.5,1,7,Renegades,2018,145,11,4,5,0.36363636363636365,13.2,29,9.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,47,3,25,15.7,2,9,Renegades,2018,192,14,6,6,0.42857142857142855,13.7,32,15.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,83,3,33,27.7,1,10,Renegades,2018,275,17,7,7,0.4117647058823529,16.2,39.3,27.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TP #6,#6 Taurus Pyles,#6,Taurus Pyles,7,1,NA,7,0,1,Fire,2018,7,1,0,1,0,7,7,7,#6,Taurus Pyles,10,2,5,NA,0,1,10,2,0,0,5,10,5
+TP #6,#6 Taurus Pyles,#6,Taurus Pyles,58,4,NA,14.5,0,4,Fire,2018,65,5,0,2,0,13,32.5,14.5,#6,Taurus Pyles,33,4,8.2,NA,1,4,43,6,1,0.16666666666666666,7.2,21.5,8.2
+TP #6,#6 Taurus Pyles,#6,Taurus Pyles,51,3,NA,17,0,6,Fire,2018,116,8,0,3,0,14.5,38.7,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TP #6,#6 Taurus Pyles,#6,Taurus Pyles,40,3,NA,13.3,1,7,Fire,2018,156,11,1,4,0.09090909090909091,14.2,39,13.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TP #6,#6 Taurus Pyles,#6,Taurus Pyles,92,4,NA,23,1,9,Fire,2018,248,15,2,5,0.13333333333333333,16.5,49.6,23,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TW #10,#10 Taylor Wood,#10,Taylor Wood,68,3,40,22.7,1,2,Waverunners,2018,68,3,1,1,0.3333333333333333,22.7,68,22.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TW #10,#10 Taylor Wood,#10,Taylor Wood,84,8,30,10.5,0,3,Waverunners,2018,152,11,1,2,0.09090909090909091,13.8,76,10.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TW #10,#10 Taylor Wood,#10,Taylor Wood,70,5,15,14,0,5,Waverunners,2018,222,16,1,3,0.0625,13.9,74,14,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TW #10,#10 Taylor Wood,#10,Taylor Wood,90,6,20,15,0,6,Waverunners,2018,312,22,1,4,0.045454545454545456,14.2,78,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TW #10,#10 Taylor Wood,#10,Taylor Wood,92,7,30,13.1,0,7,Waverunners,2018,404,29,1,5,0.034482758620689655,13.9,80.8,13.1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TW #10,#10 Taylor Wood,#10,Taylor Wood,92,7,30,13.1,0,8,Waverunners,2018,496,36,1,6,0.027777777777777776,13.8,82.7,13.1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TM #92,#92 Treva Mason,#92,Treva Mason,40,1,NA,40,1,1,Anarchy,2018,40,1,1,1,1,40,40,40,#92,Treva Mason,35,2,17.5,20,1,5,35,2,1,0.5,17.5,35,17.5
+TM #92,#92 Treva Mason,#92,Treva Mason,68,9,NA,7.6,0,7,Anarchy,2018,108,10,1,2,0.1,10.8,54,7.6,#92,Treva Mason,7,1,7,NA,0,10,42,3,1,0.3333333333333333,14,21,7
+TM #92,#92 Treva Mason,#92,Treva Mason,20,3,13,6.7,0,10,Anarchy,2018,128,13,1,3,0.07692307692307693,9.8,42.7,6.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TL #1,#1 Tyesha Lowery-Jones,#1,Tyesha Lowery-Jones,34,2,NA,17,1,2,MH Blaze,2018,34,2,1,1,0.5,17,34,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TL #1,#1 Tyesha Lowery-Jones,#1,Tyesha Lowery-Jones,15,3,NA,5,0,3,MH Blaze,2018,49,5,1,2,0.2,9.8,24.5,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TL #1,#1 Tyesha Lowery-Jones,#1,Tyesha Lowery-Jones,54,2,NA,27,1,4,MH Blaze,2018,103,7,2,3,0.2857142857142857,14.7,34.3,27,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TL #1,#1 Tyesha Lowery-Jones,#1,Tyesha Lowery-Jones,22,2,NA,11,0,5,MH Blaze,2018,125,9,2,4,0.2222222222222222,13.9,31.2,11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TL #1,#1 Tyesha Lowery-Jones,#1,Tyesha Lowery-Jones,97,7,NA,13.9,3,7,MH Blaze,2018,222,16,5,5,0.3125,13.9,44.4,13.9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
