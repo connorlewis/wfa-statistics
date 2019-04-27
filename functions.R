@@ -1,5 +1,4 @@
 # These are the supporting functions for the wfa data prep and dashboard.
-pacman::p_load(tidyverse, plotly)
 
 # set the theme for all ggplots: ------------------------------------- 
 theme_set(theme_classic() +

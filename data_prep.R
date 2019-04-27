@@ -23,7 +23,7 @@ source("functions.R")
 # save(tbl.names, file = "data/table_column_names.rda")
 load("data/table_column_names.rda")
 # Read in the statistics for all division 
-dta.list <- readRDS("data/div_all_stats.rds")
+dta.list <- readRDS("data/div_all_stats_2019.rds")
 
 # name the tables using tab
 names(dta.list) <- tbl.names
@@ -117,10 +117,10 @@ pass.cum.dta <- pass.dta %>%
            , TRUE ~ 2.375-(int_rate_cum*100*.25)
          )
          , qb_rate_cum = round((qb.part1 + qb.part2 
-                             + qb.part3 + qb.part4)/6*100, 1)) %>%
+                             + qb.part3 + qb.part4)/6*100, 1)) #%>%
   # join with the WL data for team calculations. 
-  mutate(team_for_merge)
-  left_join(wl.dta.2018.prepped, )
+  #mutate(team_for_merge)
+  #left_join(wl.dta.2018.prepped, )
 
 
 
@@ -162,25 +162,27 @@ rec.cum.dta <- rec.dta %>%
 
 # Subsets for dashboard ---------------------------------------------------
 
-
+qb.min <- 5
+rb.min <- 10
+wr.min <- 4
 
 qb.dash.dta <- pass.cum.dta %>%
-        filter(last(att_cum) > 50 & season == 2018) %>%
+        filter(last(att_cum) > qb.min & season == 2019) %>%
         left_join(rush.cum.dta, by = c("player", "plyr.lbl", "team", "season", "game")
                   , suffix = c("", ".rush")) %>%
         ungroup %>%
         arrange(name)
 
 rb.dash.dta <- rush.cum.dta %>%
-        filter(last(carries_cum) > 25 & carries > 1
-               & season == 2018) %>%
+        filter(last(carries_cum) > rb.min & carries > 1
+               & season == 2019) %>%
         left_join(rec.cum.dta, by = c("player", "plyr.lbl", "team", "season", "game")
                   , suffix = c(".rush", ".rec")) %>%
         ungroup %>%
         arrange(name.rush)
 
 wr.dash.dta <- rec.cum.dta %>%
-        filter(last(rec_cum) > 10 & season == 2018) %>%
+        filter(last(rec_cum) > wr.min & season == 2019) %>%
         left_join(rush.cum.dta, by = c("player", "plyr.lbl", "team", "season", "game")
                   , suffix = c(".rec", ".rush")) %>%
         ungroup %>%
@@ -193,9 +195,9 @@ pass.td.max <- max(qb.dash.dta$pass_td_cum)
 pass.att.max <- max(qb.dash.dta$att_cum)
 
 # for offline working
-write_csv(qb.dash.dta, "qb.csv")
-write_csv(rb.dash.dta, "rb.csv")
-write_csv(wr.dash.dta, "wr.csv")
+write_csv(qb.dash.dta, "qb_2019.csv")
+write_csv(rb.dash.dta, "rb_2019.csv")
+write_csv(wr.dash.dta, "wr_2019.csv")
 # 
 # 
 <<<<<<< HEAD

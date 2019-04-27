@@ -10,10 +10,12 @@ runtime: shiny
 
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE}
+#pacman::p_load(flexdashboard, knitr, shiny, tidyverse, DT, rsconnect)
 library(flexdashboard)
 library(knitr)
 library(shiny)
 library(tidyverse)
+library(plotly)
 library(DT)
 library(rsconnect)
 #library(plotly)
@@ -31,9 +33,9 @@ source("functions.r")
 #			  secret='7l/D0vouhjiFkeEZwmyB0anPqXFAXJogfqqifjN7')
 #rsconnect::deployApp('wfa_dash.Rmd')
 # for working offline: 
- qb.dash.dta <- read_csv("qb.csv")
- rb.dash.dta <- read_csv("rb.csv")
- wr.dash.dta <- read_csv("wr.csv")
+ qb.dash.dta <- read_csv("qb_2019.csv")
+ rb.dash.dta <- read_csv("rb_2019.csv")
+ wr.dash.dta <- read_csv("wr_2019.csv")
 # pass.yrd.max <- max(qb.dash.dta$yards_cum)
 # pass.yrd.min <- min(qb.dash.dta$yards_cum)
 # pass.td.max <- max(qb.dash.dta$td_cum)
@@ -95,7 +97,7 @@ Inputs {.sidebar data-width=300}
 
 ```{r passing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("qb", "QB (>50 attempts)", choices = c('', unique(qb.dash.dta$player))
+selectInput("qb", "QB (>5 attempts)", choices = c('', unique(qb.dash.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("comp", "Compare to another QB", value = FALSE)
@@ -249,7 +251,7 @@ Inputs {.sidebar data-width=300}
 
 ```{r rushing.input}
 # What players (QBs) will be compared/analyzed
-selectInput("rb", "RB (>25 Carries)", choices = c('', unique(rb.dash.dta$player))
+selectInput("rb", "RB (>10 Carries)", choices = c('', unique(rb.dash.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("comprb", "Compare to another RB", value = FALSE)
@@ -391,7 +393,7 @@ Inputs {.sidebar data-width=300}
 
 ```{r wr.input}
 # What players (QBs) will be compared/analyzed
- selectInput("wr", "WR (>10 Receptions)", choices = c('', unique(wr.dash.dta$player))
+ selectInput("wr", "WR (>4 Receptions)", choices = c('', unique(wr.dash.dta$player))
               , selected = NULL, multiple = FALSE, selectize = TRUE)
 
 checkboxInput("compwr", "Compare to another Receiver", value = FALSE)

@@ -1,0 +1,82 @@
+plyr.lbl,player,no..rec,name.rec,rec_yards,rec,long.rec,avg.rec,rec_td,week.rec,team,season,rec_yards_cum,rec_cum,rec_td_cum,game,rec_td_rate_cum,rec_avg_cum,rec_yards_cum_game,rec_yards_rec,no..rush,name.rush,rush_yards,carries,avg.rush,long.rush,rush_td,week.rush,rush_yards_cum,carries_cum,rush_td_cum,rush_td_rate_cum,rush_avg_cum,rush_yards_cum_game,rush_yards_car
+AS #10,#10 Adrienne Smith,#10,Adrienne Smith,80,5,41,16,1,2,Renegades,2019,80,5,1,1,0.2,16,80,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AB #24,#24 Amanda Brewster,#24,Amanda Brewster,89,5,42,17.8,2,1,Lady Gades,2019,89,5,2,1,0.4,17.8,89,17.8,#24,Amanda Brewster,35,3,11.7,21,0,1,35,3,0,0,11.7,35,11.7
+AB #24,#24 Amanda Brewster,#24,Amanda Brewster,72,6,34,12,0,3,Lady Gades,2019,161,11,2,2,0.18181818181818182,14.6,80.5,12,#24,Amanda Brewster,18,3,6,10,0,3,53,6,0,0,8.8,26.5,6
+AD #81,#81 Ashley Davis,#81,Ashley Davis,5,1,NA,5,1,1,MH Blaze,2019,5,1,1,1,1,5,5,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+AD #81,#81 Ashley Davis,#81,Ashley Davis,13,4,NA,3.2,0,3,MH Blaze,2019,18,5,1,2,0.2,3.6,9,3.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BH #88,#88 Barbara Heinrich,#88,Barbara Heinrich,20,4,5,5,0,2,Sizzle,2019,20,4,0,1,0,5,20,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BH #88,#88 Barbara Heinrich,#88,Barbara Heinrich,9,2,7,4.5,0,3,Sizzle,2019,29,6,0,2,0,4.8,14.5,4.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BG #1,#1 Breana Griggs,#1,Breana Griggs,33,7,NA,4.7,1,1,OR Hawks,2019,33,7,1,1,0.14285714285714285,4.7,33,4.7,#1,Breana Griggs,2,1,2,NA,0,1,2,1,0,0,2,2,2
+BG #1,#1 Breana Griggs,#1,Breana Griggs,87,5,NA,17.4,1,2,OR Hawks,2019,120,12,2,2,0.16666666666666666,10,60,17.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BK #20,#20 Brittany Koziara,#20,Brittany Koziara,36,2,34,18,1,1,Anarchy,2019,36,2,1,1,0.5,18,36,18,#20,Brittany Koziara,62,3,20.7,30,1,1,62,3,1,0.3333333333333333,20.7,62,20.7
+BK #20,#20 Brittany Koziara,#20,Brittany Koziara,22,3,17,7.3,0,3,Anarchy,2019,58,5,1,2,0.2,11.6,29,7.3,#20,Brittany Koziara,97,7,13.9,42,1,2,159,10,2,0.2,15.9,79.5,13.9
+CP #8,#8 Candace Pistole,#8,Candace Pistole,42,2,23,21,1,1,Inferno,2019,42,2,1,1,0.5,21,42,21,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CP #8,#8 Candace Pistole,#8,Candace Pistole,25,3,18,8.3,0,2,Inferno,2019,67,5,1,2,0.2,13.4,33.5,8.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CP #8,#8 Candace Pistole,#8,Candace Pistole,59,2,56,29.5,1,3,Inferno,2019,126,7,2,3,0.2857142857142857,18,42,29.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,31,4,10,7.8,0,1,Sizzle,2019,31,4,0,1,0,7.8,31,7.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+C #1,#1 Charetta  Pride,#1,Charetta  Pride,14,2,9,7,1,2,Sizzle,2019,45,6,1,2,0.16666666666666666,7.5,22.5,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CB #96,#96 Crystal Bell,#96,Crystal Bell,43,3,30,14.3,2,2,Anarchy,2019,43,3,2,1,0.6666666666666666,14.3,43,14.3,#96,Crystal Bell,64,4,16,28,1,2,64,4,1,0.25,16,64,16
+CB #96,#96 Crystal Bell,#96,Crystal Bell,131,9,NA,14.6,1,3,Anarchy,2019,174,12,3,2,0.25,14.5,87,14.6,#96,Crystal Bell,20,6,3.3,3,0,3,84,10,1,0.1,8.4,42,3.3
+DP #88,#88 Danielle Price,#88,Danielle Price,89,5,55,17.8,1,2,Slam,2019,89,5,1,1,0.2,17.8,89,17.8,#88,Danielle Price,16,2,8,22,1,2,16,2,1,0.5,8,16,8
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,52,3,40,17.3,0,1,Tidal Waves,2019,52,3,0,1,0,17.3,52,17.3,#15,Dessiree Trevino,3,1,3,3,0,1,3,1,0,0,3,3,3
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,22,3,12,7.3,0,2,Tidal Waves,2019,74,6,0,2,0,12.3,37,7.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DT #15,#15 Dessiree Trevino,#15,Dessiree Trevino,24,4,12,6,1,3,Tidal Waves,2019,98,10,1,3,0.1,9.8,32.7,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+D #14,#14 Devon  Walker,#14,Devon  Walker,61,5,13,12.2,1,1,Lady Gades,2019,61,5,1,1,0.2,12.2,61,12.2,#14,Devon  Walker,18,1,18,18,0,1,18,1,0,0,18,18,18
+D #14,#14 Devon  Walker,#14,Devon  Walker,96,5,30,19.2,2,3,Lady Gades,2019,157,10,3,2,0.3,15.7,78.5,19.2,#14,Devon  Walker,6,2,3,NA,0,3,24,3,0,0,8,12,3
+DC #87,#87 Dia Cascone,#87,Dia Cascone,129,5,NA,25.8,0,2,Wolves,2019,129,5,0,1,0,25.8,129,25.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+DC #87,#87 Dia Cascone,#87,Dia Cascone,66,5,NA,13.2,0,3,Wolves,2019,195,10,0,2,0,19.5,97.5,13.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,46,3,24,15.3,0,2,Inferno,2019,46,3,0,1,0,15.3,46,15.3,#25,Dominique  Jacobs,15,1,15,15,0,2,15,1,0,0,15,15,15
+D #25,#25 Dominique  Jacobs,#25,Dominique  Jacobs,48,2,29,24,1,3,Inferno,2019,94,5,1,2,0.2,18.8,47,24,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+E #82,#82 Elise  Stephens,#82,Elise  Stephens,32,2,18,16,1,1,Vanguards,2019,32,2,1,1,0.5,16,32,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+E #82,#82 Elise  Stephens,#82,Elise  Stephens,66,5,21,13.2,0,2,Vanguards,2019,98,7,1,2,0.14285714285714285,14,49,13.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+E #82,#82 Elise  Stephens,#82,Elise  Stephens,13,1,13,13,0,3,Vanguards,2019,111,8,1,3,0.125,13.9,37,13,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ES #3,#3 Elizabeth Speaks,#3,Elizabeth Speaks,68,3,50,22.7,0,1,Savages,2019,68,3,0,1,0,22.7,68,22.7,#3,Elizabeth Speaks,4,4,1,5,0,1,4,4,0,0,1,4,1
+ES #3,#3 Elizabeth Speaks,#3,Elizabeth Speaks,42,4,31,10.5,0,2,Savages,2019,110,7,0,2,0,15.7,55,10.5,#3,Elizabeth Speaks,36,9,4,28,0,2,40,13,0,0,3.1,20,4
+EB #87,#87 Emily Beinecke,#87,Emily Beinecke,60,6,18,10,0,1,Renegades,2019,60,6,0,1,0,10,60,10,#87,Emily Beinecke,18,1,18,18,0,1,18,1,0,0,18,18,18
+EB #87,#87 Emily Beinecke,#87,Emily Beinecke,102,5,50,20.4,1,2,Renegades,2019,162,11,1,2,0.09090909090909091,14.7,81,20.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JF #14,#14 Jamie Fornal,#14,Jamie Fornal,88,5,NA,17.6,2,2,MH Blaze,2019,88,5,2,1,0.4,17.6,88,17.6,#14,Jamie Fornal,15,2,7.5,NA,0,3,15,2,0,0,7.5,15,7.5
+JS #10,#10 Jamie Skinner,#10,Jamie Skinner,19,2,17,9.5,1,1,Slam,2019,19,2,1,1,0.5,9.5,19,9.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JS #10,#10 Jamie Skinner,#10,Jamie Skinner,28,3,14,9.3,0,2,Slam,2019,47,5,1,2,0.2,9.4,23.5,9.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JC #85,#85 Jana C Meister,#85,Jana C Meister,79,4,33,19.8,0,1,Passion,2019,79,4,0,1,0,19.8,79,19.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JC #85,#85 Jana C Meister,#85,Jana C Meister,29,3,14,9.7,1,2,Passion,2019,108,7,1,2,0.14285714285714285,15.4,54,9.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JW #48,#48 Justine Wypych,#48,Justine Wypych,40,3,NA,13.3,1,1,MH Blaze,2019,40,3,1,1,0.3333333333333333,13.3,40,13.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+JW #48,#48 Justine Wypych,#48,Justine Wypych,45,2,NA,22.5,1,2,MH Blaze,2019,85,5,2,2,0.4,17,42.5,22.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #11,#11 Kaiya Sygulla,#11,Kaiya Sygulla,67,6,14,11.2,0,1,Vixen,2019,67,6,0,1,0,11.2,67,11.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #11,#11 Kaiya Sygulla,#11,Kaiya Sygulla,86,5,39,17.2,0,3,Vixen,2019,153,11,0,2,0,13.9,76.5,17.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #21,#21 Katrina Steffes,#21,Katrina Steffes,73,3,NA,24.3,2,1,Dragons,2019,73,3,2,1,0.6666666666666666,24.3,73,24.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KS #21,#21 Katrina Steffes,#21,Katrina Steffes,12,3,NA,4,0,3,Dragons,2019,85,6,2,2,0.3333333333333333,14.2,42.5,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KF #4,#4 Keeahna Fontes,#4,Keeahna Fontes,26,3,NA,8.7,0,1,Comets,2019,26,3,0,1,0,8.7,26,8.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KF #4,#4 Keeahna Fontes,#4,Keeahna Fontes,16,2,9,8,0,2,Comets,2019,42,5,0,2,0,8.4,21,8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,118,6,50,19.7,1,1,Passion,2019,118,6,1,1,0.16666666666666666,19.7,118,19.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+K #40,#40 Krystal  Cozzo,#40,Krystal  Cozzo,18,3,8,6,1,2,Passion,2019,136,9,2,2,0.2222222222222222,15.1,68,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+KM #40,#40 Krystal Molina,#40,Krystal Molina,62,6,NA,10.3,0,3,Wolves,2019,62,6,0,1,0,10.3,62,10.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LU #84,#84 Leslee Uhrich,#84,Leslee Uhrich,90,6,NA,15,2,1,Nighthawks,2019,90,6,2,1,0.3333333333333333,15,90,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+LU #84,#84 Leslee Uhrich,#84,Leslee Uhrich,44,4,NA,11,0,2,Nighthawks,2019,134,10,2,2,0.2,13.4,67,11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NF #6,#6 Nicole Figueroa,#6,Nicole Figueroa,35,4,20,8.8,0,2,PY Phantomz,2019,35,4,0,1,0,8.8,35,8.8,#6,Nicole Figueroa,31,5,6.2,9,1,2,31,5,1,0.2,6.2,31,6.2
+NF #6,#6 Nicole Figueroa,#6,Nicole Figueroa,35,1,35,35,1,3,PY Phantomz,2019,70,5,1,2,0.2,14,35,35,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NG #26,#26 Nicole Green,#26,Nicole Green,35,3,16,11.7,0,1,IO Phoenix,2019,35,3,0,1,0,11.7,35,11.7,#26,Nicole Green,0,2,0,NA,0,1,0,2,0,0,0,0,0
+NG #26,#26 Nicole Green,#26,Nicole Green,16,3,7,5.3,0,2,IO Phoenix,2019,51,6,0,2,0,8.5,25.5,5.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NM #17,#17 Nicole Matheson,#17,Nicole Matheson,62,4,NA,15.5,1,1,Dragons,2019,62,4,1,1,0.25,15.5,62,15.5,#17,Nicole Matheson,2,4,0.5,NA,0,1,2,4,0,0,0.5,2,0.5
+NM #17,#17 Nicole Matheson,#17,Nicole Matheson,21,4,NA,5.2,0,3,Dragons,2019,83,8,1,2,0.125,10.4,41.5,5.2,#17,Nicole Matheson,0,2,0,NA,0,3,2,6,0,0,0.3,1,0
+OL #32,#32 Octavia Langston,#32,Octavia Langston,41,5,21,8.2,0,2,Dixie Blues,2019,41,5,0,1,0,8.2,41,8.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #11,#11 Sarah Tully,#11,Sarah Tully,32,3,14,10.7,1,1,Renegades,2019,32,3,1,1,0.3333333333333333,10.7,32,10.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ST #11,#11 Sarah Tully,#11,Sarah Tully,0,2,1,0,0,2,Renegades,2019,32,5,1,2,0.2,6.4,16,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SW #4,#4 Sarah Workman,#4,Sarah Workman,8,1,8,8,0,1,Tidal Waves,2019,8,1,0,1,0,8,8,8,#4,Sarah Workman,1,1,1,1,0,1,1,1,0,0,1,1,1
+SW #4,#4 Sarah Workman,#4,Sarah Workman,3,1,3,3,0,2,Tidal Waves,2019,11,2,0,2,0,5.5,5.5,3,#4,Sarah Workman,0,1,0,NA,0,3,1,2,0,0,0.5,0.5,0
+SW #4,#4 Sarah Workman,#4,Sarah Workman,5,3,6,1.7,0,3,Tidal Waves,2019,16,5,0,3,0,3.2,5.3,1.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #4,#4 Satoria Bell,#4,Satoria Bell,47,3,24,15.7,1,1,Renegades,2019,47,3,1,1,0.3333333333333333,15.7,47,15.7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #4,#4 Satoria Bell,#4,Satoria Bell,91,5,27,18.2,2,2,Renegades,2019,138,8,3,2,0.375,17.2,69,18.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SW #52,#52 Star Wright,#52,Star Wright,159,5,76,31.8,3,3,PY Phantomz,2019,159,5,3,1,0.6,31.8,159,31.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SB #2,#2 Starry Bady,#2,Starry Bady,128,5,66,25.6,0,1,Wildcats,2019,128,5,0,1,0,25.6,128,25.6,#2,Starry Bady,14,2,7,7,0,1,14,2,0,0,7,14,7
+SB #2,#2 Starry Bady,#2,Starry Bady,91,3,39,30.3,0,2,Wildcats,2019,219,8,0,2,0,27.4,109.5,30.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,27,2,16,13.5,0,1,Renegades,2019,27,2,0,1,0,13.5,27,13.5,#3,Stephanie  Pascual,2,1,2,2,0,1,2,1,0,0,2,2,2
+S #3,#3 Stephanie  Pascual,#3,Stephanie  Pascual,127,3,94,42.3,1,2,Renegades,2019,154,5,1,2,0.2,30.8,77,42.3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+SS #86,#86 Svetlana Stepanchuk,#86,Svetlana Stepanchuk,66,5,55,13.2,1,3,War,2019,66,5,1,1,0.2,13.2,66,13.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TB #36,#36 Tess Bair,#36,Tess Bair,27,2,21,13.5,0,1,Fighting Shockwave,2019,27,2,0,1,0,13.5,27,13.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TB #36,#36 Tess Bair,#36,Tess Bair,24,1,24,24,1,2,Fighting Shockwave,2019,51,3,1,2,0.3333333333333333,17,25.5,24,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+TB #36,#36 Tess Bair,#36,Tess Bair,47,4,30,11.8,0,3,Fighting Shockwave,2019,98,7,1,3,0.14285714285714285,14,32.7,11.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+VC #12,#12 Viviana Cruz,#12,Viviana Cruz,7,5,2,1.4,0,1,Heat,2019,7,5,0,1,0,1.4,7,1.4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+VC #12,#12 Viviana Cruz,#12,Viviana Cruz,12,2,6,6,0,2,Heat,2019,19,7,0,2,0,2.7,9.5,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+ZC #15,#15 Zshalyn Canfield,#15,Zshalyn Canfield,44,4,NA,11,0,1,MH Blaze,2019,44,4,0,1,0,11,44,11,#15,Zshalyn Canfield,1,1,1,NA,1,1,1,1,1,1,1,1,1
+ZC #15,#15 Zshalyn Canfield,#15,Zshalyn Canfield,0,3,NA,0,0,2,MH Blaze,2019,44,7,0,2,0,6.3,22,0,#15,Zshalyn Canfield,4,1,4,NA,0,2,5,2,1,0.5,2.5,2.5,4
+ZC #15,#15 Zshalyn Canfield,#15,Zshalyn Canfield,14,4,NA,3.5,0,3,MH Blaze,2019,58,11,0,3,0,5.3,19.3,3.5,#15,Zshalyn Canfield,6,1,6,NA,0,3,11,3,1,0.3333333333333333,3.7,3.7,6

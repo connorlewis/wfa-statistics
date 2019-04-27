@@ -20,22 +20,27 @@ library(purrr)
 # url setup
 
 league <- "wfa"
-season <- c("2017","2018")
+season <- c("2019")
 tier <- "1"
 tiers <- c("WFA+I","WFA+II","WFA+III")
-weeks <- c("1","2","3","4","5","6","7","8","9","10")
-teams_div_1 <- c("Fighting+Shockwaves","Majestics","War+Angels","Warriors","Surge","Titans",
-          "Elite","Impact","Force","Renegades","Divas","Passion",
-          "Fusion","AT_Phoenix")
-teams_div_2 <- c("Dixie+Blues","Fury","Inferno","Fusion","Nighthawks","Comets",
-          "Dark+Angels","Phantomz","Sharks","Rebellion","EV_Reign","Trauma",
-          "Dragons","Rage","Vixen","MH_Blaze")
-teams_div_3 <- c("CA_Phoenix","Fire","Trojans","MD_Blaze","Waverunners","Tigers",
-          "Mizfits","Anarchy","Smash","Hurricanez","Royalty","Lightning",
-          "TO_Reign","Black+Widows","Sizzle","Hawks","Dynamite","Riveters","Assault","Mayhem",
-          "Nightmare","Vanguards","Tidal+Waves","Ravens","Crusaders","Las+Cruces","Thunderkatz",
-          "Lady+Renegades","Blitz","Wolf-Pack","Dukes","Wildkatz","Freeze","Destroyers","Power",
-          "Zydeco","Wildcats","Outlaws","Knockout")
+weeks <- c("1","2","3")#"4","5","6","7","8","9","10")
+teams_div_1 <- c("Fighting+Shockwave","War","Titans",
+          "Elite","Impact", "Renegades","Divas")
+teams_div_2 <- c("Spartans","MH_Blaze", "Outlaws", "Energy", 
+                 "Vixen", "Slam", "Dragons", "Nighthawks", 
+                 "Fusion", "Comets", "Dark+Angels", 
+                 "Dixie+Blues","Fury", "Wolves", "PY_Phantomz", 
+                 "Passion", "Inferno")
+teams_div_3 <- c("Zydeco", "Wildcats", "Camo", "Mustangs", 
+                 "Power", "IO_Phoenix", "Ravens", "Crusaders",
+                 "De+La+Muerte", "Royalty", "Panthers", "Storm",
+                 "OR_Hawks", "PX_Phantomz", "Thunderkatz", "Heat",
+                 "Trojans", "Lady+Gades", "Trauma", "Threat", 
+                 "Blitz", "Wolfpack", "Savages",
+                 "Sizzle", "Vanguards", "CN_Hawks", "Waverunners", 
+                 "Dynamite", "Tidal+Waves", "Lightning", "Mayhem",
+                 "Mizfits", "Knockout", "Anarchy", "Black+Widows",
+                 "Smash", "Diamondbacks", "Reign")
 
 teams <- c(teams_div_1,teams_div_2,teams_div_3)
 
@@ -75,7 +80,7 @@ for(l in 1:length(season)) {
         html_nodes("table") %>% 
         html_table(fill=TRUE,header=TRUE) %>%
         keep(~(length(grep("Name",names(.))) == 1)) %>% 
-        map(~mutate(.x,week = i,team = teams[j],season = season[l])) %>% 
+        map(~mutate(.x, week = i,team = teams[j], season = season[l])) %>% 
         map(~mutate_all(.x,as.character))
       
       if(is.null(table_data)||length(table_data) == 0) {
@@ -92,7 +97,7 @@ for(l in 1:length(season)) {
         headers <- stats_page_results %>% 
           html_nodes(".indStatHead") %>%
           html_text() %>% 
-          as.tibble()
+          as_tibble()
       }
     
     }
@@ -101,15 +106,15 @@ for(l in 1:length(season)) {
   
 }
 
-#saveRDS(table_data,"div_all_stats.rds")
+saveRDS(table_data,"div_all_stats_2019.rds")
 
 #data <- readRDS("/Users/heatherlendway/Documents/Code/wfa-statistics/div_2_stats.rds")
 
 # TO DO Do something to add the headers in
-for(k in 1:length(headers)) {
-  table_data <- table_data %>% 
-    map(~mutate(.x,week = i,team = teams[j]))
-}
+# for(k in 1:length(headers)) {
+#   table_data <- table_data %>% 
+#     map(~mutate(.x,week = i,team = teams[j]))
+# }
 
 
 
@@ -123,7 +128,7 @@ for(k in 1:length(headers)) {
 
 week_results_table <- NULL
 header_table <- NULL
-years <- c(2009,2010,2011,2012,2013,2014,2015,2016,2017,2018)
+years <- 2019  #c(2009,2010,2011,2012,2013,2014,2015,2016,2017,2018)
 
 for(m in 1:length(years)) {
   # m = 2 # for testing
@@ -157,7 +162,7 @@ for(m in 1:length(years)) {
 }
 
 
-#saveRDS(week_results_table,"game_score_historical.rds")
+saveRDS(week_results_table,"game_score_2019.rds")
 
 ```
 
